@@ -27,12 +27,12 @@ const Register = () => {
 
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
-
+            {/* Background image */}
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>
                 <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Dark filter */}
             </div>
 
-
+            {/* Form */}
             <div className="relative bg-white p-8 rounded shadow-md w-96">
                 <h2 className="text-2xl font-bold mb-6 text-center">Crear Cuenta</h2>
                 {message && <p className="text-center mb-4 text-red-500">{message}</p>}

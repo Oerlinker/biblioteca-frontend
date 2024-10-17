@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'; 
+import { useNavigate, Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
-import fondo from '../assets/fondo.jpeg'; 
+import fondo from '../assets/fondo.jpeg';
 
 const Login = ({ setIsLoggedIn, setUser }) => {
     const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                 if (rol === 4) {
                     navigate("/admin");
                 } else {
-                    navigate("/books"); 
+                    navigate("/books");
                 }
             } catch (error) {
                 console.error('Token inválido:', error);
@@ -34,7 +34,6 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/login', { email, password });
             localStorage.setItem('token', response.data.token);
 
             const decodedToken = jwtDecode(response.data.token);
@@ -89,15 +88,15 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                             required
                         />
                     </div>
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="w-full py-3 bg-lightblue-500 text-white rounded-lg font-semibold hover:bg-lightblue-600 transition-colors duration-300">
                         Iniciar Sesión
                     </button>
                 </form>
                 <div className="mt-6 text-center">
                     <p className="text-gray-600">¿Olvidaste tu contraseña? <a href="/login" className="text-lightblue-500 hover:underline">Recupérala aquí</a></p>
-                    <p className="text-gray-600 mt-4">¿No tienes una cuenta? <a href="/" className="text-lightblue-500 hover:underline">Regístrate</a></p>
+                    <p className="text-gray-600 mt-4">¿No tienes una cuenta? <Link to="/register" className="text-lightblue-500 hover:underline">Regístrate</Link></p>
                 </div>
             </div>
         </div>

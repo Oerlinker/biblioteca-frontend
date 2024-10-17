@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
 import axios from 'axios';
 
 const Login = ({ setIsLoggedIn, setUser }) => {
@@ -10,22 +10,22 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Verifica si hay un token en localStorage al cargar el componente
+        
         const token = localStorage.getItem('token');
         if (token) {
-            // Si hay un token, decodifícalo y actualiza el estado
-            const decodedToken = jwtDecode(token);
-            const rol = decodedToken.rol;
+            try {
+                const decodedToken = jwtDecode(token);
+                const rol = decodedToken.rol;
+                setUser({ nombre: decodedToken.nombre, rol: rol });
+                setIsLoggedIn(true);
 
-            // Actualiza el estado con los datos del usuario
-            setUser({ nombre: decodedToken.nombre, rol: rol });
-            setIsLoggedIn(true);
-
-            // Redirige al panel de administración si el rol es válido
-            if (rol === 4) {
-                navigate("/admin");
-            } else {
-                navigate("/books"); // O donde quieras redirigir
+                if (rol === 4) {
+                    navigate("/admin");
+                } else {
+                    navigate("/books"); 
+                }
+            } catch (error) {
+                console.error('Token inválido:', error);
             }
         }
     }, [setIsLoggedIn, setUser, navigate]);
@@ -36,15 +36,18 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             const response = await axios.post('/api/login', { email, password });
             localStorage.setItem('token', response.data.token);
 
-            // Decodificar el token JWT para extraer el rol
             const decodedToken = jwtDecode(response.data.token);
             const rol = decodedToken.rol;
             const nombre = decodedToken.nombre;
 
-            // Actualizar el estado con los datos del usuario, incluyendo el rol
             setUser({ nombre: nombre, rol: rol });
             setIsLoggedIn(true);
-            navigate("/admin");
+
+            if (rol === 4) {
+                navigate("/admin");
+            } else {
+                navigate("/books");
+            }
         } catch (error) {
             setError('Email o contraseña incorrectos');
         }

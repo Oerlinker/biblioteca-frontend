@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -15,28 +15,16 @@ import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
 import Bitacora from './components/Bitacora';
-import AccountForm from './Pages/AccountForm'; // Import the AccountForm component
-import {jwtDecode} from 'jwt-decode';
+import AccountForm from './Pages/AccountForm';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState({});
 
-    useEffect(() => {
-        // Verificar si hay un token en el localStorage al cargar la aplicación
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = jwtDecode(token);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol }; // Asegúrate de que el nombre y correo estén en el token
-            setUser(userData);
-            setIsLoggedIn(true);
-        }
-    }, []);
-
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
+        localStorage.removeItem('token'); // Elimina el token
         setIsLoggedIn(false);
-        setUser({}); // Reiniciar el estado del usuario
+        setUser({});
     };
 
     return (
@@ -47,7 +35,7 @@ function App() {
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                 <Route path="/books" element={<Books />} />
                 <Route path="/libro/:id" element={<BookDetail />} />
-                <Route path="/account" element={<AccountForm user={user} />} /> {/* Add this route */}
+                <Route path="/account" element={<AccountForm user={user} />} />
 
                 {isLoggedIn && user.rol === 4 && (
                     <>

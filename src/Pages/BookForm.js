@@ -14,15 +14,27 @@ const BookForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetch autores
                 const autoresResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
-                const editorialesResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
-                const categoriasResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
-
                 setAutores(autoresResponse.data);
+            } catch (error) {
+                console.error('Error fetching autores:', error);
+            }
+
+            try {
+                // Fetch editoriales
+                const editorialesResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
                 setEditoriales(editorialesResponse.data);
+            } catch (error) {
+                console.error('Error fetching editoriales:', error);
+            }
+
+            try {
+                // Fetch categorias
+                const categoriasResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
                 setCategorias(categoriasResponse.data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching categorias:', error);
             }
         };
 
@@ -40,7 +52,7 @@ const BookForm = () => {
                 CategoriaID,
             };
 
-            await axios.post('/api/libros', nuevoLibro);
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro);
 
             // Reset form fields
             setTitulo('');

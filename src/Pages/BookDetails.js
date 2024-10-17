@@ -6,13 +6,12 @@ const BookDetails = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
 
-
     useEffect(() => {
         console.log("ID del libro:", id);
-        setBook(null)
+        setBook(null);
         const fetchBook = async () => {
             try {
-                const response = await axios.get(`api/libros/${id}`); // Asegúrate de incluir el URL completo
+                const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}`);
                 setBook(response.data);
             } catch (error) {
                 console.error('Error obteniendo los detalles del libro', error);
@@ -23,16 +22,43 @@ const BookDetails = () => {
     }, [id]);
 
     if (!book) {
-        return <p>Cargando...</p>;
+        return <p className="text-center text-gray-500">Cargando detalles del libro...</p>;
     }
 
     return (
-        <div>
-            <h1>{book.titulo}</h1>
-            <p>Autor: {book.autorid}</p> {/* Asegúrate de que este campo sea correcto */}
-            <p>Género: {book.genero}</p>
-            <p>Editorial: {book.editorialid}</p> {/* Considera hacer una consulta para obtener el nombre de la editorial */}
-            <p>Categoría: {book.categoriaid}</p> {/* Considera hacer una consulta para obtener el nombre de la categoría */}
+        <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg space-y-8">
+            <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Detalles del Libro</h1>
+
+            <table className="min-w-full bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                <thead>
+                    <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                        <th className="py-3 px-6 text-left font-semibold">Campo</th>
+                        <th className="py-3 px-6 text-left font-semibold">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className="hover:bg-gray-100 transition duration-200">
+                        <td className="py-4 px-6 border-b">Título</td>
+                        <td className="py-4 px-6 border-b">{book.titulo}</td>
+                    </tr>
+                    <tr className="hover:bg-gray-100 transition duration-200">
+                        <td className="py-4 px-6 border-b">Autor</td>
+                        <td className="py-4 px-6 border-b">{book.autorid}</td> 
+                    </tr>
+                    <tr className="hover:bg-gray-100 transition duration-200">
+                        <td className="py-4 px-6 border-b">Género</td>
+                        <td className="py-4 px-6 border-b">{book.genero}</td>
+                    </tr>
+                    <tr className="hover:bg-gray-100 transition duration-200">
+                        <td className="py-4 px-6 border-b">Editorial</td>
+                        <td className="py-4 px-6 border-b">{book.editorialid}</td> 
+                    </tr>
+                    <tr className="hover:bg-gray-100 transition duration-200">
+                        <td className="py-4 px-6 border-b">Categoría</td>
+                        <td className="py-4 px-6 border-b">{book.categoriaid}</td> 
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 };

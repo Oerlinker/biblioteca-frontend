@@ -96,7 +96,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                     </button>
                 </form>
                 <div className="mt-6 text-center">
-                    <p className="text-gray-600">¿Olvidaste tu contraseña? <a href="/" className="text-lightblue-500 hover:underline">Recupérala aquí</a></p>
+                    <p className="text-gray-600">¿Olvidaste tu contraseña? <a href="/login" className="text-lightblue-500 hover:underline">Recupérala aquí</a></p>
                     <p className="text-gray-600 mt-4">¿No tienes una cuenta? <a href="/" className="text-lightblue-500 hover:underline">Regístrate</a></p>
                 </div>
             </div>

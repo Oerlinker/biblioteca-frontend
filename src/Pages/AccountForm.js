@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import UserInfo from './UserInfo';
+import UserInfo from './UserInfo'; // Importa el componente UserInfo
 import EditName from './EditName';
 import EditEmail from './EditEmail';
 import EditPassword from './EditPassword';
@@ -16,14 +16,9 @@ const AccountForm = ({ user }) => {
 
             {/* Contenedor principal dividido en dos partes */}
             <div className="relative flex w-full max-w-6xl mx-auto z-10 bg-white rounded-3xl shadow-2xl">
-                {/* Sección izquierda (perfil del usuario) */}
+                {/* Sección izquierda (información del usuario) */}
                 <aside className="w-1/3 bg-gray-100 rounded-l-3xl p-8 flex flex-col items-center justify-center">
-                    {/* Avatar en lugar de foto de perfil */}
-                    <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center mb-4">
-                        <span className="text-4xl font-bold text-gray-700">A</span>
-                    </div>
-                    <h2 className="text-2xl font-bold text-gray-700 mb-2">{user.nombre}</h2>
-                    <p className="text-gray-500 mb-4">{user.rol === 4 ? 'Administrador' : 'Usuario'}</p>
+                    <UserInfo user={user} /> {/* Aquí mostramos la información del usuario con el componente UserInfo */}
                 </aside>
 
                 {/* Sección derecha (formulario de cuenta) */}
@@ -68,7 +63,7 @@ const AccountForm = ({ user }) => {
                             <label className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                             <input
                                 type="email"
-                                value="tucorreo@ejemplo.com"
+                                value={user.email}
                                 readOnly
                                 className="block w-full mt-1 p-3 border border-gray-300 rounded-md bg-gray-100"
                             />

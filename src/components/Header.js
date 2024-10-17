@@ -12,37 +12,55 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
     console.log("Rol del usuario:", user.rol);
 
     return (
-        <header className="bg-blue-500 text-white px-4 py-2 flex justify-between items-center">
-            <h1 className="text-lg font-bold">Biblioteca Alejandria</h1>
-            <nav className="flex items-center space-x-4">
-
-                {isLoggedIn ? (
-                    <>
-                        {user.rol !== 4 && (
-                            <Link to="/books" className="text-white hover:underline">Libros</Link>
-                        )}
-                        <span className="mr-4">Bienvenido, {user.nombre}</span>
-                        <Link to="/account" className="mr-4 text-white hover:underline">Gestionar Cuenta</Link>
-                        {user.rol === 4 && (
-                            <Link to="/admin" className="text-white hover:underline">Administrar</Link>
-                        )}
-                        <button
-                            onClick={handleLogoutAndRedirect}
-                            className="border border-white text-white px-4 py-2 rounded hover:bg-gray-200 hover:text-blue-500"
-                        >
-                            Cerrar Sesión
-                        </button>
-                    </>
-                ) : (
-                    <div className="flex space-x-4">
-                        <Link to="/login">Iniciar Sesión</Link>
-                        <Link to="/register">Crear Cuenta</Link>
-                    </div>
-                )}
-            </nav>
+        <header className="bg-blue-500 text-white px-6 py-4 shadow-lg">
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</h1>
+                <nav className="flex items-center space-x-6">
+                    {isLoggedIn ? (
+                        <>
+                            {user.rol !== 4 && (
+                                <Link to="/books" className="text-white font-medium hover:underline">
+                                    Libros
+                                </Link>
+                            )}
+                            <span className="text-lg font-semibold text-white">
+                                Bienvenido, {user.nombre}
+                            </span>
+                            <Link to="/account" className="text-white font-medium hover:underline">
+                                Gestionar Cuenta
+                            </Link>
+                            {user.rol === 4 && (
+                                <Link to="/admin" className="text-white font-medium hover:underline">
+                                    Administrar
+                                </Link>
+                            )}
+                            <button
+                                onClick={handleLogoutAndRedirect}
+                                className="ml-4 px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
+                            >
+                                Cerrar Sesión
+                            </button>
+                        </>
+                    ) : (
+                        <div className="flex space-x-6">
+                            <Link
+                                to="/login"
+                                className="text-white font-medium hover:underline"
+                            >
+                                Iniciar Sesión
+                            </Link>
+                            <Link
+                                to="/register"
+                                className="text-white font-medium hover:underline"
+                            >
+                                Crear Cuenta
+                            </Link>
+                        </div>
+                    )}
+                </nav>
+            </div>
         </header>
     );
 };
 
 export default Header;
-

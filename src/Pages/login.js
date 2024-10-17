@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
@@ -11,30 +11,13 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            try {
-                const decodedToken = jwtDecode(token);
-                const rol = decodedToken.rol;
-                setUser({ nombre: decodedToken.nombre, rol: rol });
-                setIsLoggedIn(true);
-
-                if (rol === 4) {
-                    navigate("/admin");
-                } else {
-                    navigate("/books");
-                }
-            } catch (error) {
-                console.error('Token inválido:', error);
-            }
-        }
-    }, [setIsLoggedIn, setUser, navigate]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/login', { email, password }); // Definir `response`
+            const response = await axios.post('/api/login', { email, password });
+
+            localStorage.setItem('token', response.data.token);
+
             const decodedToken = jwtDecode(response.data.token);
             const rol = decodedToken.rol;
             const nombre = decodedToken.nombre;
@@ -51,6 +34,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             setError('Email o contraseña incorrectos');
         }
     };
+
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
             {/* Imagen de fondo */}

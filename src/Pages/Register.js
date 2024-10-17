@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import fondo from '../assets/fondo.jpeg'; // Import the background image
 
 const Register = () => {
     const [nombre, setNombre] = useState('');
@@ -25,8 +26,14 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded shadow-md w-96">
+        <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
+
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>
+                <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Dark filter */}
+            </div>
+
+
+            <div className="relative bg-white p-8 rounded shadow-md w-96">
                 <h2 className="text-2xl font-bold mb-6 text-center">Crear Cuenta</h2>
                 {message && <p className="text-center mb-4 text-red-500">{message}</p>}
                 <form onSubmit={handleSubmit}>

@@ -34,8 +34,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            localStorage.setItem('token', response.data.token);
-
+            const response = await axios.post('/api/login', { email, password }); // Definir `response`
             const decodedToken = jwtDecode(response.data.token);
             const rol = decodedToken.rol;
             const nombre = decodedToken.nombre;
@@ -52,7 +51,6 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             setError('Email o contraseña incorrectos');
         }
     };
-
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
             {/* Imagen de fondo */}

@@ -7,7 +7,7 @@ const EditPassword = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3000/api/users/${user.id}`, { password });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`, { password });
             // Optionally, add a success message or redirect the user
         } catch (error) {
             console.error('Error updating password:', error);

@@ -8,7 +8,7 @@ const DeleteUserForm = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/usuarios');
+                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/usuarios');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -21,7 +21,7 @@ const DeleteUserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.delete(`http://localhost:3000/api/usuarios/${selectedUser}`);
+            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/usuarios/${selectedUser}`);
             alert('Usuario eliminado con éxito');
         } catch (error) {
             console.error('Error eliminando el usuario:', error);

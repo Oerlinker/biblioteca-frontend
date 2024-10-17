@@ -52,7 +52,7 @@ const BookForm = () => {
                 CategoriaID,
             };
 
-            await axios.post('http://localhost:3000/api/libros', nuevoLibro);
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro);
 
             setSuccessMessage('Libro agregado con éxito.');
             setError('');

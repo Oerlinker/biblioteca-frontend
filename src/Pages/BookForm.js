@@ -14,9 +14,9 @@ const BookForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const autoresResponse = await axios.get('/api/autores');
-                const editorialesResponse = await axios.get('api/editoriales');
-                const categoriasResponse = await axios.get('/api/categorias');
+                const autoresResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
+                const editorialesResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
+                const categoriasResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
 
                 setAutores(autoresResponse.data);
                 setEditoriales(editorialesResponse.data);

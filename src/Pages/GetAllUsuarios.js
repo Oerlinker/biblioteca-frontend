@@ -5,7 +5,7 @@ const GetAllUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/users')
+        axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/users')
             .then((response) => {
                 setUsuarios(response.data);
             })

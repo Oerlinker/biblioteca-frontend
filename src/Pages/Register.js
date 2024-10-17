@@ -13,7 +13,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/register', { nombre, email, password });
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/register', { nombre, email, password });
             setMessage('Registro exitoso');
             setTimeout(() => {
                 navigate('/login');

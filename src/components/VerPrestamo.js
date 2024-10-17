@@ -8,7 +8,7 @@ const VerPrestamos = () => {
     useEffect(() => {
         const fetchPrestamos = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/prestamos');
+                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/prestamos');
                 setPrestamos(response.data);
             } catch (error) {
                 console.error('Error obteniendo préstamos:', error);

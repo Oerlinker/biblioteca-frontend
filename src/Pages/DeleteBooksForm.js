@@ -8,7 +8,7 @@ const DeleteBookForm = () => {
     useEffect(() => {
         const fetchLibros = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/libros');
+                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
                 setLibros(response.data);
             } catch (error) {
                 console.error('Error fetching libros:', error);
@@ -22,10 +22,10 @@ const DeleteBookForm = () => {
         e.preventDefault();
         try {
             console.log(`Deleting book with ID: ${selectedLibro}`);
-            await axios.delete(`http://localhost:3000/api/libros/${selectedLibro}`);
+            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro}`);
             alert('Libro eliminado con éxito');
             // Refresh the list of books after deletion
-            const response = await axios.get('http://localhost:3000/api/libros/:id');
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros/:id');
             setLibros(response.data);
             setSelectedLibro('');
         } catch (error) {

@@ -8,7 +8,7 @@ const GetBooksForm = () => {
     useEffect(() => {
         const fetchLibros = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/libros');
+                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
                 setLibros(response.data);
             } catch (error) {
                 console.error('Error fetching libros:', error);

@@ -5,7 +5,7 @@ const AdministrarRoles = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/users')
+        axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/users')
             .then((response) => {
                 setUsuarios(response.data);
             })
@@ -20,7 +20,7 @@ const AdministrarRoles = () => {
             return;
         }
 
-        axios.put('http://localhost:3000/api/users/update', { userId, newRole })
+        axios.put('https://backend-proyecto-production-13fc.up.railway.app/api/users/update', { userId, newRole })
             .then((response) => {
                 alert('Rol actualizado exitosamente');
                 setUsuarios((prev) =>

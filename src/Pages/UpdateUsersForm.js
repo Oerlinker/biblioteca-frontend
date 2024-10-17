@@ -34,7 +34,7 @@ const UpdateUserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3000/api/usuarios/${selectedUser.usuarioid}`, {
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/usuarios/${selectedUser.usuarioid}`, {
                 nombre,
                 email,
                 rol

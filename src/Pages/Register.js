@@ -41,13 +41,13 @@ const Register = () => {
                 )}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="relative">
-                        <label className="block text-sm font-semibold text-gray-700">Nombre de Usuario</label>
+                        <label className="block text-sm font-semibold text-gray-700">Usuario</label>
                         <input
                             type="text"
                             value={nombre}
                             onChange={(e) => setNombre(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lightblue-500 transition"
-                            placeholder="Tu nombre"
+                            placeholder="Usuario"
                             required
                         />
                     </div>

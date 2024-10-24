@@ -1,31 +1,23 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
-import UserInfo from './UserInfo'; // Importa el componente UserInfo
-import EditName from './EditName';
-import EditEmail from './EditEmail';
-import EditPassword from './EditPassword';
-import fondo from '../assets/fondo.jpeg'; // Importa la imagen de fondo
+import { Link } from 'react-router-dom';
+import UserInfo from './UserInfo';
+import fondo from '../assets/fondo.jpeg';
 
 const AccountForm = ({ user }) => {
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
-            {/* Imagen de fondo */}
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>
-                <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Filtro oscuro */}
+                <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             </div>
 
-            {/* Contenedor principal dividido en dos partes */}
             <div className="relative flex w-full max-w-6xl mx-auto z-10 bg-white rounded-3xl shadow-2xl">
-                {/* Sección izquierda (información del usuario) */}
                 <aside className="w-1/3 bg-gray-100 rounded-l-3xl p-8 flex flex-col items-center justify-center">
-                    <UserInfo user={user} /> {/* Aquí mostramos la información del usuario con el componente UserInfo */}
+                    <UserInfo user={user} />
                 </aside>
 
-                {/* Sección derecha (formulario de cuenta) */}
                 <section className="w-2/3 p-10">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6">Gestionar Cuenta</h2>
 
-                    {/* Botones de edición */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                         <Link
                             to="edit-name"
@@ -47,7 +39,6 @@ const AccountForm = ({ user }) => {
                         </Link>
                     </div>
 
-                    {/* Formulario principal */}
                     <form className="grid grid-cols-1 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Usuario</label>
@@ -78,13 +69,6 @@ const AccountForm = ({ user }) => {
                             </button>
                         </div>
                     </form>
-
-                    {/* Rutas de edición */}
-                    <Routes>
-                        <Route path="edit-name" element={<EditName user={user} />} />
-                        <Route path="edit-email" element={<EditEmail user={user} />} />
-                        <Route path="edit-password" element={<EditPassword user={user} />} />
-                    </Routes>
                 </section>
             </div>
         </div>

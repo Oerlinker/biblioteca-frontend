@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -16,20 +16,21 @@ import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
 import Bitacora from './components/Bitacora';
 import AccountForm from './Pages/AccountForm';
-import {jwtDecode} from "jwt-decode";
+import EditName from './Pages/EditName';
+import EditEmail from './Pages/EditEmail';
+import EditPassword from './Pages/EditPassword';
+import { useState, useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        // Verificar si hay un token en el localStorage al cargar la aplicación
         const token = localStorage.getItem('token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            console.log('Decoded token:', decodedToken);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol }; // Asegúrate de que el nombre esté en el token
-
+            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
             setUser(userData);
             setIsLoggedIn(true);
         }
@@ -49,7 +50,10 @@ function App() {
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                 <Route path="/books" element={<Books />} />
                 <Route path="/libro/:id" element={<BookDetail />} />
-                <Route path="/account" element={<AccountForm user={user} />} />
+                <Route path="/account/*" element={<AccountForm user={user} />} />
+                <Route path="/account/edit-name" element={<EditName user={user} />} />
+                <Route path="/account/edit-email" element={<EditEmail user={user} />} />
+                <Route path="/account/edit-password" element={<EditPassword user={user} />} />
 
                 {isLoggedIn && user.rol === 4 && (
                     <>

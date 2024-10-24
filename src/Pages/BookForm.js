@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 
 const InputField = ({ label, value, onChange, placeholder, type = 'text' }) => (
     <div>
@@ -34,7 +32,7 @@ const SelectField = ({ label, value, onChange, options, defaultOption }) => (
     </div>
 );
 
-const BookForm = ({ userRole }) => {
+const BookForm = () => {
     const [Titulo, setTitulo] = useState('');
     const [Genero, setGenero] = useState('');
     const [autores, setAutores] = useState([]);
@@ -48,16 +46,19 @@ const BookForm = ({ userRole }) => {
     const [successMessage, setSuccessMessage] = useState('');
 
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const autoresResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
                 const editorialesResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
                 const categoriasResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
+                const librosResponse = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
 
                 setAutores(autoresResponse.data);
                 setEditoriales(editorialesResponse.data);
                 setCategorias(categoriasResponse.data);
+                setBooks(librosResponse.data);
                 setLoading(false);
             } catch (error) {
                 setError('Error al cargar los datos.');
@@ -100,6 +101,8 @@ const BookForm = ({ userRole }) => {
         }
     };
 
+
+
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
             <h2 className="text-2xl font-bold text-gray-700 mb-4">Agregar Libro</h2>
@@ -110,54 +113,53 @@ const BookForm = ({ userRole }) => {
                 <p className="text-gray-500">Cargando datos...</p>
             ) : (
                 <>
-                    {userRole === 'admin' && (
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <InputField
-                                label="Título:"
-                                value={Titulo}
-                                onChange={(e) => setTitulo(e.target.value)}
-                                placeholder="Escribe el título del libro"
-                            />
-                            <InputField
-                                label="Género:"
-                                value={Genero}
-                                onChange={(e) => setGenero(e.target.value)}
-                                placeholder="Escribe el género del libro"
-                            />
-                            <SelectField
-                                label="Autor:"
-                                value={AutorID}
-                                onChange={(e) => setAutorID(e.target.value)}
-                                options={autores.map((autor) => ({ id: autor.autorid, name: autor.nombre }))}
-                                defaultOption="Selecciona un autor"
-                            />
-                            <SelectField
-                                label="Editorial:"
-                                value={EditorialID}
-                                onChange={(e) => setEditorialID(e.target.value)}
-                                options={editoriales.map((editorial) => ({ id: editorial.editorialid, name: editorial.nombre_editorial }))}
-                                defaultOption="Selecciona una editorial"
-                            />
-                            <SelectField
-                                label="Categoría:"
-                                value={CategoriaID}
-                                onChange={(e) => setCategoriaID(e.target.value)}
-                                options={categorias.map((categoria) => ({ id: categoria.categoriaid, name: categoria.nombre_categoria }))}
-                                defaultOption="Selecciona una categoría"
-                            />
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <InputField
+                            label="Título:"
+                            value={Titulo}
+                            onChange={(e) => setTitulo(e.target.value)}
+                            placeholder="Escribe el título del libro"
+                        />
+                        <InputField
+                            label="Género:"
+                            value={Genero}
+                            onChange={(e) => setGenero(e.target.value)}
+                            placeholder="Escribe el género del libro"
+                        />
+                        <SelectField
+                            label="Autor:"
+                            value={AutorID}
+                            onChange={(e) => setAutorID(e.target.value)}
+                            options={autores.map((autor) => ({ id: autor.autorid, name: autor.nombre }))}
+                            defaultOption="Selecciona un autor"
+                        />
+                        <SelectField
+                            label="Editorial:"
+                            value={EditorialID}
+                            onChange={(e) => setEditorialID(e.target.value)}
+                            options={editoriales.map((editorial) => ({ id: editorial.editorialid, name: editorial.nombre_editorial }))}
+                            defaultOption="Selecciona una editorial"
+                        />
+                        <SelectField
+                            label="Categoría:"
+                            value={CategoriaID}
+                            onChange={(e) => setCategoriaID(e.target.value)}
+                            options={categorias.map((categoria) => ({ id: categoria.categoriaid, name: categoria.nombre_categoria }))}
+                            defaultOption="Selecciona una categoría"
+                        />
 
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition-colors"
-                            >
-                                Agregar Libro
-                            </button>
-                        </form>
-                    )}
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition-colors"
+                        >
+                            Agregar Libro
+                        </button>
+                    </form>
                 </>
             )}
         </div>
     );
+
 };
 
 export default BookForm;

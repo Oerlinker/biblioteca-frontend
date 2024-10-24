@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const EditUserName = ({ user }) => {
     const [nombre, setNombre] = useState(user.nombre);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!user || !user.id) {
+            alert("No se ha podido obtener el usuario");
+            return;
+        }
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
-            // Optionally, add a success message or redirect the user
+            alert("Nombre de usuario actualizado con éxito");
+            navigate("/profile");
+            setNombre('');
         } catch (error) {
-            console.error('Error updating username:', error);
+            console.error('Error actualizando el nombre de usuario:', error);
+            alert("Hubo un problema al actualizar el nombre de usuario");
         }
     };
 

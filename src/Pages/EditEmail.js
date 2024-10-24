@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const EditEmail = ({ user }) => {
     const [correo, setCorreo] = useState(user.correo);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!user || !user.id) {
+            alert("No se ha podido obtener el usuario");
+            return;
+        }
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/correo/${user.id}`, { correo });
-            // Optionally, add a success message or redirect the user
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
+            alert("Correo actualizado con éxito");
+            navigate("/profile");
+            setCorreo('');
         } catch (error) {
-            console.error('Error updating email:', error);
+            console.error('Error actualizando el correo:', error);
+            alert("Hubo un problema al actualizar el correo");
         }
     };
 

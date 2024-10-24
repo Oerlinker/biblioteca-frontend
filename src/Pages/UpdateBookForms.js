@@ -38,7 +38,7 @@ const UpdateBookForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3000/api/libros/${selectedLibro.libroid}`, {
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro.libroid}`, {
                 Titulo,
                 Genero,
                 AutorID,

@@ -7,7 +7,7 @@ const EditEmail = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`, { correo });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { correo });
             // Optionally, add a success message or redirect the user
         } catch (error) {
             console.error('Error updating email:', error);

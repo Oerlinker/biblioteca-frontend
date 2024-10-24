@@ -19,7 +19,7 @@ const EditPassword = ({ user }) => {
             return;
         }
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`, { password });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
             alert("Contraseña actualizada con éxito");
             navigate("/profile");
             setPassword('');

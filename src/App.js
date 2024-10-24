@@ -20,7 +20,7 @@ import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';
 import EditPassword from './Pages/EditPassword';
 import { useState, useEffect } from 'react';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);

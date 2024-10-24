@@ -23,7 +23,7 @@ const EditEmail = ({ user }) => {
                     type="email"
                     value={correo}
                     onChange={(e) => setCorreo(e.target.value)}
-                    placeholder="Escribe tu correo"
+                    placeholder="Escribe nuevo username"
                 />
             </div>
             <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">Actualizar</button>

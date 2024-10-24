@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -16,13 +16,27 @@ import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
 import Bitacora from './components/Bitacora';
 import AccountForm from './Pages/AccountForm';
+import {jwtDecode} from "jwt-decode";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState({});
 
+    useEffect(() => {
+        // Verificar si hay un token en el localStorage al cargar la aplicación
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            console.log('Decoded token:', decodedToken);
+            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol }; // Asegúrate de que el nombre esté en el token
+
+            setUser(userData);
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Elimina el token
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
         setUser({});
     };

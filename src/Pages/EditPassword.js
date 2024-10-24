@@ -3,14 +3,28 @@ import axios from 'axios';
 
 const EditPassword = ({ user }) => {
     const [password, setPassword] = useState('');
+    const navigate=useNavigate();
+
+    console.log("user en edit password",user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!user||!user.id){
+            alert("No se ha podido obtener el usuario");
+            return;
+        }
+        if(password.length<6){
+            alert("La contraseña debe tener al menos 6 caracteres");
+            return;
+        }
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`, { password });
-            // Optionally, add a success message or redirect the user
+            alert("Contraseña actualizada con éxito");
+            navigate("/profile");
+            setPassword('');
         } catch (error) {
-            console.error('Error updating password:', error);
+            console.error('Error actualizando la contraseña:', error);
+            alert("Hubo un problema al actualizar la contraseña");
         }
     };
 

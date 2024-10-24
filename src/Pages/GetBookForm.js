@@ -1,11 +1,12 @@
-// src/Pages/GetBooksForm.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const GetBooksForm = () => {
     const [libros, setLibros] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLibros = async () => {
@@ -21,6 +22,10 @@ const GetBooksForm = () => {
 
         fetchLibros();
     }, []);
+
+    const handleViewBook = (id) => {
+        navigate(`/libro/${id}`);
+    };
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">

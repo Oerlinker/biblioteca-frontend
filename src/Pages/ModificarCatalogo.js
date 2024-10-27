@@ -5,6 +5,9 @@ import GetBooksForm from './GetBookForm';
 import UpdateBookForm from './UpdateBookForms';
 import DeleteBookForm from './DeleteBooksForm';
 import AutorForm from "./autorForm";
+import EditorialForm from "./editorialForm";
+import CategoriaForm from "./CategoriaForm";
+import EdicionesForm from "./EdicionesForm";
 
 const ModificarCatalogo = () => {
     return (
@@ -26,6 +29,15 @@ const ModificarCatalogo = () => {
                 <Link to="gestionar-autores" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
                     Gestionar Autores
                 </Link>
+                <Link to="gestionar-editoriales" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Gestionar Editoriales
+                </Link>
+                <Link to="gestionar-categorias" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Gestionar Categorias
+                </Link>
+                <Link to="gestionar-ediciones" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Gestionar Ediciones
+                </Link>
             </div>
 
             <Routes>
@@ -34,6 +46,9 @@ const ModificarCatalogo = () => {
                 <Route path="actualizar-libro" element={<UpdateBookForm />} />
                 <Route path="eliminar-libro" element={<DeleteBookForm />} />
                 <Route path="gestionar-autores" element={<AutorForm />} />
+                <Route path="gestionar-editoriales" element={<EditorialForm />} />
+                <Route path="gestionar-categorias" element={<CategoriaForm />} />
+                <Route path="gestionar-ediciones" element={<EdicionesForm />} />
             </Routes>
         </div>
     );

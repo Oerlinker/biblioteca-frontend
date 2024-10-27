@@ -68,6 +68,16 @@ const AutorForm = () => {
     };
 
     // Manejar el submit del formulario
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (autorID) {
+            actualizarAutor();
+        } else {
+            insertarAutor();
+        }
+    };
+
+    // Manejar la selección de un autor para editar
     const handleEdit = (autor) => {
         setNombre(autor.nombre);
         setBiografia(autor.biografia);

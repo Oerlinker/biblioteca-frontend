@@ -33,6 +33,7 @@ const ModificarCatalogo = () => {
                 <Route path="obtener-libros" element={<GetBooksForm />} />
                 <Route path="actualizar-libro" element={<UpdateBookForm />} />
                 <Route path="eliminar-libro" element={<DeleteBookForm />} />
+                <Route path="gestionar-autores" element={<AutorForm />} />
             </Routes>
         </div>
     );

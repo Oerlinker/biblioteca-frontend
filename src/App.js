@@ -14,7 +14,7 @@ import GetBooksForm from './Pages/GetBookForm';
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
-import Bitacora from './components/Bitacora';
+import Bitacora from './Pages/Bitacora';
 import AccountForm from './Pages/AccountForm';
 import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';

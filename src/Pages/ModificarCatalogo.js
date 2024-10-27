@@ -4,6 +4,7 @@ import BookForm from './BookForm';
 import GetBooksForm from './GetBookForm';
 import UpdateBookForm from './UpdateBookForms';
 import DeleteBookForm from './DeleteBooksForm';
+import AutorForm from "./autorForm";
 
 const ModificarCatalogo = () => {
     return (
@@ -21,6 +22,9 @@ const ModificarCatalogo = () => {
                 </Link>
                 <Link to="eliminar-libro" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
                     Eliminar Libro
+                </Link>
+                <Link to="gestionar-autores" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Gestionar Autores
                 </Link>
             </div>
 

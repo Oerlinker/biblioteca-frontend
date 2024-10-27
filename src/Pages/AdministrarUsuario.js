@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import GetAllUsuarios from './GetAllUsuarios';
 import AdministrarRoles from './AdministrarRoles';
-import Bitacora from '../components/Bitacora';
+import Bitacora from './Bitacora';
 
 const AdministrarUsuarios = () => {
     return (

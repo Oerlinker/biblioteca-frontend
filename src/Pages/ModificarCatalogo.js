@@ -5,7 +5,7 @@ import GetBooksForm from './GetBookForm';
 import UpdateBookForm from './UpdateBookForms';
 import DeleteBookForm from './DeleteBooksForm';
 import AutorForm from "./autorForm";
-import EditorialForm from "./editorialForm";
+import EditorialForm from "./EditorialForm";
 import CategoriaForm from "./CategoriaForm";
 import EdicionesForm from "./EdicionesForm";
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import GetAllUsuarios from './GetAllUsuarios';
 import AdministrarRoles from './AdministrarRoles';
-import Bitacora from './Bitacora';
+import ActivityLog from "./ActivityLog";
+
 
 const AdministrarUsuarios = () => {
     return (
@@ -15,15 +16,16 @@ const AdministrarUsuarios = () => {
                 <Link to="administrar-roles" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
                     Administrar Roles
                 </Link>
-                <Link to="bitacora" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
-                    Ver Bitácora
+                <Link to="activity-log" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Ver Bitacora
                 </Link>
             </div>
 
             <Routes>
                 <Route path="getall-usuarios" element={<GetAllUsuarios />} />
                 <Route path="administrar-roles" element={<AdministrarRoles />} />
-                <Route path="bitacora" element={<Bitacora />} />
+                <Route path="activity-log" element={<ActivityLog />} />
+
             </Routes>
         </div>
     );

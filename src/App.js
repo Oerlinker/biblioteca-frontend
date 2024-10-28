@@ -14,7 +14,6 @@ import GetBooksForm from './Pages/GetBookForm';
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
-import Bitacora from './Pages/Bitacora';
 import AccountForm from './Pages/AccountForm';
 import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';
@@ -67,7 +66,7 @@ function App() {
                         <Route path="/admin/administrar-usuarios/*" element={<AdministrarUsuarios />} />
                         <Route path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios />} />
                         <Route path="/admin/administrar-usuarios/administrar-roles" element={<AdministrarRoles />} />
-                        <Route path="/admin/administrar-usuarios/bitacora" element={<Bitacora />} />
+                        <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} />
                     </>
                 )}
             </Routes>

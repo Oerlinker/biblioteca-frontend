@@ -1,3 +1,4 @@
+// src/components/Header.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,30 +10,19 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
         navigate('/');
     };
 
-    console.log("Rol del usuario:", user.rol);
-
     return (
         <header className="bg-blue-500 text-white px-6 py-4 shadow-lg">
-            <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</h1>
+            <div className="container mx-auto flex justify-between items-center">
+                <Link to="/" className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</Link>
                 <nav className="flex items-center space-x-6">
+                    <Link to="/" className="text-white font-medium hover:underline">Home</Link>
+                    <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                     {isLoggedIn ? (
                         <>
-                            {user.rol !== 4 && (
-                                <Link to="/books" className="text-white font-medium hover:underline">
-                                    Libros
-                                </Link>
-                            )}
-                            <span className="text-lg font-semibold text-white">
-                                Bienvenido, {user.nombre}
-                            </span>
-                            <Link to="/account" className="text-white font-medium hover:underline">
-                                Gestionar Cuenta
-                            </Link>
+                            <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>
+                            <Link to="/account" className="text-white font-medium hover:underline">Gestionar Cuenta</Link>
                             {user.rol === 4 && (
-                                <Link to="/admin" className="text-white font-medium hover:underline">
-                                    Administrar
-                                </Link>
+                                <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
                             <button
                                 onClick={handleLogoutAndRedirect}
@@ -42,20 +32,10 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                             </button>
                         </>
                     ) : (
-                        <div className="flex space-x-6">
-                            <Link
-                                to="/login"
-                                className="text-white font-medium hover:underline"
-                            >
-                                Iniciar Sesión
-                            </Link>
-                            <Link
-                                to="/register"
-                                className="text-white font-medium hover:underline"
-                            >
-                                Crear Cuenta
-                            </Link>
-                        </div>
+                        <>
+                            <Link to="/login" className="text-white font-medium hover:underline">Iniciar Sesión</Link>
+                            <Link to="/register" className="text-white font-medium hover:underline">Crear Cuenta</Link>
+                        </>
                     )}
                 </nav>
             </div>

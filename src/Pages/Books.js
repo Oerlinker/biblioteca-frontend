@@ -11,7 +11,7 @@ const Books = () => {
     //fetch para obtener todas las categorias de la caja
     const fetchCategorias = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/categorias');
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
             setCategorias(response.data);
         } catch (error) {
             console.error('Error obteniendo las categorias:', error);

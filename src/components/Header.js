@@ -15,8 +15,6 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</Link>
                 <nav className="flex items-center space-x-6">
-                    <Link to="/" className="text-white font-medium hover:underline">Home</Link>
-                    <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                     {isLoggedIn ? (
                         <>
                             <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>
@@ -37,6 +35,8 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                             <Link to="/register" className="text-white font-medium hover:underline">Crear Cuenta</Link>
                         </>
                     )}
+                    <Link to="/" className="text-white font-medium hover:underline">Home</Link>
+                    <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                 </nav>
             </div>
         </header>

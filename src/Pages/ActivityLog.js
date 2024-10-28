@@ -15,6 +15,7 @@ const ActivityLog = () => {
                 setLogs(response.data);
                 setLoading(false);
             } catch (error) {
+                console.error('Error fetching activity log:', error);
                 setError('Error fetching activity log');
                 setLoading(false);
             }

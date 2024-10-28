@@ -25,14 +25,15 @@ const ActivityLog = () => {
 
     const downloadPDF = () => {
         const doc = new jsPDF();
-        const tableColumn = ["Timestamp", "User ID", "Action"];
+        const tableColumn = ["Timestamp", "User ID", "Action", "IP"];
         const tableRows = [];
 
         logs.forEach(log => {
             const logData = [
                 log.timestamp,
                 log.userid,
-                log.action
+                log.action,
+                log.ip
             ];
             tableRows.push(logData);
         });
@@ -62,6 +63,7 @@ const ActivityLog = () => {
                                 <th className="py-2 px-4 border-b text-left">Timestamp</th>
                                 <th className="py-2 px-4 border-b text-left">User ID</th>
                                 <th className="py-2 px-4 border-b text-left">Action</th>
+                                <th className="py-2 px-4 border-b text-left">IP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,6 +72,7 @@ const ActivityLog = () => {
                                     <td className="py-2 px-4 border-b">{log.timestamp}</td>
                                     <td className="py-2 px-4 border-b">{log.userid}</td>
                                     <td className="py-2 px-4 border-b">{log.action}</td>
+                                    <td className="py-2 px-4 border-b">{log.ip}</td>
                                 </tr>
                             ))}
                         </tbody>

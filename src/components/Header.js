@@ -22,9 +22,11 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                             {user.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
+                            <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
+                            <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                             <button
                                 onClick={handleLogoutAndRedirect}
-                                className="ml-4 px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
+                                className="px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
                             >
                                 Cerrar Sesión
                             </button>
@@ -33,10 +35,10 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                         <>
                             <Link to="/login" className="text-white font-medium hover:underline">Iniciar Sesión</Link>
                             <Link to="/register" className="text-white font-medium hover:underline">Crear Cuenta</Link>
+                            <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
+                            <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                         </>
                     )}
-                    <Link to="/" className="text-white font-medium hover:underline">Home</Link>
-                    <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                 </nav>
             </div>
         </header>

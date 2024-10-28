@@ -12,9 +12,9 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
 
     return (
         <header className="bg-blue-500 text-white px-6 py-4 shadow-lg">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container mx-auto flex flex-wrap justify-between items-center">
                 <Link to="/" className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</Link>
-                <nav className="flex items-center space-x-6">
+                <nav className="flex flex-wrap items-center space-x-6 mt-4 sm:mt-0">
                     {isLoggedIn ? (
                         <>
                             <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>

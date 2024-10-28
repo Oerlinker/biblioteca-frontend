@@ -1,9 +1,9 @@
+// src/Pages/AdministrarUsuario.js
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import GetAllUsuarios from './GetAllUsuarios';
 import AdministrarRoles from './AdministrarRoles';
 import ActivityLog from "./ActivityLog";
-
 
 const AdministrarUsuarios = () => {
     return (
@@ -25,7 +25,6 @@ const AdministrarUsuarios = () => {
                 <Route path="getall-usuarios" element={<GetAllUsuarios />} />
                 <Route path="administrar-roles" element={<AdministrarRoles />} />
                 <Route path="activity-log" element={<ActivityLog />} />
-
             </Routes>
         </div>
     );

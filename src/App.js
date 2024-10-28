@@ -20,6 +20,7 @@ import EditEmail from './Pages/EditEmail';
 import ActivityLog from './Pages/ActivityLog';
 import HomePage from './Pages/HomePage';
 import EditPassword from './Pages/EditPassword';
+import subscriptionForm from "./Pages/SubscriptionForm";
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/account/edit-name" element={<EditName user={user} />} />
                 <Route path="/account/edit-email" element={<EditEmail user={user} />} />
                 <Route path="/account/edit-password" element={<EditPassword user={user} />} />
+                <Route path="/subscription" element={<subscriptionForm user={user}/>} />
 
                 {isLoggedIn && user.rol === 4 && (
                     <>

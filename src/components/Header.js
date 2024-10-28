@@ -22,6 +22,7 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                             {user.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
+                            <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
                             <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                             <button

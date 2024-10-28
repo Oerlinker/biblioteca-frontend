@@ -4,24 +4,51 @@ import { useNavigate } from 'react-router-dom';
 
 const GetBooksForm = () => {
     const [libros, setLibros] = useState([]);
+    const [autores, setAutores] = useState([]);
+    const [editoriales, setEditoriales] = useState([]);
+    const [categorias, setCategorias] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchLibros = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
-                setLibros(response.data);
+                const [librosResponse, autoresResponse, editorialesResponse, categoriasResponse] = await Promise.all([
+                    axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros'),
+                    axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores'),
+                    axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales'),
+                    axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias')
+                ]);
+
+                setLibros(librosResponse.data);
+                setAutores(autoresResponse.data);
+                setEditoriales(editorialesResponse.data);
+                setCategorias(categoriasResponse.data);
                 setLoading(false);
             } catch (error) {
-                setError('Error fetching libros');
+                setError('Error fetching data');
                 setLoading(false);
             }
         };
 
-        fetchLibros();
+        fetchData();
     }, []);
+
+    const getAutorName = (id) => {
+        const autor = autores.find((autor) => autor.autorid === id);
+        return autor ? autor.nombre : 'Unknown';
+    };
+
+    const getEditorialName = (id) => {
+        const editorial = editoriales.find((editorial) => editorial.editorialid === id);
+        return editorial ? editorial.nombre_editorial : 'Unknown';
+    };
+
+    const getCategoriaName = (id) => {
+        const categoria = categorias.find((categoria) => categoria.categoriaid === id);
+        return categoria ? categoria.nombre_categoria : 'Unknown';
+    };
 
     const handleViewBook = (id) => {
         navigate(`/libro/${id}`);
@@ -40,7 +67,8 @@ const GetBooksForm = () => {
                         <tr>
                             <th className="py-2 px-4 border-b text-left">Título</th>
                             <th className="py-2 px-4 border-b text-left">Autor</th>
-                            <th className="py-2 px-4 border-b text-left">Género</th>
+                            <th className="py-2 px-4 border-b text-left">Editorial</th>
+                            <th className="py-2 px-4 border-b text-left">Categoría</th>
                             <th className="py-2 px-4 border-b text-left">Acciones</th>
                         </tr>
                     </thead>
@@ -48,8 +76,9 @@ const GetBooksForm = () => {
                         {libros.map((book) => (
                             <tr key={book.libroid}>
                                 <td className="py-2 px-4 border-b">{book.titulo}</td>
-                                <td className="py-2 px-4 border-b">{book.autorid}</td>
-                                <td className="py-2 px-4 border-b">{book.genero}</td>
+                                <td className="py-2 px-4 border-b">{getAutorName(book.autorid)}</td>
+                                <td className="py-2 px-4 border-b">{getEditorialName(book.editorialid)}</td>
+                                <td className="py-2 px-4 border-b">{getCategoriaName(book.categoriaid)}</td>
                                 <td className="py-2 px-4 border-b">
                                     <button
                                         onClick={() => handleViewBook(book.libroid)}

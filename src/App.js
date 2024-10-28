@@ -17,6 +17,7 @@ import AdministrarRoles from './Pages/AdministrarRoles';
 import AccountForm from './Pages/AccountForm';
 import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';
+import ActivityLog from './Pages/ActivityLog';
 import EditPassword from './Pages/EditPassword';
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';

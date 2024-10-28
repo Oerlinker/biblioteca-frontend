@@ -38,37 +38,6 @@ const AccountForm = ({ user }) => {
                             Editar Contraseña
                         </Link>
                     </div>
-
-                    <form className="grid grid-cols-1 gap-6">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Usuario</label>
-                            <input
-                                type="text"
-                                value={user.nombre}
-                                readOnly
-                                className="block w-full mt-1 p-3 border border-gray-300 rounded-md bg-gray-100"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input
-                                type="email"
-                                value={user.email}
-                                readOnly
-                                className="block w-full mt-1 p-3 border border-gray-300 rounded-md bg-gray-100"
-                            />
-                        </div>
-
-                        <div className="col-span-1">
-                            <button
-                                type="submit"
-                                className="w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
-                            >
-                                Actualizar
-                            </button>
-                        </div>
-                    </form>
                 </section>
             </div>
         </div>

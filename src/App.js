@@ -18,6 +18,7 @@ import AccountForm from './Pages/AccountForm';
 import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';
 import ActivityLog from './Pages/ActivityLog';
+import HomePage from './Pages/HomePage';
 import EditPassword from './Pages/EditPassword';
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
@@ -46,6 +47,7 @@ function App() {
         <Router>
             <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
             <Routes>
+                <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
                 <Route path="/books" element={<Books />} />

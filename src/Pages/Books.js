@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 const Books = () => {
     const [books, setLibros] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [categorias, setCategorias] = useState([]); // Estado para almacenar los géneros
-    const [selectedCategoria, setSelectedCategoria] = useState(""); // Estado para la categoría seleccionada
+    const [categorias, setCategorias] = useState([]);
+    const [selectedCategoria, setSelectedCategoria] = useState("");
 
-    //fetch para obtener todas las categorias de la caja
     const fetchCategorias = async () => {
         try {
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
@@ -22,13 +21,12 @@ const Books = () => {
         fetchCategorias();
     }, []);
 
-    //fetch de busqueda, ya sea por nombre o categoria
     const fetchLibros = useCallback(async () => {
         try {
             const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/search`, {
                 params: {
                     search: searchQuery,
-                    categoriaid: selectedCategoria // Cambiado a 'id' para buscar por ID de categoría
+                    categoriaid: selectedCategoria
                 }
             });
             setLibros(response.data);
@@ -37,40 +35,34 @@ const Books = () => {
         }
     }, [searchQuery, selectedCategoria]);
 
-    // Realiza la búsqueda de libros al cambiar la categoría o la consulta de búsqueda
     useEffect(() => {
         fetchLibros();
     }, [fetchLibros]);
 
-    // Llama a la función para buscar libros por categoría al cambiar la categoria selec
     const handleGenreChange = (e) => {
         setSelectedCategoria(e.target.value);
         fetchLibros();
     };
 
-
-//full diseño
     return (
         <div className="container mx-auto p-4">
             <h2 className="text-3xl font-bold text-center mb-6">Buscar Libros</h2>
 
-            {/* Filtro de Categorías */}
             <div className="flex justify-center mb-4">
                 <select
                     value={selectedCategoria}
-                    onChange={handleGenreChange} // funcion para que busque al cambio de cat
+                    onChange={handleGenreChange}
                     className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
                 >
                     <option value="">Todas las categorías</option>
                     {categorias.map((categoria) => (
-                        <option key={categoria.categoriaid} value={categoria.categoriaid}> {/* Cambiado a categoriaid */}
+                        <option key={categoria.categoriaid} value={categoria.categoriaid}>
                             {categoria.nombre_categoria}
                         </option>
                     ))}
                 </select>
             </div>
 
-            {/* Campo de búsqueda */}
             <div className="flex justify-center mb-6">
                 <input
                     type="text"
@@ -87,7 +79,6 @@ const Books = () => {
                 </button>
             </div>
 
-            {/* Resultados de libros */}
             {books.length > 0 ? (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {books.map((book) => (

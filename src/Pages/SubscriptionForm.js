@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import fondo from '../assets/fondo.jpeg';
 
 const SubscriptionForm = ({ user }) => {
+    const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [direccion, setDireccion] = useState('');
     const [carrera, setCarrera] = useState('');
@@ -23,6 +24,7 @@ const SubscriptionForm = ({ user }) => {
         try {
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 usuarioid: user.id,
+                nombre,
                 telefono,
                 direccion,
                 carrera,
@@ -50,6 +52,13 @@ const SubscriptionForm = ({ user }) => {
             <div className="relative bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
                 <h2 className="text-center text-3xl font-bold text-gray-700 mb-6">Registrar Suscripción</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <input
+                        type="text"
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
+                        placeholder="Nombre"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
                     <input
                         type="text"
                         value={telefono}

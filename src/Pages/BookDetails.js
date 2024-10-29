@@ -79,6 +79,7 @@ const BookDetail = () => {
                     <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                         <th className="py-3 px-6 text-left font-semibold">Campo</th>
                         <th className="py-3 px-6 text-left font-semibold">Valor</th>
+                        
                     </tr>
                 </thead>
                 <tbody>

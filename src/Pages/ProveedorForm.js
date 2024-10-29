@@ -3,9 +3,11 @@ import axios from 'axios';
 
 const ProveedorForm = () => {
     const [proveedores, setProveedores] = useState([]);
-    const [nombre, setNombre] = useState('');
-    const [direccion, setDireccion] = useState('');
-    const [telefono, setTelefono] = useState('');
+    const [nombreProveedor, setNombreProveedor] = useState('');
+    const [contactoProveedor, setContactoProveedor] = useState('');
+    const [correoProveedor, setCorreoProveedor] = useState('');
+    const [telefonoProveedor, setTelefonoProveedor] = useState('');
+    const [direccionProveedor, setDireccionProveedor] = useState('');
     const [proveedorID, setProveedorID] = useState(null);
 
     // Fetch proveedores
@@ -26,13 +28,17 @@ const ProveedorForm = () => {
     const insertarProveedor = async () => {
         try {
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/proveedores', {
-                nombre,
-                direccion,
-                telefono
+                nombre_proveedor: nombreProveedor,
+                contacto_proveedor: contactoProveedor,
+                correo_proveedor: correoProveedor,
+                telefono_proveedor: telefonoProveedor,
+                direccion_proveedor: direccionProveedor
             });
-            setNombre('');
-            setDireccion('');
-            setTelefono('');
+            setNombreProveedor('');
+            setContactoProveedor('');
+            setCorreoProveedor('');
+            setTelefonoProveedor('');
+            setDireccionProveedor('');
             fetchProveedores();
         } catch (error) {
             console.error('Error insertando el proveedor:', error);
@@ -43,13 +49,17 @@ const ProveedorForm = () => {
     const actualizarProveedor = async () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/proveedores/${proveedorID}`, {
-                nombre,
-                direccion,
-                telefono
+                nombre_proveedor: nombreProveedor,
+                contacto_proveedor: contactoProveedor,
+                correo_proveedor: correoProveedor,
+                telefono_proveedor: telefonoProveedor,
+                direccion_proveedor: direccionProveedor
             });
-            setNombre('');
-            setDireccion('');
-            setTelefono('');
+            setNombreProveedor('');
+            setContactoProveedor('');
+            setCorreoProveedor('');
+            setTelefonoProveedor('');
+            setDireccionProveedor('');
             setProveedorID(null);
             fetchProveedores();
         } catch (error) {
@@ -79,9 +89,11 @@ const ProveedorForm = () => {
 
     // Manejar la selección de un proveedor para editar
     const handleEdit = (proveedor) => {
-        setNombre(proveedor.nombre);
-        setDireccion(proveedor.direccion);
-        setTelefono(proveedor.telefono);
+        setNombreProveedor(proveedor.nombre_proveedor);
+        setContactoProveedor(proveedor.contacto_proveedor);
+        setCorreoProveedor(proveedor.correo_proveedor);
+        setTelefonoProveedor(proveedor.telefono_proveedor);
+        setDireccionProveedor(proveedor.direccion_proveedor);
         setProveedorID(proveedor.proveedorid);
     };
 
@@ -91,23 +103,37 @@ const ProveedorForm = () => {
             <form onSubmit={handleSubmit} className="mb-4">
                 <input
                     type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    value={nombreProveedor}
+                    onChange={(e) => setNombreProveedor(e.target.value)}
                     placeholder="Nombre del proveedor"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <input
                     type="text"
-                    value={direccion}
-                    onChange={(e) => setDireccion(e.target.value)}
-                    placeholder="Dirección del proveedor"
+                    value={contactoProveedor}
+                    onChange={(e) => setContactoProveedor(e.target.value)}
+                    placeholder="Contacto del proveedor"
+                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
+                />
+                <input
+                    type="email"
+                    value={correoProveedor}
+                    onChange={(e) => setCorreoProveedor(e.target.value)}
+                    placeholder="Correo del proveedor"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <input
                     type="text"
-                    value={telefono}
-                    onChange={(e) => setTelefono(e.target.value)}
+                    value={telefonoProveedor}
+                    onChange={(e) => setTelefonoProveedor(e.target.value)}
                     placeholder="Teléfono del proveedor"
+                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
+                />
+                <input
+                    type="text"
+                    value={direccionProveedor}
+                    onChange={(e) => setDireccionProveedor(e.target.value)}
+                    placeholder="Dirección del proveedor"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
@@ -117,7 +143,7 @@ const ProveedorForm = () => {
             <ul>
                 {proveedores.map((proveedor) => (
                     <li key={proveedor.proveedorid} className="border p-4 rounded-md shadow-md mb-2 flex justify-between items-center">
-                        <span>{proveedor.nombre}</span>
+                        <span>{proveedor.nombre_proveedor}</span>
                         <div>
                             <button onClick={() => handleEdit(proveedor)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600 mr-2">
                                 Editar

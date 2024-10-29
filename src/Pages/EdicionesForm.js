@@ -3,12 +3,11 @@ import axios from 'axios';
 
 const EdicionForm = () => {
     const [ediciones, setEdiciones] = useState([]);
-    const [edicionid, setEdicionid] = useState('');
     const [isbn, setIsbn] = useState('');
     const [numeroEdicion, setNumeroEdicion] = useState('');
     const [fechaPublicacion, setFechaPublicacion] = useState('');
-    const [libroid, setLibroid] = useState('');
-    const [proveedorid, setProveedorid] = useState('');
+    const [tituloLibro, setTituloLibro] = useState('');
+    const [nombreProveedor, setNombreProveedor] = useState('');
     const [edicionID, setEdicionID] = useState(null);
 
     // Fetch ediciones
@@ -29,19 +28,17 @@ const EdicionForm = () => {
     const insertarEdicion = async () => {
         try {
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones', {
-                edicionid,
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
-                libroid,
-                proveedorid
+                titulo_libro: tituloLibro,
+                nombre_proveedor: nombreProveedor
             });
-            setEdicionid('');
             setIsbn('');
             setNumeroEdicion('');
             setFechaPublicacion('');
-            setLibroid('');
-            setProveedorid('');
+            setTituloLibro('');
+            setNombreProveedor('');
             fetchEdiciones();
         } catch (error) {
             console.error('Error insertando la edición:', error);
@@ -52,19 +49,17 @@ const EdicionForm = () => {
     const actualizarEdicion = async () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${edicionID}`, {
-                edicionid,
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
-                libroid,
-                proveedorid
+                titulo_libro: tituloLibro,
+                nombre_proveedor: nombreProveedor
             });
-            setEdicionid('');
             setIsbn('');
             setNumeroEdicion('');
             setFechaPublicacion('');
-            setLibroid('');
-            setProveedorid('');
+            setTituloLibro('');
+            setNombreProveedor('');
             setEdicionID(null);
             fetchEdiciones();
         } catch (error) {
@@ -94,12 +89,11 @@ const EdicionForm = () => {
 
     // Manejar la selección de una edición para editar
     const handleEdit = (edicion) => {
-        setEdicionid(edicion.edicionid);
         setIsbn(edicion.isbn);
         setNumeroEdicion(edicion.numero_edicion);
         setFechaPublicacion(edicion.fecha_publicacion);
-        setLibroid(edicion.libroid);
-        setProveedorid(edicion.proveedorid);
+        setTituloLibro(edicion.titulo_libro);
+        setNombreProveedor(edicion.nombre_proveedor);
         setEdicionID(edicion.edicionid);
     };
 
@@ -107,13 +101,6 @@ const EdicionForm = () => {
         <div className="container mx-auto p-4">
             <h2 className="text-3xl font-bold text-center mb-6">Gestionar Ediciones</h2>
             <form onSubmit={handleSubmit} className="mb-4">
-                <input
-                    type="text"
-                    value={edicionid}
-                    onChange={(e) => setEdicionid(e.target.value)}
-                    placeholder="ID de la edición"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
                 <input
                     type="text"
                     value={isbn}
@@ -137,16 +124,16 @@ const EdicionForm = () => {
                 />
                 <input
                     type="text"
-                    value={libroid}
-                    onChange={(e) => setLibroid(e.target.value)}
-                    placeholder="ID del libro"
+                    value={tituloLibro}
+                    onChange={(e) => setTituloLibro(e.target.value)}
+                    placeholder="Título del libro"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <input
                     type="text"
-                    value={proveedorid}
-                    onChange={(e) => setProveedorid(e.target.value)}
-                    placeholder="ID del proveedor"
+                    value={nombreProveedor}
+                    onChange={(e) => setNombreProveedor(e.target.value)}
+                    placeholder="Nombre del proveedor"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">

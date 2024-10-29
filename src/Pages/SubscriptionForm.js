@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import fondo from '../assets/fondo.jpeg';
-import { jwtDecode } from 'jwt-decode';
-
 
 const SubscriptionForm = ({ user }) => {
     const [nombre, setNombre] = useState('');
@@ -25,11 +23,7 @@ const SubscriptionForm = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            localStorage.setItem('token', response.data.token);
-
-            const decodedToken = jwtDecode(response.data.token);
-            const usuarioid= decodedToken.id;
-
+            const usuarioid = user.id;
 
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 usuarioid,
@@ -38,10 +32,7 @@ const SubscriptionForm = ({ user }) => {
                 direccion,
                 carrera,
                 semestre,
-                registro,
-                fecha_inicio: new Date(),
-                fecha_fin: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-                estado: 'Activa'
+                registro
             });
             alert('Suscripción creada con éxito');
         } catch (error) {

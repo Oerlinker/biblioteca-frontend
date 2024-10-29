@@ -8,6 +8,7 @@ import AutorForm from "./autorForm";
 import EditorialForm from "./EditorialForm";
 import CategoriaForm from "./CategoriaForm";
 import EdicionesForm from "./EdicionesForm";
+import ProveedorForm from "./ProveedorForm";
 
 const ModificarCatalogo = () => {
     return (
@@ -37,6 +38,9 @@ const ModificarCatalogo = () => {
                 </Link>
                 <Link to="gestionar-ediciones" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
                     Gestionar Ediciones
+                </Link>
+                <Link to="gestionar-proveedores" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
+                    Gestionar Proveedores
                 </Link>
             </div>
 

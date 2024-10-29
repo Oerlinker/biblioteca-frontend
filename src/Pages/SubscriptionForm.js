@@ -21,7 +21,7 @@ const SubscriptionForm = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/subscripciones', {
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/register/subscription', {
                 usuarioid: user.id,
                 telefono,
                 direccion,

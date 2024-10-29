@@ -26,13 +26,13 @@ const SubscriptionForm = ({ user }) => {
             const usuarioid = user.id;
 
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
-                usuarioid,
                 nombre,
                 telefono,
                 direccion,
                 carrera,
                 semestre,
-                registro
+                registro,
+                usuarioid
             });
             alert('Suscripción creada con éxito');
         } catch (error) {

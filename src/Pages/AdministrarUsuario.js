@@ -1,4 +1,3 @@
-// src/Pages/AdministrarUsuario.js
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import GetAllUsuarios from './GetAllUsuarios';

@@ -9,8 +9,6 @@ const EdicionForm = () => {
     const [fechaPublicacion, setFechaPublicacion] = useState('');
     const [libroid, setLibroid] = useState('');
     const [proveedorid, setProveedorid] = useState('');
-    const [totalPrestamos, setTotalPrestamos] = useState('');
-    const [promedioRating, setPromedioRating] = useState('');
     const [edicionID, setEdicionID] = useState(null);
 
     // Fetch ediciones
@@ -36,9 +34,7 @@ const EdicionForm = () => {
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
                 libroid,
-                proveedorid,
-                total_prestamos: totalPrestamos,
-                promedio_rating: promedioRating
+                proveedorid
             });
             setEdicionid('');
             setIsbn('');
@@ -46,8 +42,6 @@ const EdicionForm = () => {
             setFechaPublicacion('');
             setLibroid('');
             setProveedorid('');
-            setTotalPrestamos('');
-            setPromedioRating('');
             fetchEdiciones();
         } catch (error) {
             console.error('Error insertando la edición:', error);
@@ -63,9 +57,7 @@ const EdicionForm = () => {
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
                 libroid,
-                proveedorid,
-                total_prestamos: totalPrestamos,
-                promedio_rating: promedioRating
+                proveedorid
             });
             setEdicionid('');
             setIsbn('');
@@ -73,8 +65,6 @@ const EdicionForm = () => {
             setFechaPublicacion('');
             setLibroid('');
             setProveedorid('');
-            setTotalPrestamos('');
-            setPromedioRating('');
             setEdicionID(null);
             fetchEdiciones();
         } catch (error) {
@@ -110,8 +100,6 @@ const EdicionForm = () => {
         setFechaPublicacion(edicion.fecha_publicacion);
         setLibroid(edicion.libroid);
         setProveedorid(edicion.proveedorid);
-        setTotalPrestamos(edicion.total_prestamos);
-        setPromedioRating(edicion.promedio_rating);
         setEdicionID(edicion.edicionid);
     };
 
@@ -159,21 +147,6 @@ const EdicionForm = () => {
                     value={proveedorid}
                     onChange={(e) => setProveedorid(e.target.value)}
                     placeholder="ID del proveedor"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <input
-                    type="number"
-                    value={totalPrestamos}
-                    onChange={(e) => setTotalPrestamos(e.target.value)}
-                    placeholder="Total de préstamos"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <input
-                    type="number"
-                    step="0.1"
-                    value={promedioRating}
-                    onChange={(e) => setPromedioRating(e.target.value)}
-                    placeholder="Promedio de rating"
                     className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
                 />
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">

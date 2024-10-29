@@ -49,7 +49,7 @@ const SubscriptionForm = ({ user }) => {
             </div>
 
             {/* Formulario */}
-            <div className="relative bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
+            <div className="relative bg-white p-10 rounded-xl shadow-lg w-full max-w-md mx-4 sm:mx-auto">
                 <h2 className="text-center text-3xl font-bold text-gray-700 mb-6">Registrar Suscripción</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
@@ -94,7 +94,7 @@ const SubscriptionForm = ({ user }) => {
                         placeholder="Registro"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 w-full">
                         Registrar Suscripción
                     </button>
                 </form>

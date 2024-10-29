@@ -36,58 +36,60 @@ const AdministrarRoles = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="container mx-auto p-4">
             <h2 className="text-2xl font-bold mb-4">Administrar Roles</h2>
-            <table className="min-w-full border border-gray-200">
-                <thead>
-                <tr>
-                    <th className="border border-gray-300 p-2">ID</th>
-                    <th className="border border-gray-300 p-2">Nombre</th>
-                    <th className="border border-gray-300 p-2">Correo</th>
-                    <th className="border border-gray-300 p-2">Rol ID</th>
-                    <th className="border border-gray-300 p-2">Rol</th>
-                    <th className="border border-gray-300 p-2">Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                {usuarios.map((usuario) => (
-                    <tr key={usuario.usuarioid}>
-                        <td className="border border-gray-300 p-2">{usuario.usuarioid}</td>
-                        <td className="border border-gray-300 p-2">{usuario.nombre_usuario}</td>
-                        <td className="border border-gray-300 p-2">{usuario.correo_electronico}</td>
-                        <td className="border border-gray-300 p-2">{usuario.rolid}</td>
-                        <td className="border border-gray-300 p-2">
-                            <select
-                                value={usuario.newRole || usuario.rolid}
-                                onChange={(e) => {
-                                    const updatedUsuarios = usuarios.map((u) =>
-                                        u.usuarioid === usuario.usuarioid
-                                            ? { ...u, newRole: e.target.value }
-                                            : u
-                                    );
-                                    setUsuarios(updatedUsuarios);
-                                }}
-                                className="p-1 border border-gray-300 rounded"
-                            >
-                                <option value="">Seleccionar rol</option>
-                                <option value="1">Usuario</option>
-                                <option value="2">Miembro</option>
-                                <option value="3">Empleado</option>
-                                <option value="4">Administrador</option>
-                            </select>
-                        </td>
-                        <td className="border border-gray-300 p-2">
-                            <button
-                                onClick={() => handleUpdateRole(usuario.usuarioid, usuario.newRole || usuario.rolid)}
-                                className="bg-blue-500 text-white p-1 rounded"
-                            >
-                                Actualizar Rol
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            <div className="overflow-x-auto">
+                <table className="min-w-full border border-gray-200">
+                    <thead>
+                        <tr>
+                            <th className="border border-gray-300 p-2">ID</th>
+                            <th className="border border-gray-300 p-2">Nombre</th>
+                            <th className="border border-gray-300 p-2">Correo</th>
+                            <th className="border border-gray-300 p-2">Rol ID</th>
+                            <th className="border border-gray-300 p-2">Rol</th>
+                            <th className="border border-gray-300 p-2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {usuarios.map((usuario) => (
+                            <tr key={usuario.usuarioid}>
+                                <td className="border border-gray-300 p-2">{usuario.usuarioid}</td>
+                                <td className="border border-gray-300 p-2">{usuario.nombre_usuario}</td>
+                                <td className="border border-gray-300 p-2">{usuario.correo_electronico}</td>
+                                <td className="border border-gray-300 p-2">{usuario.rolid}</td>
+                                <td className="border border-gray-300 p-2">
+                                    <select
+                                        value={usuario.newRole || usuario.rolid}
+                                        onChange={(e) => {
+                                            const updatedUsuarios = usuarios.map((u) =>
+                                                u.usuarioid === usuario.usuarioid
+                                                    ? { ...u, newRole: e.target.value }
+                                                    : u
+                                            );
+                                            setUsuarios(updatedUsuarios);
+                                        }}
+                                        className="p-1 border border-gray-300 rounded"
+                                    >
+                                        <option value="">Seleccionar rol</option>
+                                        <option value="1">Usuario</option>
+                                        <option value="2">Miembro</option>
+                                        <option value="3">Empleado</option>
+                                        <option value="4">Administrador</option>
+                                    </select>
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                    <button
+                                        onClick={() => handleUpdateRole(usuario.usuarioid, usuario.newRole || usuario.rolid)}
+                                        className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600"
+                                    >
+                                        Actualizar Rol
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

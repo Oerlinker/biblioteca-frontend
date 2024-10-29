@@ -53,6 +53,7 @@ const ModificarCatalogo = () => {
                 <Route path="gestionar-editoriales" element={<EditorialForm />} />
                 <Route path="gestionar-categorias" element={<CategoriaForm />} />
                 <Route path="gestionar-ediciones" element={<EdicionesForm />} />
+                <Route path="gestionar-proveedores" element={<ProveedorForm />} />
             </Routes>
         </div>
     );

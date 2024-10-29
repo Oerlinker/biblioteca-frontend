@@ -75,7 +75,7 @@ function App() {
                         <Route path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios />} />
                         <Route path="/admin/administrar-usuarios/administrar-roles" element={<AdministrarRoles />} />
                         <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} />
-                        <Route path="/admin/administrar-usuarios/gestionar-proveedores" element={<ProveedorForm />} />
+                        <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
                     </>
                 )}
             </Routes>

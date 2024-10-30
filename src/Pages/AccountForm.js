@@ -4,7 +4,7 @@ import UserInfo from './UserInfo';
 import fondo from '../assets/fondo.jpeg';
 import { UserContext } from '../UserContext';
 
-const AccountForm = ({ user }) => {
+const AccountForm = () => {
     const {user}= useContext(UserContext);
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">

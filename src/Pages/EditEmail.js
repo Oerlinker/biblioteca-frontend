@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const EditEmail = ({ user }) => {
-    const [correo, setCorreo] = useState(user.correo);
+const EditEmail = () => {
+    const location = useLocation();
+    const { user } = location.state || {};
+    const [correo, setCorreo] = useState(user?.correo || '');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

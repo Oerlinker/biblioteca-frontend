@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const EditPassword = ({ user }) => {
+const EditPassword = () => {
+    const location = useLocation();
+    const { user } = location.state || {};
     const [password, setPassword] = useState('');
-    const navigate=useNavigate();
-
-    console.log("user en edit password",user);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!user||!user.id){
+        if (!user || !user.id) {
             alert("No se ha podido obtener el usuario");
             return;
         }
-        if(password.length<6){
+        if (password.length < 6) {
             alert("La contraseña debe tener al menos 6 caracteres");
             return;
         }

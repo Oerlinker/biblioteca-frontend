@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import UserInfo from './UserInfo';
 import fondo from '../assets/fondo.jpeg';
 
@@ -35,26 +35,27 @@ const AccountForm = () => {
                     )}
                 </aside>
 
-                {/* Sección de gestión de cuenta */}
                 <section className="w-2/3 p-10 flex flex-col">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6">Gestionar Cuenta</h2>
 
-                    {/* Enlaces de gestión de cuenta */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                         <Link
                             to="edit-name"
+                            state={{ user }}
                             className="block bg-blue-500 text-white py-3 rounded-lg shadow-md text-center font-semibold text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Usuario
                         </Link>
                         <Link
                             to="edit-email"
+                            state={{ user }}
                             className="block bg-blue-500 text-white py-3 rounded-lg shadow-md text-center font-semibold text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Correo
                         </Link>
                         <Link
                             to="edit-password"
+                            state={{ user }}
                             className="block bg-blue-500 text-white py-3 rounded-lg shadow-md text-center font-semibold text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Contraseña

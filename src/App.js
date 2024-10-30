@@ -1,4 +1,3 @@
-// src/App.js
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -23,8 +22,8 @@ import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import { useEffect, useContext } from 'react';
-import jwt_decode from 'jwt-decode';
 import { UserProvider, UserContext } from './UserContext';
+import { jwtDecode } from 'jwt-decode';
 
 function App() {
     const { setUser, setIsLoggedIn } = useContext(UserContext);
@@ -32,7 +31,7 @@ function App() {
    useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-        const decodedToken = jwt_decode(token);
+        const decodedToken = jwtDecode(token);
         const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
         setUser(userData);
         setIsLoggedIn(true);

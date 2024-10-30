@@ -39,6 +39,8 @@ function App() {
             const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
             setUser(userData);
             setIsLoggedIn(true);
+            console.log("Usuario logueado:", userData);
+            console.log("Token decodificado:", decodedToken);
         }
     }, []);
 

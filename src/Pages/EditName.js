@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const EditUserName = () => {
-    const { user, setUser } = React.useContext(UserContext);
+    const { user,setUser } = React.useContext(UserContext);
     const [nombre, setNombre] = useState(user.nombre);
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const EditUserName = () => {
             return;
         }
         try {
-            const response = await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
             alert("Nombre de usuario actualizado con éxito");
             setUser({ ...user, nombre: response.data.nombre });
             navigate("/profile");

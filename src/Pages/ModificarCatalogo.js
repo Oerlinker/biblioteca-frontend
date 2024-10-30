@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import BookForm from './BookForm';
 import GetBooksForm from './GetBookForm';
 import UpdateBookForm from './UpdateBookForms';
@@ -11,9 +11,19 @@ import EdicionesForm from "./EdicionesForm";
 import ProveedorForm from "./ProveedorForm";
 
 const ModificarCatalogo = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="max-w-xl mx-auto p-6 bg-white rounded shadow-lg space-y-6">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">Modificar Catálogo</h2>
+            <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-700 mb-4">Modificar Catálogo</h2>
+                <button
+                    onClick={() => navigate('/admin')}
+                    className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                    &larr; Volver
+                </button>
+            </div>
             <div className="space-y-4">
                 <Link to="agregar-libro" className="block w-full bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 text-center">
                     Agregar Libro

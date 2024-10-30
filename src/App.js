@@ -19,12 +19,12 @@ import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import GestionarPrestamos from './Pages/GestionarPrestamos';
 import { useEffect, useContext } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { UserProvider, UserContext } from './UserContext';
 import BookCrud from './components/BookCrud';
 
 function App() {
-    const { setUser, setIsLoggedIn } = useContext(UserContext);
+    const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem('token');

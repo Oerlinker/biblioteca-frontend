@@ -1,5 +1,3 @@
-// src/App.js
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -20,14 +18,13 @@ import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import GestionarPrestamos from './Pages/GestionarPrestamos';
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import {jwtDecode} from 'jwt-decode';
-import { UserProvider } from './UserContext';
+import { UserProvider, UserContext } from './UserContext';
 import BookCrud from './components/BookCrud';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState({});
+    const { setUser, setIsLoggedIn } = useContext(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -39,7 +36,7 @@ function App() {
             console.log("Usuario logueado:", userData);
             console.log("Token decodificado:", decodedToken);
         }
-    }, []);
+    }, [setUser, setIsLoggedIn]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -50,7 +47,7 @@ function App() {
     return (
         <UserProvider>
             <Router>
-                <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
+                <Header handleLogout={handleLogout} />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/register" element={<Register />} />

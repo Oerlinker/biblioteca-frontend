@@ -1,8 +1,9 @@
-// src/components/Header.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
-const Header = ({ isLoggedIn, user, handleLogout }) => {
+const Header = ({ handleLogout }) => {
+    const { isLoggedIn, user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleLogoutAndRedirect = () => {
@@ -44,7 +45,6 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                     )}
                 </nav>
             </div>
-
         </header>
     );
 };

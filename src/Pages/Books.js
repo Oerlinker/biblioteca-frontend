@@ -3,56 +3,84 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Books = () => {
-    const [books, setLibros] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [books, setBooks] = useState([]);
+    const [autores, setAutores] = useState([]);
+    const [editoriales, setEditoriales] = useState([]);
     const [categorias, setCategorias] = useState([]);
-    const [selectedCategoria, setSelectedCategoria] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategoria, setSelectedCategoria] = useState('');
+
+    useEffect(() => {
+        fetchCategorias();
+        fetchLibros();
+        fetchAutores();
+        fetchEditoriales();
+    }, []);
+
+    const handleSearch = useCallback(async () => {
+        try {
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/search', {
+                params: {
+                    search: searchQuery,
+                    categoriaid: selectedCategoria
+                }
+            });
+            setBooks(response.data);
+        } catch (error) {
+            console.error('Error buscando los libros:', error);
+        }
+    }, [searchQuery, selectedCategoria]);
+
+    useEffect(() => {
+        handleSearch();
+    }, [handleSearch]);
 
     const fetchCategorias = async () => {
         try {
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
             setCategorias(response.data);
         } catch (error) {
-            console.error('Error obteniendo las categorias:', error);
+            console.error('Error obteniendo las categorías:', error);
         }
     };
 
-    useEffect(() => {
-        fetchCategorias();
-    }, []);
-
-    const fetchLibros = useCallback(async () => {
+    const fetchLibros = async () => {
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/search`, {
-                params: {
-                    search: searchQuery,
-                    categoriaid: selectedCategoria
-                }
-            });
-            setLibros(response.data);
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
+            setBooks(response.data);
         } catch (error) {
             console.error('Error obteniendo los libros:', error);
         }
-    }, [searchQuery, selectedCategoria]);
+    };
 
-    useEffect(() => {
-        fetchLibros();
-    }, [fetchLibros]);
+    const fetchAutores = async () => {
+        try {
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
+            setAutores(response.data);
+        } catch (error) {
+            console.error('Error obteniendo los autores:', error);
+        }
+    };
 
-    const handleGenreChange = (e) => {
-        setSelectedCategoria(e.target.value);
-        fetchLibros();
+    const fetchEditoriales = async () => {
+        try {
+            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
+            setEditoriales(response.data);
+        } catch (error) {
+            console.error('Error obteniendo las editoriales:', error);
+        }
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-3xl font-bold text-center mb-6">Buscar Libros</h2>
+        <div className="min-h-screen bg-gray-100 p-8">
+            <h2 className="text-3xl font-bold text-center mb-6 text-gray-700">Catálogo de Libros</h2>
 
-            <div className="flex justify-center mb-4">
+            {/* Search and Filter Controls */}
+            <div className="flex flex-col md:flex-row justify-center items-center mb-6 space-y-4 md:space-y-0 md:space-x-4 w-full max-w-5xl mx-auto">
                 <select
                     value={selectedCategoria}
-                    onChange={handleGenreChange}
-                    className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
+                    onChange={(e) => setSelectedCategoria(e.target.value)}
+                    className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/3"
                 >
                     <option value="">Todas las categorías</option>
                     {categorias.map((categoria) => (
@@ -61,38 +89,45 @@ const Books = () => {
                         </option>
                     ))}
                 </select>
+                <div className="flex w-full md:w-2/3">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Buscar libro por título..."
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
             </div>
 
-            <div className="flex justify-center mb-6">
-                <input
-                    type="text"
-                    value={searchQuery}onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar libro..."
-                className="border border-gray-300 rounded-md py-2 px-4 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-                onClick={fetchLibros}
-                className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-                Buscar
-            </button>
+            {/* Display Books in a Responsive Grid */}
+            {books.length > 0 ? (
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                    {books.map((book) => (
+                        <li key={book.libroid} className="bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
+                            <div>
+                                <h3 className="text-xl font-semibold text-gray-700">{book.titulo}</h3>
+                                <p className="text-gray-600 mt-1">
+                                    <strong>Autor:</strong> {autores.find(a => a.autorid === book.autorid)?.nombre || 'Desconocido'}
+                                </p>
+                                <p className="text-gray-600">
+                                    <strong>Editorial:</strong> {editoriales.find(e => e.editorialid === book.editorialid)?.nombre_editorial || 'Desconocida'}
+                                </p>
+                                <p className="text-gray-600">
+                                    <strong>Categoría:</strong> {categorias.find(c => c.categoriaid === book.categoriaid)?.nombre_categoria || 'General'}
+                                </p>
+                            </div>
+                            <Link to={`/libro/${book.libroid}`} className="text-blue-500 mt-4 block text-center hover:underline">
+                                Ver detalles
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p className="text-center text-gray-500 mt-8">No se encontraron libros.</p>
+            )}
         </div>
-
-        {books.length > 0 ? (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {books.map((book) => (
-                    <li key={book.libroid} className="border p-4 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <Link to={`/libro/${book.libroid}`} className="text-lg font-semibold text-blue-600 hover:underline">
-                            {book.titulo}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        ) : (
-            <p className="text-center text-gray-500 mt-6">No se encontraron libros.</p>
-        )}
-    </div>
-);
+    );
 };
 
 export default Books;

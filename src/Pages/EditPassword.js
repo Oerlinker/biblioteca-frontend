@@ -21,7 +21,7 @@ const EditPassword = () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
             alert("Contraseña actualizada con éxito");
-            navigate("/profile");
+            navigate("/account");
             setPassword('');
         } catch (error) {
             console.error('Error actualizando la contraseña:', error);

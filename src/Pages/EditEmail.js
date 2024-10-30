@@ -17,7 +17,7 @@ const EditEmail = () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
             alert("Correo actualizado con éxito");
-            navigate("/profile");
+            navigate("/account");
             setCorreo('');
         } catch (error) {
             console.error('Error actualizando el correo:', error);

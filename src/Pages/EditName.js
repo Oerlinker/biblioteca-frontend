@@ -18,7 +18,7 @@ const EditUserName = () => {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
             alert("Nombre de usuario actualizado con éxito");
             setUser({ ...user, nombre }); // Update the UserContext
-            navigate("/profile");
+            navigate("/account");
             setNombre('');
         } catch (error) {
             console.error('Error actualizando el nombre de usuario:', error);

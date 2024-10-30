@@ -1,10 +1,11 @@
-// src/Pages/SubscriptionForm.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import fondo from '../assets/fondo.jpeg';
+import { UserContext } from '../UserContext';
 
-const SubscriptionForm = ({ user }) => {
+const SubscriptionForm = () => {
+    const { user } = useContext(UserContext);
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [direccion, setDireccion] = useState('');
@@ -15,7 +16,7 @@ const SubscriptionForm = ({ user }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user.rol === 2) {
+        if (user?.rol === 2) {
             navigate('/'); // Redirect to home or another page
         }
     }, [user, navigate]);
@@ -23,7 +24,7 @@ const SubscriptionForm = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const usuarioid = user.id;
+            const usuarioid = user?.id;
 
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 nombre,

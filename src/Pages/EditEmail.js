@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
 
-const EditEmail = () => {
-    const { user, setUser } = useContext(UserContext);
+const EditEmail = ({ user }) => {
     const [correo, setCorreo] = useState(user.correo);
     const navigate = useNavigate();
 
@@ -15,9 +13,8 @@ const EditEmail = () => {
             return;
         }
         try {
-            const response = await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
             alert("Correo actualizado con éxito");
-            setUser({ ...user, correo: response.data.correo });
             navigate("/profile");
             setCorreo('');
         } catch (error) {

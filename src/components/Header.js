@@ -1,19 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+// src/components/Header.js
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
 
-const Header = () => {
-    const { isLoggedIn, user, setIsLoggedIn, setUser } = useContext(UserContext);
+const Header = ({ isLoggedIn, user, handleLogout }) => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // This effect will run whenever the user context changes
-    }, [user]);
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        setUser({});
+    const handleLogoutAndRedirect = () => {
+        handleLogout();
         navigate('/');
     };
 
@@ -24,21 +17,18 @@ const Header = () => {
                 <nav className="flex flex-wrap items-center space-x-6 mt-4 sm:mt-0">
                     {isLoggedIn ? (
                         <>
-                            <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre || ''}</span>
+                            <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>
                             <Link to="/account" className="text-white font-medium hover:underline">Gestionar Cuenta</Link>
-                            {user?.rol === 4 && (
+                            {user.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
-                            {user?.rol === 1 && (
+                            {user.rol === 1 && (
                                 <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             )}
-                            {user?.rol === 2 && (
-                                 <Link to="/gestionar-prestamos" className="text-white hover:underline">Gestión de Préstamos</Link>
-                             )}
                             <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
                             <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                             <button
-                                onClick={handleLogout}
+                                onClick={handleLogoutAndRedirect}
                                 className="px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
                             >
                                 Cerrar Sesión
@@ -54,6 +44,7 @@ const Header = () => {
                     )}
                 </nav>
             </div>
+
         </header>
     );
 };

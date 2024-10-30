@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+// src/Pages/login.js
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-
+import { UserContext } from '../UserContext';
 import fondo from '../assets/fondo.jpeg';
 
-const Login = ({ setIsLoggedIn, setUser }) => {
+const Login = () => {
+    const { setUser, setIsLoggedIn } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -19,13 +21,12 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             localStorage.setItem('token', response.data.token);
 
             const decodedToken = jwtDecode(response.data.token);
-            const rol = decodedToken.rol;
-            const nombre = decodedToken.nombre;
+            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
 
-            setUser({ nombre: nombre, rol: rol });
+            setUser(userData);
             setIsLoggedIn(true);
 
-            if (rol === 4) {
+            if (userData.rol === 4) {
                 navigate("/admin");
             } else {
                 navigate("/books");
@@ -37,12 +38,9 @@ const Login = ({ setIsLoggedIn, setUser }) => {
 
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
-            {/* Imagen de fondo */}
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>
-                <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Filtro oscuro */}
+                <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             </div>
-
-            {/* Formulario */}
             <div className="relative bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
                 <h2 className="text-center text-4xl font-bold text-gray-700 mb-6">Iniciar Sesión</h2>
                 <p className="text-center text-gray-500 mb-6">Accede a tu cuenta</p>

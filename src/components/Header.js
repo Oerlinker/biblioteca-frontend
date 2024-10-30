@@ -1,12 +1,16 @@
 // src/components/Header.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
-const Header = ({ isLoggedIn, user, handleLogout }) => {
+const Header = () => {
+    const { isLoggedIn, user, setIsLoggedIn, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleLogoutAndRedirect = () => {
-        handleLogout();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        setUser({});
         navigate('/');
     };
 
@@ -22,16 +26,16 @@ const Header = ({ isLoggedIn, user, handleLogout }) => {
                             {user.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
-                            {user.rol !== 2  && (
+                            {user.rol !== 2 && (
                                 <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             )}
-                            {user.rol !==3 &&(
+                            {user.rol !== 3 && (
                                 <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             )}
                             <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
                             <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                             <button
-                                onClick={handleLogoutAndRedirect}
+                                onClick={handleLogout}
                                 className="px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
                             >
                                 Cerrar Sesión

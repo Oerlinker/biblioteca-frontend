@@ -1,4 +1,3 @@
-// src/Pages/login.js
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
@@ -18,12 +17,17 @@ const Login = () => {
         try {
             const response = await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/login', { email, password });
 
+            localStorage.setItem('token', response.data.token);
+
+            // Decode the token to get user data
             const decodedToken = jwtDecode(response.data.token);
             const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
 
+            // Update the user context
             setUser(userData);
             setIsLoggedIn(true);
 
+            // Navigate based on user role
             if (userData.rol === 4) {
                 navigate("/admin");
             } else {

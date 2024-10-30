@@ -1,9 +1,9 @@
-import React, { useState,useState } from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 
 const EditPassword = () => {
-    const { user } = useContext(UserContext);
+    const { user,setUser } = useContext(UserContext);
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
 

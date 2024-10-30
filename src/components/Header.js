@@ -1,10 +1,9 @@
-// src/components/Header.js
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const Header = ({ handleLogout }) => {
-    const { isLoggedIn, user } = useContext(UserContext);
+    const { isLoggedIn } = useContext(UserContext);
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

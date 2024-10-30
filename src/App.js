@@ -22,6 +22,7 @@ import HomePage from './Pages/HomePage';
 import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
+import GestionarPrestamos from './Pages/GestionarPrestamos';
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import { UserProvider } from './UserContext';
@@ -65,7 +66,12 @@ function App() {
                     <Route path="/account/edit-email" element={<EditEmail />} />
                     <Route path="/account/edit-password" element={<EditPassword />} />
                     <Route path="/subscription" element={<SubscriptionForm />} />
-
+                    
+                    {isLoggedIn && user.rol === 2 && (
+                    <>
+                        <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
+                    </>
+                    )}
                     {isLoggedIn && user.rol === 4 && (
                         <>
                             <Route path="/admin" element={<AdminPanel />} />

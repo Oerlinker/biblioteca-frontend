@@ -32,6 +32,9 @@ const Header = () => {
                             {user?.rol === 1 && (
                                 <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             )}
+                            {user?.rol === 2 && (
+                                 <Link to="/gestionar-prestamos" className="text-white hover:underline">Gestión de Préstamos</Link>
+                             )}
                             <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
                             <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
                             <button

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 
-const EditPassword = ({ user }) => {
+const EditPassword = () => {
+    const { user } = useContext(UserContext);
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
 
@@ -21,6 +22,7 @@ const EditPassword = ({ user }) => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
             alert("Contraseña actualizada con éxito");
+            setUser({ ...user, password: response.data.password });
             navigate("/profile");
             setPassword('');
         } catch (error) {

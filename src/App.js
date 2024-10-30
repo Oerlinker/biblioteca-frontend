@@ -24,7 +24,7 @@ import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
-
+import {UserProvider,UserContext} from "./UserContext";
 
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
     };
 
     return (
+        <UserProvider>
         <Router>
             <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
             <Routes>
@@ -80,6 +81,7 @@ function App() {
                 )}
             </Routes>
         </Router>
+        </UserProvider>
     );
 }
 

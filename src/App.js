@@ -20,6 +20,7 @@ import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import GestionarPrestamos from './Pages/GestionarPrestamos';
+import AdministrarMiembrosForm from './Pages/AdministrarMiembrosForm';
 import { useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from './UserContext';
@@ -82,6 +83,7 @@ function App() {
                                 <Route path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios />} />
                                 <Route path="/admin/administrar-usuarios/administrar-roles" element={<AdministrarRoles />} />
                                 <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} />
+                                <Route path="/admin/administrar-usuarios/administrar-miembros" element={<AdministrarMiembrosForm />} />
                                 <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
                             </>
                         )}

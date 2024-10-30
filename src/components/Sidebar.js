@@ -46,6 +46,7 @@ const Sidebar = () => {
                             <Link to="/admin/administrar-usuarios/getall-usuarios" className="block px-4 py-2 hover:bg-gray-700">Get All Usuarios</Link>
                             <Link to="/admin/administrar-usuarios/administrar-roles" className="block px-4 py-2 hover:bg-gray-700">Administrar Roles</Link>
                             <Link to="/admin/administrar-usuarios/activity-log" className="block px-4 py-2 hover:bg-gray-700">Activity Log</Link>
+                            <Link to="/admin/administrar-usuarios/administrar-miembros" className="block px-4 py-2 hover:bg-gray-700">Administrar Miembros</Link>
                         </div>
                     )}
                 </nav>

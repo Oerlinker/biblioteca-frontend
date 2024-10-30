@@ -1,27 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import {useNavigate} from "react-router-dom";
 
-const EditPassword = () => {
-    const { user, setUser } = useContext(UserContext);
+const EditPassword = ({ user }) => {
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    const navigate=useNavigate();
+
+    console.log("user en edit password",user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!user || !user.id) {
+        if(!user||!user.id){
             alert("No se ha podido obtener el usuario");
             return;
         }
-        if (password.length < 6) {
+        if(password.length<6){
             alert("La contraseña debe tener al menos 6 caracteres");
             return;
         }
         try {
-            const response = await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
+            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
             alert("Contraseña actualizada con éxito");
-            setUser({ ...user, password: response.data.password });
             navigate("/profile");
             setPassword('');
         } catch (error) {

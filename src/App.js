@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './Pages/login';
@@ -23,7 +24,8 @@ import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
-import {UserProvider} from "./UserContext";
+
+
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -46,7 +48,6 @@ function App() {
     };
 
     return (
-        <UserProvider>
         <Router>
             <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
             <Routes>
@@ -79,7 +80,6 @@ function App() {
                 )}
             </Routes>
         </Router>
-        </UserProvider>
     );
 }
 

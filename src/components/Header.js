@@ -1,49 +1,48 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const Header = ({ handleLogout }) => {
     const { isLoggedIn, user } = useContext(UserContext);
     const navigate = useNavigate();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const handleLogoutAndRedirect = () => {
         handleLogout();
         navigate('/');
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     return (
         <header className="bg-blue-500 text-white px-6 py-4 shadow-lg">
-            <div className="container mx-auto flex flex-wrap justify-between items-center">
+            <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</Link>
-                <nav className="flex flex-wrap items-center space-x-6 mt-4 sm:mt-0">
-                    {isLoggedIn ? (
-                        <>
-                            <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>
-                            <Link to="/account" className="text-white font-medium hover:underline">Gestionar Cuenta</Link>
-                            {user.rol === 4 && (
-                                <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
-                            )}
-                            {user.rol === 1 && (
-                                <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
-                            )}
-                            <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
-                            <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
-                            <button
-                                onClick={handleLogoutAndRedirect}
-                                className="px-4 py-2 border border-white rounded-md text-white font-semibold bg-transparent hover:bg-gray-200 hover:text-blue-500 transition duration-300"
-                            >
-                                Cerrar Sesión
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/login" className="text-white font-medium hover:underline">Iniciar Sesión</Link>
-                            <Link to="/register" className="text-white font-medium hover:underline">Crear Cuenta</Link>
-                            <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>
-                            <Link to="/books" className="text-white font-medium hover:underline">Books</Link>
-                        </>
-                    )}
-                </nav>
+                {isLoggedIn && (
+                    <div className="relative">
+                        <button onClick={toggleDropdown} className="text-lg font-semibold text-white focus:outline-none">
+                            Bienvenido, {user.nombre}
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
+                                <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Home</Link>
+                                <Link to="/account" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Gestionar Cuenta</Link>
+                                {user.rol === 4 && (
+                                    <Link to="/admin" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Administrar</Link>
+                                )}
+                                <Link to="/books" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Books</Link>
+                                <button
+                                    onClick={handleLogoutAndRedirect}
+                                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                >
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </header>
     );

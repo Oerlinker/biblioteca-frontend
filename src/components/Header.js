@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
@@ -21,15 +20,12 @@ const Header = () => {
                 <nav className="flex flex-wrap items-center space-x-6 mt-4 sm:mt-0">
                     {isLoggedIn ? (
                         <>
-                            <span className="text-lg font-semibold text-white">Bienvenido, {user.nombre}</span>
+                            <span className="text-lg font-semibold text-white">Bienvenido, {user?.nombre}</span>
                             <Link to="/account" className="text-white font-medium hover:underline">Gestionar Cuenta</Link>
-                            {user.rol === 4 && (
+                            {user?.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>
                             )}
-                            {user.rol !== 2 && (
-                                <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
-                            )}
-                            {user.rol !== 3 && (
+                            {user?.rol === 1 && (
                                 <Link to="/subscription" className="text-white font-medium hover:underline">Suscripción</Link>
                             )}
                             <Link to="/" className="text-white font-medium hover:underline ml-auto">Home</Link>

@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import {jwtDecode} from "jwt-decode";
 
 const Header = () => {
     const { isLoggedIn, user, setIsLoggedIn, setUser } = useContext(UserContext);
     const navigate = useNavigate();
-
+    const token = localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
@@ -20,7 +22,7 @@ const Header = () => {
                 <nav className="flex flex-wrap items-center space-x-6 mt-4 sm:mt-0">
                     {isLoggedIn ? (
                         <>
-                            <span className="text-lg font-semibold text-white">Bienvenido, {user?.nombre}</span>
+                            <span className="text-lg font-semibold text-white">Bienvenido, {decodedToken.nombre}</span>
                             <Link to="/account" className="text-white font-medium hover:underline">Gestionar Cuenta</Link>
                             {user?.rol === 4 && (
                                 <Link to="/admin" className="text-white font-medium hover:underline">Administrar</Link>

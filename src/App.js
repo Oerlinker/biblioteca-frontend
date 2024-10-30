@@ -5,7 +5,6 @@ import Sidebar from './components/Sidebar';
 import Login from './Pages/login';
 import Books from './Pages/Books';
 import BookDetail from './Pages/BookDetails';
-import AdminPanel from './Pages/AdminPanel';
 import Register from './Pages/Register';
 import ModificarCatalogo from './Pages/ModificarCatalogo';
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
@@ -72,7 +71,6 @@ function App() {
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>
-                                <Route path="/admin" element={<AdminPanel />} />
                                 <Route path="/admin/agregar-libro" element={<BookCrud />} />
                                 <Route path="/admin/modificar-libro/:id" element={<BookCrud />} />
                                 <Route path="/admin/modificar-catalogo/*" element={<ModificarCatalogo />} />

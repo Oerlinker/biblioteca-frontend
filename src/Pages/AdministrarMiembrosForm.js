@@ -48,7 +48,7 @@ const AdministrarMiembrosForm = () => {
                                         miembros.map((miembro) => (
                                             <tr key={miembro.id}>
                                                 <td className="px-4 py-4 text-sm font-medium text-gray-800">{miembro.nombre}</td>
-                                                <td className="px-12 py-4 text-sm font-medium text-gray-600">{user.email}</td>
+                                                <td className="px-12 py-4 text-sm font-medium text-gray-600">{miembro.correo}</td>
                                                 <td className="px-4 py-4 text-sm font-medium text-gray-500">{miembro.registro}</td>
                                             </tr>
                                         ))

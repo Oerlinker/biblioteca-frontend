@@ -1,3 +1,4 @@
+// src/components/Header.js
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
@@ -31,9 +32,6 @@ const Header = ({ handleLogout }) => {
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
                                 <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Home</Link>
                                 <Link to="/account" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Gestionar Cuenta</Link>
-                                {user.rol === 4 && (
-                                    <Link to="/admin" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Administrar</Link>
-                                )}
                                 <Link to="/books" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Books</Link>
                                 <button
                                     onClick={handleLogoutAndRedirect}

@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {UserContext} from "../UserContext";
 
 const AdminPanel = () => {
+    const {user} = React.useContext(UserContext);
+    const navigate = useNavigate();
+    if(user.rol !==4){
+        navigate('/');
+    }
     return (
         <div className="max-w-xl mx-auto p-6 bg-white rounded shadow-lg space-y-6">
             <h2 className="text-2xl font-bold text-gray-700 mb-4">Panel de Administración</h2>

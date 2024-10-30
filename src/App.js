@@ -23,21 +23,21 @@ import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import { useEffect, useContext } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { UserProvider, UserContext } from './UserContext';
 
 function App() {
     const { setUser, setIsLoggedIn } = useContext(UserContext);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = jwtDecode(token);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
-            setUser(userData);
-            setIsLoggedIn(true);
-        }
-    }, [setUser, setIsLoggedIn]);
+   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        const decodedToken = jwt_decode(token);
+        const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
+        setUser(userData);
+        setIsLoggedIn(true);
+    }
+}, [setUser, setIsLoggedIn]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');

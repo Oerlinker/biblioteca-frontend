@@ -1,3 +1,4 @@
+// src/App.js
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -7,7 +8,6 @@ import BookDetail from './Pages/BookDetails';
 import AdminPanel from './Pages/AdminPanel';
 import Register from './Pages/Register';
 import ModificarCatalogo from './Pages/ModificarCatalogo';
-
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
@@ -24,8 +24,6 @@ import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import { UserProvider } from './UserContext';
 import BookCrud from './components/BookCrud';
-
-
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,23 +50,23 @@ function App() {
     return (
         <UserProvider>
             <Router>
-                <Header handleLogout={handleLogout} />
+                <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/books" element={<Books/>} />
+                    <Route path="/books" element={<Books />} />
                     <Route path="/libro/:id" element={<BookDetail />} />
                     <Route path="/account/*" element={<AccountForm />} />
                     <Route path="/account/edit-name" element={<EditName />} />
                     <Route path="/account/edit-email" element={<EditEmail />} />
                     <Route path="/account/edit-password" element={<EditPassword />} />
                     <Route path="/subscription" element={<SubscriptionForm />} />
-                    
+
                     {isLoggedIn && user.rol === 2 && (
-                    <>
-                        <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
-                    </>
+                        <>
+                            <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
+                        </>
                     )}
                     {isLoggedIn && user.rol === 4 && (
                         <>
@@ -91,4 +89,5 @@ function App() {
         </UserProvider>
     );
 }
+
 export default App;

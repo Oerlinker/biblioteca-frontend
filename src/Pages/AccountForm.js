@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import UserInfo from './UserInfo';
 import fondo from '../assets/fondo.jpeg';
+import { UserContext } from '../UserContext';
 
 const AccountForm = ({ user }) => {
+    const {user}= useContext(UserContext);
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>

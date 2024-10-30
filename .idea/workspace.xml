@@ -32,6 +32,11 @@
     &quot;accountId&quot;: &quot;a20d3442-5283-4f16-a346-b903636b9bac&quot;
   }
 }</component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupnpm">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -87,7 +92,7 @@
       <workItem from="1730159286002" duration="12856000" />
       <workItem from="1730208858717" duration="1232000" />
       <workItem from="1730239227537" duration="1617000" />
-      <workItem from="1730254439776" duration="12656000" />
+      <workItem from="1730254439776" duration="13185000" />
     </task>
     <servers />
   </component>

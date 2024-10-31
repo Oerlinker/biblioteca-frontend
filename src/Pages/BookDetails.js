@@ -6,7 +6,6 @@ import { jwtDecode } from 'jwt-decode';
 const BookDetail = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
-    const [reviews, setReviews] = useState([]); // State to store reviews
 
     //adicion prestamo
     const [user, setUser] = useState(null);  // Aquí guardaremos la información del usuario
@@ -46,16 +45,6 @@ const BookDetail = () => {
         }
     }, [id]);
 
-    // Fetch reviews
-    const fetchReviews = useCallback(async () => {
-        try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/reseñas`);
-            setReviews(response.data);
-        } catch (error) {
-            console.error('Error fetching reviews:', error);
-        }
-    }, [id]);
-
     //adicion prestamo
     const fetchUser = () => {
         const token = localStorage.getItem('token');
@@ -68,9 +57,8 @@ const BookDetail = () => {
 
     useEffect(() => {
         fetchBookDetails();
-        fetchReviews(); // Fetch reviews when component mounts
         fetchUser();
-    }, [fetchBookDetails, fetchReviews]);
+    }, [fetchBookDetails]);
 
     //adicion prestamo
     const handleSolicitarPrestamo = async (edicionidSeleccionada) => {
@@ -98,6 +86,8 @@ const BookDetail = () => {
     if (!book) {
         return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
     }
+
+
 
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
@@ -139,24 +129,7 @@ const BookDetail = () => {
 
                 </div>
 
-                {/* Reviews Section */}
-                <div className="mt-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Reseñas</h3>
-                    {reviews.length > 0 ? (
-                        <div className="space-y-4">
-                            {reviews.map((review) => (
-                                <div key={review.id} className="bg-gray-100 p-4 rounded shadow">
-                                    <p className="text-gray-700"><strong>{review.usuario}:</strong> {review.comentario}</p>
-                                    <p className="text-gray-500 text-sm">Calificación: {review.calificacion}/5</p>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="text-gray-500">No hay reseñas disponibles para este libro.</p>
-                    )}
-                </div>
-
-                <Link to="/" className="text-blue-500 hover:underline mt-4 block text-center">
+                <Link to="/" className="text-blue-500 hover:underline">
                     Volver al catálogo
                 </Link>
             </div>

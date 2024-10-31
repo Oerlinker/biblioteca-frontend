@@ -13,7 +13,12 @@ const ActivityLog = () => {
         const fetchLogs = async () => {
             try {
                 const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/activity-log');
-                setLogs(response.data);
+                // Deserializa el campo `action` como JSON
+                const logsWithParsedAction = response.data.map(log => ({
+                    ...log,
+                    parsedAction: JSON.parse(log.action) // Acción y IP como JSON
+                }));
+                setLogs(logsWithParsedAction);
                 setLoading(false);
             } catch (error) {
                 setError('Error fetching activity log');
@@ -26,14 +31,15 @@ const ActivityLog = () => {
 
     const downloadPDF = () => {
         const doc = new jsPDF();
-        const tableColumn = ["Timestamp", "User ID", "Action"];
+        const tableColumn = ["Timestamp", "User ID", "Action", "IP"];
         const tableRows = [];
 
         logs.forEach(log => {
             const logData = [
-                log.timestamp,
+                moment(log.timestamp).tz('America/La_Paz').format('YYYY-MM-DD HH:mm:ss'),
                 log.userid,
-                log.action
+                log.parsedAction.action,
+                log.parsedAction.ip // IP deserializada
             ];
             tableRows.push(logData);
         });
@@ -63,6 +69,7 @@ const ActivityLog = () => {
                                 <th className="py-2 px-4 border-b text-left">Timestamp</th>
                                 <th className="py-2 px-4 border-b text-left">User ID</th>
                                 <th className="py-2 px-4 border-b text-left">Action</th>
+                                <th className="py-2 px-4 border-b text-left">IP Address</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,7 +77,8 @@ const ActivityLog = () => {
                                 <tr key={log.id}>
                                     <td className="p-2">{moment(log.timestamp).tz('America/La_Paz').format('YYYY-MM-DD HH:mm:ss')}</td>
                                     <td className="py-2 px-4 border-b">{log.userid}</td>
-                                    <td className="py-2 px-4 border-b">{log.action}</td>
+                                    <td className="py-2 px-4 border-b">{log.parsedAction.action}</td>
+                                    <td className="py-2 px-4 border-b">{log.parsedAction.ip}</td>
                                 </tr>
                             ))}
                         </tbody>

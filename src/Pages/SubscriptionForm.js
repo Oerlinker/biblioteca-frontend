@@ -5,7 +5,7 @@ import fondo from '../assets/fondo.jpeg';
 import { UserContext } from '../UserContext';
 
 const SubscriptionForm = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [direccion, setDireccion] = useState('');
@@ -35,7 +35,13 @@ const SubscriptionForm = () => {
                 registro,
                 usuarioid
             });
+
+            // Update user context
+            const updatedUser = { ...user, isSubscribed: true };
+            setUser(updatedUser);
+
             alert('Suscripción creada con éxito');
+            navigate('/'); // Redirect to home page
         } catch (error) {
             console.error('Error creando la suscripción', error);
             alert('Error creando la suscripción');

@@ -9,7 +9,6 @@ const EditorialForm = () => {
     const [editorialID, setEditorialID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    // Fetch editoriales
     const fetchEditoriales = async () => {
         try {
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
@@ -23,7 +22,6 @@ const EditorialForm = () => {
         fetchEditoriales();
     }, []);
 
-    // Insertar editorial
     const insertarEditorial = async () => {
         try {
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales', {
@@ -39,7 +37,6 @@ const EditorialForm = () => {
         }
     };
 
-    // Actualizar editorial
     const actualizarEditorial = async () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${editorialID}`, {
@@ -55,7 +52,6 @@ const EditorialForm = () => {
         }
     };
 
-    // Eliminar editorial con confirmación
     const eliminarEditorial = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta editorial?')) {
             try {
@@ -68,7 +64,6 @@ const EditorialForm = () => {
         }
     };
 
-    // Reset form
     const resetForm = () => {
         setNombreEditorial('');
         setDireccion('');
@@ -76,7 +71,6 @@ const EditorialForm = () => {
         setEditorialID(null);
     };
 
-    // Manejar el submit del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         if (editorialID) {
@@ -86,7 +80,6 @@ const EditorialForm = () => {
         }
     };
 
-    // Manejar la selección de una editorial para editar
     const handleEdit = (editorial) => {
         setNombreEditorial(editorial.nombre_editorial);
         setDireccion(editorial.direccion);

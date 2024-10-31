@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdministrarMiembrosForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdministrarMiembrosForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdministrarRoles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdministrarRoles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/BookDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/BookDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/EditorialForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/EditorialForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +102,7 @@
       <workItem from="1730309427295" duration="2739000" />
       <workItem from="1730316741267" duration="13566000" />
       <workItem from="1730335906103" duration="12676000" />
-      <workItem from="1730357888531" duration="14012000" />
+      <workItem from="1730357888531" duration="15065000" />
     </task>
     <servers />
   </component>

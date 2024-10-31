@@ -11,7 +11,6 @@ const EdicionForm = () => {
     const [edicionID, setEdicionID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    // Fetch ediciones
     const fetchEdiciones = async () => {
         try {
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones');
@@ -25,7 +24,6 @@ const EdicionForm = () => {
         fetchEdiciones();
     }, []);
 
-    // Insertar edicion
     const insertarEdicion = async () => {
         try {
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones', {
@@ -43,7 +41,6 @@ const EdicionForm = () => {
         }
     };
 
-    // Actualizar edicion
     const actualizarEdicion = async () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${edicionID}`, {
@@ -61,7 +58,6 @@ const EdicionForm = () => {
         }
     };
 
-    // Eliminar edicion con confirmación
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {
             try {
@@ -74,7 +70,6 @@ const EdicionForm = () => {
         }
     };
 
-    // Reset form
     const resetForm = () => {
         setIsbn('');
         setNumeroEdicion('');
@@ -84,7 +79,6 @@ const EdicionForm = () => {
         setEdicionID(null);
     };
 
-    // Manejar el submit del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         if (edicionID) {
@@ -94,7 +88,6 @@ const EdicionForm = () => {
         }
     };
 
-    // Manejar la selección de una edición para editar
     const handleEdit = (edicion) => {
         setIsbn(edicion.isbn);
         setNumeroEdicion(edicion.numero_edicion);

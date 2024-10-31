@@ -66,12 +66,12 @@ const Header = ({ handleLogout }) => {
                     )}
                 </div>
 
-                <button onClick={toggleMenu} className="md:hidden focus:outline-none">
+                <button onClick={toggleMenu} className="md:hidden focus:outline-none ml-auto">
                     <span className="text-xl font-semibold">Menu</span>
                 </button>
 
                 {isMenuOpen && (
-                    <div className="absolute top-16 left-0 w-full bg-blue-700 text-white shadow-lg md:hidden">
+                    <div className="absolute top-16 right-0 w-3/4 bg-blue-700 text-white shadow-lg md:hidden">
                         <nav className="flex flex-col p-4 space-y-4">
                             <Link to="/" onClick={toggleMenu} className="hover:text-gray-300">Home</Link>
                             <Link to="/books" onClick={toggleMenu} className="hover:text-gray-300">Books</Link>

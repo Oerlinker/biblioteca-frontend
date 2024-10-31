@@ -6,13 +6,14 @@ import { jwtDecode } from 'jwt-decode';
 const BookDetail = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
+    const [reviews, setReviews] = useState([]); // State to store reviews
 
     //adicion prestamo
     const [user, setUser] = useState(null);  // Aquí guardaremos la información del usuario
     const [disponible, setDisponible] = useState(false); // Estado para disponibilidad del libro
     const [edicionesDisponibles, setEdicionesDisponibles] = useState([]); // Almacenar ediciones disponibles
     const [edicionSeleccionada, setEdicionSeleccionada] = useState(null);
-    
+
     const [autor, setAutor] = useState('');
     const [editorial, setEditorial] = useState('');
     const [categoria, setCategoria] = useState('');
@@ -34,7 +35,7 @@ const BookDetail = () => {
             //adicion prestamo
             // Obtener ediciones disponibles
             const edicionesResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/ediciones`);
-            setEdicionesDisponibles(edicionesResponse.data); 
+            setEdicionesDisponibles(edicionesResponse.data);
             // Verificar disponibilidad del libro
             const disponibilidadResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${id}/disponibilidad`);
             setDisponible(disponibilidadResponse.data.disponible);
@@ -42,6 +43,16 @@ const BookDetail = () => {
 
         } catch (error) {
             console.error('Error fetching book details:', error);
+        }
+    }, [id]);
+
+    // Fetch reviews
+    const fetchReviews = useCallback(async () => {
+        try {
+            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/reseñas`);
+            setReviews(response.data);
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
         }
     }, [id]);
 
@@ -57,8 +68,9 @@ const BookDetail = () => {
 
     useEffect(() => {
         fetchBookDetails();
+        fetchReviews(); // Fetch reviews when component mounts
         fetchUser();
-    }, [fetchBookDetails]);
+    }, [fetchBookDetails, fetchReviews]);
 
     //adicion prestamo
     const handleSolicitarPrestamo = async (edicionidSeleccionada) => {
@@ -66,8 +78,8 @@ const BookDetail = () => {
             try {
                 await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos`, {
                     id: user.id,
-                    miembroid: user.miembroid,  
-                    edicionid: edicionidSeleccionada, 
+                    miembroid: user.miembroid,
+                    edicionid: edicionidSeleccionada,
                     fechaDevolucion: '2024-12-31' //se puede modificar a conveniencia
                 });
                 alert('Préstamo solicitado con éxito');
@@ -86,8 +98,6 @@ const BookDetail = () => {
     if (!book) {
         return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
     }
-
-    
 
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
@@ -113,7 +123,7 @@ const BookDetail = () => {
                                 </option>
                             ))}
                         </select>
-    
+
                         {edicionSeleccionada &&  (
                             <button
                                 onClick={() => handleSolicitarPrestamo(edicionSeleccionada)}
@@ -126,10 +136,27 @@ const BookDetail = () => {
                 ) : (
                     <p className="text-red-500">No hay ediciones disponibles en este momento.</p>
                 )}
-                
+
                 </div>
 
-                <Link to="/" className="text-blue-500 hover:underline">
+                {/* Reviews Section */}
+                <div className="mt-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Reseñas</h3>
+                    {reviews.length > 0 ? (
+                        <div className="space-y-4">
+                            {reviews.map((review) => (
+                                <div key={review.id} className="bg-gray-100 p-4 rounded shadow">
+                                    <p className="text-gray-700"><strong>{review.usuario}:</strong> {review.comentario}</p>
+                                    <p className="text-gray-500 text-sm">Calificación: {review.calificacion}/5</p>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-gray-500">No hay reseñas disponibles para este libro.</p>
+                    )}
+                </div>
+
+                <Link to="/" className="text-blue-500 hover:underline mt-4 block text-center">
                     Volver al catálogo
                 </Link>
             </div>

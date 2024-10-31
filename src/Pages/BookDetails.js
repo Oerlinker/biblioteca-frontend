@@ -11,7 +11,8 @@ const BookDetail = () => {
     const [user, setUser] = useState(null);  // Aquí guardaremos la información del usuario
     const [disponible, setDisponible] = useState(false); // Estado para disponibilidad del libro
     const [edicionesDisponibles, setEdicionesDisponibles] = useState([]); // Almacenar ediciones disponibles
-
+    const [edicionSeleccionada, setEdicionSeleccionada] = useState(null);
+    
     const [autor, setAutor] = useState('');
     const [editorial, setEditorial] = useState('');
     const [categoria, setCategoria] = useState('');
@@ -56,6 +57,7 @@ const BookDetail = () => {
 
     useEffect(() => {
         fetchBookDetails();
+        fetchUser();
     }, [fetchBookDetails]);
 
     //adicion prestamo
@@ -76,14 +78,16 @@ const BookDetail = () => {
         }
     };
 
-    if (!book) {
-        return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
-    }
-
     //adicion prestamo
     const handleEdicionChange = (e) => {
         setEdicionSeleccionada(e.target.value);
     };
+
+    if (!book) {
+        return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
+    }
+
+    
 
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">

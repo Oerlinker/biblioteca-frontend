@@ -6,7 +6,6 @@ import Login from './Pages/login';
 import Books from './Pages/Books';
 import BookDetail from './Pages/BookDetails';
 import Register from './Pages/Register';
-import ModificarCatalogo from './Pages/ModificarCatalogo';
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
@@ -73,7 +72,6 @@ function App() {
                             <>
                                 <Route path="/admin/agregar-libro" element={<BookCrud />} />
                                 <Route path="/admin/modificar-libro/:id" element={<BookCrud />} />
-                                <Route path="/admin/modificar-catalogo/*" element={<ModificarCatalogo />} />
                                 <Route path="/admin/obtener-libros" element={<BookCrud />} />
                                 <Route path="/admin/actualizar-libro" element={<BookCrud />} />
                                 <Route path="/admin/eliminar-libro" element={<BookCrud />} />

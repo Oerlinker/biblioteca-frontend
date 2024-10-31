@@ -15,7 +15,7 @@ const BookCrud = () => {
     const [viewLibro, setViewLibro] = useState(null);
     const [edicionesDisponibles, setEdicionesDisponibles] = useState([]);
     const [disponible, setDisponible] = useState(false);
-    const [ setEdicionSeleccionada] = useState(null);
+    const [setEdicionSeleccionada] = useState(null);
 
     useEffect(() => {
         fetchLibros();
@@ -59,7 +59,7 @@ const BookCrud = () => {
                 });
             }
             resetForm();
-            fetchLibros();
+            fetchLibros(); // Actualiza la lista de libros
         } catch (error) {
             console.error('Error saving book:', error);
         }
@@ -68,7 +68,7 @@ const BookCrud = () => {
     const handleDeleteBook = async (libroId) => {
         try {
             await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libroId}`);
-            fetchLibros();
+            fetchLibros(); // Actualiza la lista de libros
         } catch (error) {
             console.error('Error deleting book:', error);
         }
@@ -110,14 +110,12 @@ const BookCrud = () => {
     };
 
     return (
-        
         <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4 w-full">
-             
             <h1 className="text-3xl font-semibold text-gray-700 mb-8 text-center">Gestión de Libros</h1>
 
             <form onSubmit={handleAddOrUpdateBook} className="mb-8 p-6 bg-white rounded shadow-md w-full max-w-3xl lg:max-w-5xl">
                 <h2 className="text-xl font-bold text-gray-600 mb-4">{selectedLibro ? 'Actualizar Libro' : 'Agregar Libro'}</h2>
-                
+
                 <div className="space-y-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-600">Título</label>

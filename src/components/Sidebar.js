@@ -20,10 +20,7 @@ const Sidebar = () => {
                     <h2 className="text-2xl font-bold">Panel</h2>
                 </div>
                 <nav className="mt-4">
-                    <Link to="/admin/agregar-libro" className="block px-4 py-2 hover:bg-gray-700">Agregar Libro</Link>
-                    <Link to="/admin/obtener-libros" className="block px-4 py-2 hover:bg-gray-700">Obtener Libros</Link>
-                    <Link to="/admin/actualizar-libro" className="block px-4 py-2 hover:bg-gray-700">Actualizar Libro</Link>
-                    <Link to="/admin/eliminar-libro" className="block px-4 py-2 hover:bg-gray-700">Eliminar Libro</Link>
+                    <Link to="/admin/agregar-libro" className="block px-4 py-2 hover:bg-gray-700">Gestionar Catálogo</Link>
                     <Link to="/admin/gestionar-autores" className="block px-4 py-2 hover:bg-gray-700">Gestionar Autores</Link>
                     <Link to="/admin/gestionar-editoriales" className="block px-4 py-2 hover:bg-gray-700">Gestionar Editoriales</Link>
                     <Link to="/admin/gestionar-categorias" className="block px-4 py-2 hover:bg-gray-700">Gestionar Categorias</Link>

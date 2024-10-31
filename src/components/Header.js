@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import './Header.css';
+import './header.css';
 
 const Header = ({ handleLogout }) => {
     const { isLoggedIn, user } = useContext(UserContext);

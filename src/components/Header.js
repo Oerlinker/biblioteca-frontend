@@ -35,6 +35,9 @@ const Header = ({ handleLogout }) => {
                                 {user.rol === 1 && (
                                     <Link to="/subscription" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Suscripción</Link>
                                 )}
+                                {user.rol === 2 && (
+                                    <Link to="/gestionar-prestamos" className="text-white hover:underline">Gestión de Préstamos</Link>
+                                )}
                                 <button
                                     onClick={handleLogoutAndRedirect}
                                     className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"

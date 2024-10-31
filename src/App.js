@@ -24,7 +24,7 @@ import { UserContext } from './UserContext';
 import BookCrud from './components/BookCrud';
 import LandingPage from './components/Landing';
 import EdicionesForm from "./Pages/EdicionesForm";
-import AutorForm from './Pages/AutorForm';
+import AutorForm from './Pages/autorForm';
 import EditorialForm from "./Pages/EditorialForm";
 import CategoriaForm from "./Pages/CategoriaForm";
 

@@ -14,7 +14,6 @@ import AccountForm from './Pages/AccountForm';
 import EditName from './Pages/EditName';
 import EditEmail from './Pages/EditEmail';
 import ActivityLog from './Pages/ActivityLog';
-import HomePage from './Pages/HomePage';
 import EditPassword from './Pages/EditPassword';
 import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
@@ -24,6 +23,7 @@ import { useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from './UserContext';
 import BookCrud from './components/BookCrud';
+import LandingPage from './components/Landing';
 
 function App() {
     const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);
@@ -53,7 +53,7 @@ function App() {
                 {isLoggedIn && user.rol === 4 && <Sidebar />}
                 <div className="flex-1">
                     <Routes>
-                        <Route path="/" element={<HomePage />} />
+                        <Route path="/" element={<LandingPage />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/books" element={<Books />} />

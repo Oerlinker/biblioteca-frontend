@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import moment from 'moment-timezone';
 
 const ActivityLog = () => {
     const [logs, setLogs] = useState([]);
@@ -67,7 +68,7 @@ const ActivityLog = () => {
                         <tbody>
                             {logs.map((log) => (
                                 <tr key={log.id}>
-                                    <td className="py-2 px-4 border-b">{log.timestamp}</td>
+                                    <td className="p-2">{moment(log.timestamp).tz('America/La_Paz').format('YYYY-MM-DD HH:mm:ss')}</td>
                                     <td className="py-2 px-4 border-b">{log.userid}</td>
                                     <td className="py-2 px-4 border-b">{log.action}</td>
                                 </tr>

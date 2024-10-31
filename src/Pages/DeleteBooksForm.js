@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../UserContext';
 
 const DeleteBookForm = () => {
     const [libros, setLibros] = useState([]);
     const [selectedLibro, setSelectedLibro] = useState('');
+    const { user} = useContext(UserContext);
+
 
     useEffect(() => {
         const fetchLibros = async () => {
@@ -22,8 +25,11 @@ const DeleteBookForm = () => {
         e.preventDefault();
         try {
             console.log(`Deleting book with ID: ${selectedLibro}`);
-            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro}`);
-            alert('Libro eliminado con éxito');
+            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro}`, {
+                headers: {
+                    'User-ID': user.id,
+                },
+            });
             // Refresh the list of books after deletion
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros/:id');
             setLibros(response.data);

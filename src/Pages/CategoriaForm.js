@@ -6,6 +6,7 @@ const CategoriaForm = () => {
     const [nombreCategoria, setNombreCategoria] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [categoriaID, setCategoriaID] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Fetch categorias
     const fetchCategorias = async () => {
@@ -28,8 +29,8 @@ const CategoriaForm = () => {
                 Nombre_Categoria: nombreCategoria,
                 Descripcion: descripcion
             });
-            setNombreCategoria('');
-            setDescripcion('');
+            resetForm();
+            setSuccessMessage('Categoría agregada exitosamente');
             fetchCategorias();
         } catch (error) {
             console.error('Error insertando la categoría:', error);
@@ -43,23 +44,32 @@ const CategoriaForm = () => {
                 Nombre_Categoria: nombreCategoria,
                 Descripcion: descripcion
             });
-            setNombreCategoria('');
-            setDescripcion('');
-            setCategoriaID(null);
+            resetForm();
+            setSuccessMessage('Categoría actualizada exitosamente');
             fetchCategorias();
         } catch (error) {
             console.error('Error actualizando la categoría:', error);
         }
     };
 
-    // Eliminar categoria
+    // Eliminar categoria con confirmación
     const eliminarCategoria = async (id) => {
-        try {
-            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${id}`);
-            fetchCategorias();
-        } catch (error) {
-            console.error('Error eliminando la categoría:', error);
+        if (window.confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+            try {
+                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${id}`);
+                setSuccessMessage('Categoría eliminada exitosamente');
+                fetchCategorias();
+            } catch (error) {
+                console.error('Error eliminando la categoría:', error);
+            }
         }
+    };
+
+    // Reset form
+    const resetForm = () => {
+        setNombreCategoria('');
+        setDescripcion('');
+        setCategoriaID(null);
     };
 
     // Manejar el submit del formulario
@@ -80,32 +90,46 @@ const CategoriaForm = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-6 max-w-lg flex flex-col gap-6">
             <h2 className="text-3xl font-bold text-center mb-6">Gestionar Categorías</h2>
-            <form onSubmit={handleSubmit} className="mb-4">
-                <input
-                    type="text"
-                    value={nombreCategoria}
-                    onChange={(e) => setNombreCategoria(e.target.value)}
-                    placeholder="Nombre de la categoría"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <textarea
-                    value={descripcion}
-                    onChange={(e) => setDescripcion(e.target.value)}
-                    placeholder="Descripción de la categoría"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            {successMessage && (
+                <div className="bg-green-100 text-green-800 p-3 rounded-md mb-4 text-center">
+                    {successMessage}
+                </div>
+            )}
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre de la Categoría</label>
+                    <input
+                        type="text"
+                        value={nombreCategoria}
+                        onChange={(e) => setNombreCategoria(e.target.value)}
+                        placeholder="Nombre de la categoría"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
+                    <textarea
+                        value={descripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                        placeholder="Descripción de la categoría"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <button type="submit" className={`w-full py-2 px-4 rounded-md text-white ${categoriaID ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
                     {categoriaID ? 'Actualizar Categoría' : 'Agregar Categoría'}
                 </button>
             </form>
-            <ul>
+            <ul className="space-y-4">
                 {categorias.map((categoria) => (
-                    <li key={categoria.categoriaid} className="border p-4 rounded-md shadow-md mb-2 flex justify-between items-center">
-                        <span>{categoria.nombre_categoria}</span>
+                    <li key={categoria.categoriaid} className="border p-4 rounded-md shadow-md flex justify-between items-center">
                         <div>
-                            <button onClick={() => handleEdit(categoria)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600 mr-2">
+                            <h3 className="font-semibold text-lg">{categoria.nombre_categoria}</h3>
+                            <p className="text-gray-500">{categoria.descripcion}</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <button onClick={() => handleEdit(categoria)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600">
                                 Editar
                             </button>
                             <button onClick={() => eliminarCategoria(categoria.categoriaid)} className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment-timezone';
 
+
 const GestionarPrestamos = () => {
     const [prestamos, setPrestamos] = useState([]);
     const [user, setUser] = useState(null); 
@@ -20,13 +21,13 @@ const GestionarPrestamos = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, nombre: decodedToken.nombre });
+                setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
                 console.log('Usuario:', decodedToken);
             }
         };
 
-        fetchUser();
-    }, []);
+    fetchUser();
+}, [user?.id]); 
 
     // Usar useCallback para memoizar la función fetchPrestamos
     const fetchPrestamos = useCallback(async () => {
@@ -69,6 +70,7 @@ const GestionarPrestamos = () => {
         console.log('reseña',review);
         try {
             await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
+                id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,
                 libroid: review.libroid,
@@ -124,7 +126,7 @@ const GestionarPrestamos = () => {
                                     </p>
                                 </div>
                                 <div style={{ display: 'flex', gap: '10px' }}>
-                                    <button onClick={() => handleDevolucion(prestamo.prestamoid)} style={{
+                                    <button onClick={() => handleDevolucion(prestamo.prestamoid, prestamo.edicionid)} style={{
                                         backgroundColor: '#007BFF',
                                         color: 'white',
                                         border: 'none',

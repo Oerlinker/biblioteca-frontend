@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../UserContext';
 
 const BookForm = () => {
     const [Titulo, setTitulo] = useState('');
@@ -10,6 +11,9 @@ const BookForm = () => {
     const [AutorID, setAutorID] = useState('');
     const [EditorialID, setEditorialID] = useState('');
     const [CategoriaID, setCategoriaID] = useState('');
+    const { user } = useContext(UserContext);
+
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,6 +45,7 @@ const BookForm = () => {
         fetchData();
     }, []);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -50,6 +55,7 @@ const BookForm = () => {
                 AutorID,
                 EditorialID,
                 CategoriaID,
+                id: user.id
             };
 
             await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro);

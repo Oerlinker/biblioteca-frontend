@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const BookDetail = () => {
     const { id } = useParams();
@@ -44,7 +44,7 @@ const BookDetail = () => {
         }
     }, [id]);
 
-    //adcion prestamo
+    //adicion prestamo
     const fetchUser = () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -79,6 +79,11 @@ const BookDetail = () => {
     if (!book) {
         return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
     }
+
+    //adicion prestamo
+    const handleEdicionChange = (e) => {
+        setEdicionSeleccionada(e.target.value);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">

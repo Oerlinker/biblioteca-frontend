@@ -80,8 +80,8 @@ const EdicionForm = () => {
         setIsbn('');
         setNumeroEdicion('');
         setFechaPublicacion('');
-        setLibroid('');
-        setProveedorid('');
+        setTituloLibro('');
+        setNombreProveedor('');
         setEdicionID(null);
     };
 
@@ -144,21 +144,21 @@ const EdicionForm = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">ID del Libro</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Titulo del Libro</label>
                     <input
                         type="text"
                         value={libroid}
-                        onChange={(e) => setLibroid(e.target.value)}
+                        onChange={(e) => setTituloLibro(e.target.value)}
                         placeholder="ID del libro"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">ID del Proveedor</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre del Proveedor</label>
                     <input
                         type="text"
-                        value={proveedorid}
-                        onChange={(e) => setProveedorid(e.target.value)}
+                        value={nombreProveedor}
+                        onChange={(e) => setNombreProveedor(e.target.value)}
                         placeholder="ID del proveedor"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />

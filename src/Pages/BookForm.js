@@ -58,7 +58,7 @@ const BookForm = () => {
                 id: user.id
             };
 
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro, { id });
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro);
 
             // Reset form fields
             setTitulo('');

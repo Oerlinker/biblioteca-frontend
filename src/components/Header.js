@@ -35,7 +35,7 @@ const Header = ({ handleLogout }) => {
                     {isLoggedIn && user.rol === 2 && (
                         <Link to="/gestionar-prestamos" className="hover:text-gray-200">Gestión de Préstamos</Link>
                     )}
-                    {isLoggedIn && user.rol === 1 && (
+                    {isLoggedIn && user.rol === 1 && !user.isSubscribed && (
                         <Link to="/subscription" className="hover:text-gray-200">Suscripción</Link>
                     )}
                 </nav>
@@ -81,7 +81,7 @@ const Header = ({ handleLogout }) => {
                             {isLoggedIn && user.rol === 2 && (
                                 <Link to="/gestionar-prestamos" onClick={toggleMenu} className="hover:text-gray-300">Gestión de Préstamos</Link>
                             )}
-                            {isLoggedIn && user.rol === 1 && (
+                            {isLoggedIn && user.rol === 1 && !user.isSubscribed && (
                                 <Link to="/subscription" onClick={toggleMenu} className="hover:text-gray-300">Suscripción</Link>
                             )}
                             {isLoggedIn ? (

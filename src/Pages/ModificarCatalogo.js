@@ -54,6 +54,9 @@ const ModificarCatalogo = () => {
 
             <Routes>
                 <Route path="agregar-libro" element={<BookCrud />} />
+                <Route path={"obtener-libros"} element={<BookCrud />} />
+                <Route path="actualizar-libro" element={<BookCrud />} />
+                <Route path="eliminar-libro" element={<BookCrud />} />
                 <Route path="gestionar-autores" element={<AutorForm />} />
                 <Route path="gestionar-editoriales" element={<EditorialForm />} />
                 <Route path="gestionar-categorias" element={<CategoriaForm />} />

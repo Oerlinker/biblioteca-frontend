@@ -25,7 +25,6 @@ const Header = ({ handleLogout }) => {
     return (
         <header className="bg-blue-600 text-white px-6 py-4 shadow-md relative">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold tracking-wide">ALEJANDRIA</Link>
 
                 <nav className="hidden md:flex space-x-4 mx-auto">
                     <Link to="/" className="hover:text-gray-200">Home</Link>

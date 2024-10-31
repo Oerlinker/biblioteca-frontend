@@ -19,7 +19,7 @@ const Sidebar = () => {
             </button>
             <div className={`fixed top-0 left-0 h-full bg-gray-800 text-white z-40 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} overflow-y-auto`}>
                 <div className="p-4">
-                    <h2 className="text-2xl font-bold">Admin Panel</h2>
+                    <h2 className="text-2xl font-bold">''''''Panel</h2>
                 </div>
                 <nav className="mt-4">
                     <button onClick={toggleCatalog} className="w-full text-left px-4 py-2 hover:bg-gray-700">

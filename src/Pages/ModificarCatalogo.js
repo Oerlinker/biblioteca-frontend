@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
-import BookForm from './BookForm';
-import GetBooksForm from './GetBookForm';
-import UpdateBookForm from './UpdateBookForms';
-import DeleteBookForm from './DeleteBooksForm';
+
 import AutorForm from "./autorForm";
 import EditorialForm from "./EditorialForm";
 import CategoriaForm from "./CategoriaForm";
 import EdicionesForm from "./EdicionesForm";
 import ProveedorForm from "./ProveedorForm";
+import BookCrud from '../components/BookCrud';
 
 const ModificarCatalogo = () => {
     const navigate = useNavigate();
@@ -55,10 +53,7 @@ const ModificarCatalogo = () => {
             </div>
 
             <Routes>
-                <Route path="agregar-libro" element={<BookForm />} />
-                <Route path="obtener-libros" element={<GetBooksForm />} />
-                <Route path="actualizar-libro" element={<UpdateBookForm />} />
-                <Route path="eliminar-libro" element={<DeleteBookForm />} />
+                <Route path="agregar-libro" element={<BookCrud />} />
                 <Route path="gestionar-autores" element={<AutorForm />} />
                 <Route path="gestionar-editoriales" element={<EditorialForm />} />
                 <Route path="gestionar-categorias" element={<CategoriaForm />} />

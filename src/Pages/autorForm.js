@@ -7,6 +7,7 @@ const AutorForm = () => {
     const [biografia, setBiografia] = useState('');
     const [nacionalidad, setNacionalidad] = useState('');
     const [autorID, setAutorID] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Fetch autores
     const fetchAutores = async () => {
@@ -30,9 +31,8 @@ const AutorForm = () => {
                 Biografia: biografia,
                 Nacionalidad: nacionalidad
             });
-            setNombre('');
-            setBiografia('');
-            setNacionalidad('');
+            resetForm();
+            setSuccessMessage('Autor agregado exitosamente');
             fetchAutores();
         } catch (error) {
             console.error('Error insertando el autor:', error);
@@ -47,24 +47,33 @@ const AutorForm = () => {
                 Biografia: biografia,
                 Nacionalidad: nacionalidad
             });
-            setNombre('');
-            setBiografia('');
-            setNacionalidad('');
-            setAutorID(null);
+            resetForm();
+            setSuccessMessage('Autor actualizado exitosamente');
             fetchAutores();
         } catch (error) {
             console.error('Error actualizando el autor:', error);
         }
     };
 
-    // Eliminar autor
+    // Eliminar autor con confirmación
     const eliminarAutor = async (id) => {
-        try {
-            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${id}`);
-            fetchAutores();
-        } catch (error) {
-            console.error('Error eliminando el autor:', error);
+        if (window.confirm('¿Estás seguro de que deseas eliminar este autor?')) {
+            try {
+                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${id}`);
+                setSuccessMessage('Autor eliminado exitosamente');
+                fetchAutores();
+            } catch (error) {
+                console.error('Error eliminando el autor:', error);
+            }
         }
+    };
+
+    // Reset form
+    const resetForm = () => {
+        setNombre('');
+        setBiografia('');
+        setNacionalidad('');
+        setAutorID(null);
     };
 
     // Manejar el submit del formulario
@@ -86,39 +95,57 @@ const AutorForm = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-6 max-w-lg flex flex-col gap-6">
             <h2 className="text-3xl font-bold text-center mb-6">Gestionar Autores</h2>
-            <form onSubmit={handleSubmit} className="mb-4">
-                <input
-                    type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    placeholder="Nombre del autor"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <textarea
-                    value={biografia}
-                    onChange={(e) => setBiografia(e.target.value)}
-                    placeholder="Biografía del autor"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <input
-                    type="text"
-                    value={nacionalidad}
-                    onChange={(e) => setNacionalidad(e.target.value)}
-                    placeholder="Nacionalidad del autor"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            {successMessage && (
+                <div className="bg-green-100 text-green-800 p-3 rounded-md mb-4 text-center">
+                    {successMessage}
+                </div>
+            )}
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre del Autor</label>
+                    <input
+                        type="text"
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
+                        placeholder="Nombre del autor"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Biografía</label>
+                    <textarea
+                        value={biografia}
+                        onChange={(e) => setBiografia(e.target.value)}
+                        placeholder="Biografía del autor"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nacionalidad</label>
+                    <input
+                        type="text"
+                        value={nacionalidad}
+                        onChange={(e) => setNacionalidad(e.target.value)}
+                        placeholder="Nacionalidad del autor"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <button type="submit" className={`w-full py-2 px-4 rounded-md text-white ${autorID ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
                     {autorID ? 'Actualizar Autor' : 'Agregar Autor'}
                 </button>
             </form>
-            <ul>
+            <ul className="space-y-4">
                 {autores.map((autor) => (
-                    <li key={autor.autorid} className="border p-4 rounded-md shadow-md mb-2 flex justify-between items-center">
-                        <span>{autor.nombre}</span>
+                    <li key={autor.autorid} className="border p-4 rounded-md shadow-md flex justify-between items-center">
                         <div>
-                            <button onClick={() => handleEdit(autor)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600 mr-2">
+                            <h3 className="font-semibold text-lg">{autor.nombre}</h3>
+                            <p className="text-gray-500">Nacionalidad: {autor.nacionalidad}</p>
+                            <p className="text-gray-500">Biografía: {autor.biografia}</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <button onClick={() => handleEdit(autor)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600">
                                 Editar
                             </button>
                             <button onClick={() => eliminarAutor(autor.autorid)} className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">

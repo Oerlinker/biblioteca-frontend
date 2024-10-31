@@ -7,6 +7,7 @@ const EditorialForm = () => {
     const [direccion, setDireccion] = useState('');
     const [contacto, setContacto] = useState('');
     const [editorialID, setEditorialID] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Fetch editoriales
     const fetchEditoriales = async () => {
@@ -33,6 +34,7 @@ const EditorialForm = () => {
             setNombreEditorial('');
             setDireccion('');
             setContacto('');
+            setSuccessMessage('Editorial agregada exitosamente');
             fetchEditoriales();
         } catch (error) {
             console.error('Error insertando la editorial:', error);
@@ -51,19 +53,23 @@ const EditorialForm = () => {
             setDireccion('');
             setContacto('');
             setEditorialID(null);
+            setSuccessMessage('Editorial actualizada exitosamente');
             fetchEditoriales();
         } catch (error) {
             console.error('Error actualizando la editorial:', error);
         }
     };
 
-    // Eliminar editorial
+    // Eliminar editorial con confirmación
     const eliminarEditorial = async (id) => {
-        try {
-            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${id}`);
-            fetchEditoriales();
-        } catch (error) {
-            console.error('Error eliminando la editorial:', error);
+        if (window.confirm('¿Estás seguro de que deseas eliminar esta editorial?')) {
+            try {
+                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${id}`);
+                setSuccessMessage('Editorial eliminada exitosamente');
+                fetchEditoriales();
+            } catch (error) {
+                console.error('Error eliminando la editorial:', error);
+            }
         }
     };
 
@@ -86,40 +92,58 @@ const EditorialForm = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-6 max-w-lg flex flex-col gap-6">
             <h2 className="text-3xl font-bold text-center mb-6">Gestionar Editoriales</h2>
-            <form onSubmit={handleSubmit} className="mb-4">
-                <input
-                    type="text"
-                    value={nombreEditorial}
-                    onChange={(e) => setNombreEditorial(e.target.value)}
-                    placeholder="Nombre de la editorial"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <input
-                    type="text"
-                    value={direccion}
-                    onChange={(e) => setDireccion(e.target.value)}
-                    placeholder="Dirección de la editorial"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <input
-                    type="text"
-                    value={contacto}
-                    onChange={(e) => setContacto(e.target.value)}
-                    placeholder="Contacto de la editorial"
-                    className="border border-gray-300 rounded-md py-2 px-4 w-full mb-2"
-                />
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            {successMessage && (
+                <div className="bg-green-100 text-green-800 p-3 rounded-md mb-4 text-center">
+                    {successMessage}
+                </div>
+            )}
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre de la Editorial</label>
+                    <input
+                        type="text"
+                        value={nombreEditorial}
+                        onChange={(e) => setNombreEditorial(e.target.value)}
+                        placeholder="Nombre de la editorial"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Dirección</label>
+                    <input
+                        type="text"
+                        value={direccion}
+                        onChange={(e) => setDireccion(e.target.value)}
+                        placeholder="Dirección de la editorial"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Contacto</label>
+                    <input
+                        type="text"
+                        value={contacto}
+                        onChange={(e) => setContacto(e.target.value)}
+                        placeholder="Contacto de la editorial"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <button type="submit" className={`w-full py-2 px-4 rounded-md text-white ${editorialID ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
                     {editorialID ? 'Actualizar Editorial' : 'Agregar Editorial'}
                 </button>
             </form>
-            <ul>
+            <ul className="space-y-4">
                 {editoriales.map((editorial) => (
-                    <li key={editorial.editorialid} className="border p-4 rounded-md shadow-md mb-2 flex justify-between items-center">
-                        <span>{editorial.nombre_editorial}</span>
+                    <li key={editorial.editorialid} className="border p-4 rounded-md shadow-md flex justify-between items-center">
                         <div>
-                            <button onClick={() => handleEdit(editorial)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600 mr-2">
+                            <h3 className="font-semibold text-lg">{editorial.nombre_editorial}</h3>
+                            <p className="text-gray-500">{editorial.direccion}</p>
+                            <p className="text-gray-500">{editorial.contacto}</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <button onClick={() => handleEdit(editorial)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600">
                                 Editar
                             </button>
                             <button onClick={() => eliminarEditorial(editorial.editorialid)} className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">

@@ -148,7 +148,7 @@ const EdicionForm = () => {
                         type="text"
                         value={tituloLibro}
                         onChange={(e) => setTituloLibro(e.target.value)}
-                        placeholder="ID del libro"
+                        placeholder="Titulo del Libro"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>
@@ -158,7 +158,7 @@ const EdicionForm = () => {
                         type="text"
                         value={nombreProveedor}
                         onChange={(e) => setNombreProveedor(e.target.value)}
-                        placeholder="ID del proveedor"
+                        placeholder="Nombre del proveedor"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>

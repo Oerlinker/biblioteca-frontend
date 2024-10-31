@@ -6,7 +6,6 @@ import Login from './Pages/login';
 import Books from './Pages/Books';
 import BookDetail from './Pages/BookDetails';
 import Register from './Pages/Register';
-import ModificarCatalogo from './Pages/ModificarCatalogo';
 import AdministrarUsuarios from './Pages/AdministrarUsuario';
 import GetAllUsuarios from './Pages/GetAllUsuarios';
 import AdministrarRoles from './Pages/AdministrarRoles';
@@ -24,6 +23,10 @@ import { jwtDecode } from 'jwt-decode';
 import { UserContext } from './UserContext';
 import BookCrud from './components/BookCrud';
 import LandingPage from './components/Landing';
+import EdicionesForm from "./Pages/EdicionesForm";
+import AutorForm from './Pages/autorForm';
+import EditorialForm from "./Pages/EditorialForm";
+import CategoriaForm from "./Pages/CategoriaForm";
 
 function App() {
     const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);
@@ -73,7 +76,6 @@ function App() {
                             <>
                                 <Route path="/admin/agregar-libro" element={<BookCrud />} />
                                 <Route path="/admin/modificar-libro/:id" element={<BookCrud />} />
-                                <Route path="/admin/modificar-catalogo/*" element={<ModificarCatalogo />} />
                                 <Route path="/admin/obtener-libros" element={<BookCrud />} />
                                 <Route path="/admin/actualizar-libro" element={<BookCrud />} />
                                 <Route path="/admin/eliminar-libro" element={<BookCrud />} />
@@ -83,6 +85,11 @@ function App() {
                                 <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} />
                                 <Route path="/admin/administrar-usuarios/administrar-miembros" element={<AdministrarMiembrosForm />} />
                                 <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
+                                <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
+                                <Route path="/admin/gestionar-editoriales" element={<EditorialForm />} />
+                                <Route path="/admin/gestionar-categorias" element={<CategoriaForm />} />
+                                <Route path="/admin/gestionar-ediciones" element={<EdicionesForm />} />
+                                <Route path="/admin/gestionar-autores" element={<AutorForm />} />
                             </>
                         )}
                     </Routes>

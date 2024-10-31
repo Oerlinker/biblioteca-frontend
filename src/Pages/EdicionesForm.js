@@ -6,8 +6,8 @@ const EdicionForm = () => {
     const [isbn, setIsbn] = useState('');
     const [numeroEdicion, setNumeroEdicion] = useState('');
     const [fechaPublicacion, setFechaPublicacion] = useState('');
-    const [libroid, setLibroid] = useState('');
-    const [proveedorid, setProveedorid] = useState('');
+    const [tituloLibro, setTituloLibro] = useState('');
+    const [nombreProveedor, setNombreProveedor] = useState('');
     const [edicionID, setEdicionID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -32,8 +32,8 @@ const EdicionForm = () => {
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
-                libroid,
-                proveedorid
+                titulo_libro: tituloLibro,
+                nombre_proveedor: nombreProveedor
             });
             resetForm();
             setSuccessMessage('Edición agregada exitosamente');
@@ -50,8 +50,8 @@ const EdicionForm = () => {
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
-                libroid,
-                proveedorid
+                titulo_libro: tituloLibro,
+                nombre_proveedor: nombreProveedor
             });
             resetForm();
             setSuccessMessage('Edición actualizada exitosamente');
@@ -79,8 +79,8 @@ const EdicionForm = () => {
         setIsbn('');
         setNumeroEdicion('');
         setFechaPublicacion('');
-        setLibroid('');
-        setProveedorid('');
+        setTituloLibro('');
+        setNombreProveedor('');
         setEdicionID(null);
     };
 
@@ -99,8 +99,8 @@ const EdicionForm = () => {
         setIsbn(edicion.isbn);
         setNumeroEdicion(edicion.numero_edicion);
         setFechaPublicacion(edicion.fecha_publicacion);
-        setLibroid(edicion.libroid);
-        setProveedorid(edicion.proveedorid);
+        setTituloLibro(edicion.titulo_libro);
+        setNombreProveedor(edicion.nombre_proveedor);
         setEdicionID(edicion.edicionid);
     };
 
@@ -143,22 +143,22 @@ const EdicionForm = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">ID del Libro</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Titulo del Libro</label>
                     <input
                         type="text"
-                        value={libroid}
-                        onChange={(e) => setLibroid(e.target.value)}
-                        placeholder="ID del libro"
+                        value={tituloLibro}
+                        onChange={(e) => setTituloLibro(e.target.value)}
+                        placeholder="Titulo del Libro"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">ID del Proveedor</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre del Proveedor</label>
                     <input
                         type="text"
-                        value={proveedorid}
-                        onChange={(e) => setProveedorid(e.target.value)}
-                        placeholder="ID del proveedor"
+                        value={nombreProveedor}
+                        onChange={(e) => setNombreProveedor(e.target.value)}
+                        placeholder="Nombre del proveedor"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>

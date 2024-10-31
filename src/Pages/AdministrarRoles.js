@@ -37,27 +37,27 @@ const AdministrarRoles = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">Administrar Roles</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">Administrar Roles</h2>
             <div className="overflow-x-auto">
                 <table className="min-w-full border border-gray-200">
-                    <thead>
+                    <thead className="bg-gray-50">
                         <tr>
-                            <th className="border border-gray-300 p-2">ID</th>
-                            <th className="border border-gray-300 p-2">Nombre</th>
-                            <th className="border border-gray-300 p-2">Correo</th>
-                            <th className="border border-gray-300 p-2">Rol ID</th>
-                            <th className="border border-gray-300 p-2">Rol</th>
-                            <th className="border border-gray-300 p-2">Acciones</th>
+                            <th className="border border-gray-300 p-2 text-center">ID</th>
+                            <th className="border border-gray-300 p-2 text-center">Nombre</th>
+                            <th className="border border-gray-300 p-2 text-center">Correo</th>
+                            <th className="border border-gray-300 p-2 text-center">Rol ID</th>
+                            <th className="border border-gray-300 p-2 text-center">Rol</th>
+                            <th className="border border-gray-300 p-2 text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-white divide-y divide-gray-200">
                         {usuarios.map((usuario) => (
                             <tr key={usuario.usuarioid}>
-                                <td className="border border-gray-300 p-2">{usuario.usuarioid}</td>
-                                <td className="border border-gray-300 p-2">{usuario.nombre_usuario}</td>
-                                <td className="border border-gray-300 p-2">{usuario.correo_electronico}</td>
-                                <td className="border border-gray-300 p-2">{usuario.rolid}</td>
-                                <td className="border border-gray-300 p-2">
+                                <td className="border border-gray-300 p-2 text-center">{usuario.usuarioid}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.nombre_usuario}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.correo_electronico}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.rolid}</td>
+                                <td className="border border-gray-300 p-2 text-center">
                                     <select
                                         value={usuario.newRole || usuario.rolid}
                                         onChange={(e) => {
@@ -77,7 +77,7 @@ const AdministrarRoles = () => {
                                         <option value="4">Administrador</option>
                                     </select>
                                 </td>
-                                <td className="border border-gray-300 p-2">
+                                <td className="border border-gray-300 p-2 text-center">
                                     <button
                                         onClick={() => handleUpdateRole(usuario.usuarioid, usuario.newRole || usuario.rolid)}
                                         className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600"

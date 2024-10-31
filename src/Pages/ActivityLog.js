@@ -13,11 +13,25 @@ const ActivityLog = () => {
         const fetchLogs = async () => {
             try {
                 const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/activity-log');
-                // Deserializa el campo `action` como JSON
-                const logsWithParsedAction = response.data.map(log => ({
-                    ...log,
-                    parsedAction: JSON.parse(log.action) // Acción y IP como JSON
-                }));
+    
+                // Procesa cada log para manejar casos donde `action` no es JSON válido
+                const logsWithParsedAction = response.data.map(log => {
+                    let parsedAction;
+    
+                    try {
+                        // Intenta parsear `action` como JSON
+                        parsedAction = JSON.parse(log.action);
+                    } catch (error) {
+                        // Si falla, deja `action` tal cual
+                        parsedAction = log.action;
+                    }
+    
+                    return {
+                        ...log,
+                        parsedAction
+                    };
+                });
+    
                 setLogs(logsWithParsedAction);
                 setLoading(false);
             } catch (error) {
@@ -25,7 +39,7 @@ const ActivityLog = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchLogs();
     }, []);
 

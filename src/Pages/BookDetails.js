@@ -49,7 +49,7 @@ const BookDetail = () => {
 
     const fetchReviews = useCallback(async () => {
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/reseñas`);
+            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/review/libro/${id}`);
             setReviews(response.data);
         } catch (error) {
             console.error('Error fetching reviews:', error);

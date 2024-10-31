@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../UserContext';
 
 const BookForm = () => {
@@ -46,18 +45,6 @@ const BookForm = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        const fetchUser = () => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                const decodedToken = jwtDecode(token);
-                setUser({id: user.id, nombre: decodedToken.nombre });
-                console.log('Usuario:', decodedToken);
-            }
-        };
-
-        fetchUser();
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -68,9 +55,10 @@ const BookForm = () => {
                 AutorID,
                 EditorialID,
                 CategoriaID,
+                id: user.id
             };
 
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro);
+            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', nuevoLibro, { id });
 
             // Reset form fields
             setTitulo('');

@@ -11,7 +11,7 @@ const BookForm = () => {
     const [AutorID, setAutorID] = useState('');
     const [EditorialID, setEditorialID] = useState('');
     const [CategoriaID, setCategoriaID] = useState('');
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     
 

@@ -9,6 +9,7 @@ import EditorialForm from "./EditorialForm";
 import CategoriaForm from "./CategoriaForm";
 import EdicionesForm from "./EdicionesForm";
 import ProveedorForm from "./ProveedorForm";
+import BookCrud from "../components/BookCrud";
 
 const ModificarCatalogo = () => {
     const navigate = useNavigate();
@@ -55,10 +56,10 @@ const ModificarCatalogo = () => {
             </div>
 
             <Routes>
-                <Route path="agregar-libro" element={<BookForm />} />
-                <Route path="obtener-libros" element={<GetBooksForm />} />
-                <Route path="actualizar-libro" element={<UpdateBookForm />} />
-                <Route path="eliminar-libro" element={<DeleteBookForm />} />
+                <Route path="agregar-libro" element={<BookCrud />} />
+                <Route path="obtener-libros" element={<BookCrud/>} />
+                <Route path="actualizar-libro" element={<BookCrud />} />
+                <Route path="eliminar-libro" element={<BookCrud />} />
                 <Route path="gestionar-autores" element={<AutorForm />} />
                 <Route path="gestionar-editoriales" element={<EditorialForm />} />
                 <Route path="gestionar-categorias" element={<CategoriaForm />} />

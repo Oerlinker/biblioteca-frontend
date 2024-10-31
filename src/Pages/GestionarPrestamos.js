@@ -26,8 +26,8 @@ const GestionarPrestamos = () => {
             }
         };
 
-        fetchUser();
-    }, []);
+    fetchUser();
+}, [user?.id]); 
 
     // Usar useCallback para memoizar la función fetchPrestamos
     const fetchPrestamos = useCallback(async () => {

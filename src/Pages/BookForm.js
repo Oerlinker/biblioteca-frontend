@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import { UserContext } from '../UserContext';
 
 const BookForm = () => {
     const [Titulo, setTitulo] = useState('');
@@ -10,6 +12,9 @@ const BookForm = () => {
     const [AutorID, setAutorID] = useState('');
     const [EditorialID, setEditorialID] = useState('');
     const [CategoriaID, setCategoriaID] = useState('');
+    const { user, setUser } = useContext(UserContext);
+
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +44,19 @@ const BookForm = () => {
         };
 
         fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchUser = () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decodedToken = jwtDecode(token);
+                setUser({id: user.id, nombre: decodedToken.nombre });
+                console.log('Usuario:', decodedToken);
+            }
+        };
+
+        fetchUser();
     }, []);
 
     const handleSubmit = async (e) => {

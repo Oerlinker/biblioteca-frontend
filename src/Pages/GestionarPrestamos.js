@@ -20,7 +20,7 @@ const GestionarPrestamos = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, nombre: decodedToken.nombre });
+                setUser({ miembroid: decodedToken.miembroid, id: user.id, nombre: decodedToken.nombre });
                 console.log('Usuario:', decodedToken);
             }
         };
@@ -69,6 +69,7 @@ const GestionarPrestamos = () => {
         console.log('reseña',review);
         try {
             await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
+                id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,
                 libroid: review.libroid,
@@ -124,7 +125,7 @@ const GestionarPrestamos = () => {
                                     </p>
                                 </div>
                                 <div style={{ display: 'flex', gap: '10px' }}>
-                                    <button onClick={() => handleDevolucion(prestamo.prestamoid)} style={{
+                                    <button onClick={() => handleDevolucion(prestamo.prestamoid, prestamo.edicionid)} style={{
                                         backgroundColor: '#007BFF',
                                         color: 'white',
                                         border: 'none',

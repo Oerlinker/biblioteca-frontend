@@ -17,6 +17,7 @@ const BookDetail = () => {
     const [autor, setAutor] = useState('');
     const [editorial, setEditorial] = useState('');
     const [categoria, setCategoria] = useState('');
+    const [currentPage, setCurrentPage] = useState(0);
 
     const fetchBookDetails = useCallback(async () => {
         try {

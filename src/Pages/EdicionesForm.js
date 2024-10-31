@@ -47,7 +47,6 @@ const EdicionForm = () => {
     const actualizarEdicion = async () => {
         try {
             await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${edicionID}`, {
-                edicionid,
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
@@ -147,7 +146,7 @@ const EdicionForm = () => {
                     <label className="block text-gray-700 text-sm font-bold mb-2">Titulo del Libro</label>
                     <input
                         type="text"
-                        value={libroid}
+                        value={tituloLibro}
                         onChange={(e) => setTituloLibro(e.target.value)}
                         placeholder="ID del libro"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"

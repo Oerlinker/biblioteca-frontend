@@ -32,11 +32,11 @@ const Header = ({ handleLogout }) => {
                                 <Link to="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Home</Link>
                                 <Link to="/account" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Gestionar Cuenta</Link>
                                 <Link to="/books" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Books</Link>
-                                {user.rol === 1 && (
-                                    <Link to="/subscription" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Suscripción</Link>
-                                )}
                                 {user.rol === 2 && (
                                     <Link to="/gestionar-prestamos" className="text-white hover:underline">Gestión de Préstamos</Link>
+                                )}
+                                {user.rol === 1 && (
+                                    <Link to="/subscription" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Suscripción</Link>
                                 )}
                                 <button
                                     onClick={handleLogoutAndRedirect}

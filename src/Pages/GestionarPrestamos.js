@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment-timezone';
 
+
 const GestionarPrestamos = () => {
     const [prestamos, setPrestamos] = useState([]);
     const [user, setUser] = useState(null); 
@@ -20,7 +21,7 @@ const GestionarPrestamos = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, id: user.id, nombre: decodedToken.nombre });
+                setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
                 console.log('Usuario:', decodedToken);
             }
         };

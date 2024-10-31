@@ -63,7 +63,7 @@ const AdministrarRoles = () => {
                                     onChange={(e) => {
                                         const updatedUsuarios = usuarios.map((u) =>
                                             u.usuarioid === usuario.usuarioid
-                                                ? { ...u, newRole: e.target.value }
+                                                ? {...u, newRole: e.target.value}
                                                 : u
                                         );
                                         setUsuarios(updatedUsuarios);
@@ -72,7 +72,9 @@ const AdministrarRoles = () => {
                                 >
                                     <option value="">Seleccionar rol</option>
                                     <option value="1">Usuario</option>
-                                    <option value="2">Administrador</option>
+                                    <option value="2">Miembro</option>
+                                    <option value="3">Empleado</option>
+                                    <option value="4">Administrador</option>
                                 </select>
                             </td>
                             <td className="border border-gray-300 p-2 text-center">

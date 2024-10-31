@@ -6,7 +6,7 @@ const UserInfo = ({ user }) => {
     }
 
     return (
-        <div className="text-center">
+        <div className="text-center flex flex-col items-center">
             <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center mb-4">
                 <span className="text-4xl font-bold text-gray-700">
                     {user.nombre ? user.nombre.charAt(0).toUpperCase() : 'U'}

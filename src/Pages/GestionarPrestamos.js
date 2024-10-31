@@ -15,18 +15,18 @@ const GestionarPrestamos = () => {
     comentario: '',
 });
 
-    useEffect(() => {
-        const fetchUser = () => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, id: user.id, nombre: decodedToken.nombre });
-                console.log('Usuario:', decodedToken);
-            }
-        };
+useEffect(() => {
+    const fetchUser = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
+            console.log('Usuario:', decodedToken);
+        }
+    };
 
-        fetchUser();
-    }, []);
+    fetchUser();
+}, [user?.id]); 
 
     // Usar useCallback para memoizar la función fetchPrestamos
     const fetchPrestamos = useCallback(async () => {

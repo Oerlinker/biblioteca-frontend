@@ -35,7 +35,7 @@ const AdministrarMiembrosForm = () => {
                                         <th scope="col" className="py-3.5 px-4 text-sm font-normal text-center text-gray-500">
                                             <span>Nombre</span>
                                         </th>
-                                        <th scope="col" className="px-12 py-3.5 text-sm font-normal text-center text-gray-500">
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center text-gray-500">
                                             Correo
                                         </th>
                                         <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center text-gray-500">
@@ -48,7 +48,7 @@ const AdministrarMiembrosForm = () => {
                                         miembros.map((miembro) => (
                                             <tr key={miembro.id}>
                                                 <td className="px-4 py-4 text-sm font-medium text-gray-800 text-center">{miembro.nombre}</td>
-                                                <td className="px-12 py-4 text-sm font-medium text-gray-600 text-center">{miembro.correo}</td>
+                                                <td className="px-4 py-4 text-sm font-medium text-gray-600 text-center">{miembro.correo}</td>
                                                 <td className="px-4 py-4 text-sm font-medium text-gray-500 text-center">{miembro.registro}</td>
                                             </tr>
                                         ))

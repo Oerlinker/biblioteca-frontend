@@ -141,8 +141,6 @@ const BookDetail = () => {
                     <p className="text-gray-700"><strong>Autor:</strong> {autor || 'Desconocido'}</p>
                     <p className="text-gray-700"><strong>Editorial:</strong> {editorial || 'Desconocida'}</p>
                     <p className="text-gray-700"><strong>Categoría:</strong> {categoria || 'General'}</p>
-                    <p className="text-gray-700"><strong>Edición:</strong> {book.edicion || 'No disponible'}</p>
-                    <p className="text-gray-700"><strong>ISBN:</strong> {book.isbn || 'No disponible'}</p>
                     {edicionesDisponibles.length > 0 ? (
                         <div>
                             <label htmlFor="edicion">Selecciona una edición:</label>

@@ -41,52 +41,52 @@ const AdministrarRoles = () => {
             <div className="overflow-x-auto w-full max-w-3xl">
                 <table className="min-w-full border border-gray-200">
                     <thead className="bg-gray-50">
-                    <tr>
-                        <th className="border border-gray-300 p-2 text-center">ID</th>
-                        <th className="border border-gray-300 p-2 text-center">Nombre</th>
-                        <th className="border border-gray-300 p-2 text-center">Correo</th>
-                        <th className="border border-gray-300 p-2 text-center">Rol ID</th>
-                        <th className="border border-gray-300 p-2 text-center">Rol</th>
-                        <th className="border border-gray-300 p-2 text-center">Acciones</th>
-                    </tr>
+                        <tr>
+                            <th className="border border-gray-300 p-2 text-center">ID</th>
+                            <th className="border border-gray-300 p-2 text-center">Nombre</th>
+                            <th className="border border-gray-300 p-2 text-center">Correo</th>
+                            <th className="border border-gray-300 p-2 text-center">Rol ID</th>
+                            <th className="border border-gray-300 p-2 text-center">Rol</th>
+                            <th className="border border-gray-300 p-2 text-center">Acciones</th>
+                        </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                    {usuarios.map((usuario) => (
-                        <tr key={usuario.usuarioid}>
-                            <td className="border border-gray-300 p-2 text-center">{usuario.usuarioid}</td>
-                            <td className="border border-gray-300 p-2 text-center">{usuario.nombre_usuario}</td>
-                            <td className="border border-gray-300 p-2 text-center">{usuario.correo_electronico}</td>
-                            <td className="border border-gray-300 p-2 text-center">{usuario.rolid}</td>
-                            <td className="border border-gray-300 p-2 text-center">
-                                <select
-                                    value={usuario.newRole || usuario.rolid}
-                                    onChange={(e) => {
-                                        const updatedUsuarios = usuarios.map((u) =>
-                                            u.usuarioid === usuario.usuarioid
-                                                ? {...u, newRole: e.target.value}
-                                                : u
-                                        );
-                                        setUsuarios(updatedUsuarios);
-                                    }}
-                                    className="p-1 border border-gray-300 rounded"
-                                >
-                                    <option value="">Seleccionar rol</option>
-                                    <option value="1">Usuario</option>
-                                    <option value="2">Miembro</option>
-                                    <option value="3">Empleado</option>
-                                    <option value="4">Administrador</option>
-                                </select>
-                            </td>
-                            <td className="border border-gray-300 p-2 text-center">
-                                <button
-                                    onClick={() => handleUpdateRole(usuario.usuarioid, usuario.newRole)}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-                                >
-                                    Guardar
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                        {usuarios.map((usuario) => (
+                            <tr key={usuario.usuarioid}>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.usuarioid}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.nombre_usuario}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.correo_electronico}</td>
+                                <td className="border border-gray-300 p-2 text-center">{usuario.rolid}</td>
+                                <td className="border border-gray-300 p-2 text-center">
+                                    <select
+                                        value={usuario.newRole || usuario.rolid}
+                                        onChange={(e) => {
+                                            const updatedUsuarios = usuarios.map((u) =>
+                                                u.usuarioid === usuario.usuarioid
+                                                    ? { ...u, newRole: e.target.value }
+                                                    : u
+                                            );
+                                            setUsuarios(updatedUsuarios);
+                                        }}
+                                        className="p-1 border border-gray-300 rounded"
+                                    >
+                                        <option value="">Seleccionar rol</option>
+                                        <option value="1">Usuario</option>
+                                        <option value="2">Miembro</option>
+                                        <option value="3">Empleado</option>
+                                        <option value="4">Administrador</option>
+                                    </select>
+                                </td>
+                                <td className="border border-gray-300 p-2 text-center">
+                                    <button
+                                        onClick={() => handleUpdateRole(usuario.usuarioid, usuario.newRole)}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                                    >
+                                        Guardar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

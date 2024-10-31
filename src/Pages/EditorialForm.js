@@ -31,9 +31,7 @@ const EditorialForm = () => {
                 Direccion: direccion,
                 Contacto: contacto
             });
-            setNombreEditorial('');
-            setDireccion('');
-            setContacto('');
+            resetForm();
             setSuccessMessage('Editorial agregada exitosamente');
             fetchEditoriales();
         } catch (error) {
@@ -49,10 +47,7 @@ const EditorialForm = () => {
                 Direccion: direccion,
                 Contacto: contacto
             });
-            setNombreEditorial('');
-            setDireccion('');
-            setContacto('');
-            setEditorialID(null);
+            resetForm();
             setSuccessMessage('Editorial actualizada exitosamente');
             fetchEditoriales();
         } catch (error) {
@@ -71,6 +66,14 @@ const EditorialForm = () => {
                 console.error('Error eliminando la editorial:', error);
             }
         }
+    };
+
+    // Reset form
+    const resetForm = () => {
+        setNombreEditorial('');
+        setDireccion('');
+        setContacto('');
+        setEditorialID(null);
     };
 
     // Manejar el submit del formulario

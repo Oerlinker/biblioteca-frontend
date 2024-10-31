@@ -3,84 +3,112 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Books = () => {
-    const [books, setBooks] = useState([]);
-    const [autores, setAutores] = useState([]);
-    const [editoriales, setEditoriales] = useState([]);
-    const [categorias, setCategorias] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategoria, setSelectedCategoria] = useState('');
+    const [books, setLibros] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [categorias, setCategorias] = useState([]); // Estado para almacenar los géneros
+    const [selectedCategoria, setSelectedCategoria] = useState(""); // Estado para la categoría seleccionada
+    //avanzada
+    const [showAdvanced, setShowAdvanced] = useState(false);
 
-    useEffect(() => {
-        fetchCategorias();
-        fetchLibros();
-        fetchAutores();
-        fetchEditoriales();
-    }, []);
+    // Filtros adicionales para búsqueda avanzada
+    const [autor, setAutor] = useState("");
+    const [calificacion, setCalificacion] = useState("");
+    const [isbn, setIsbn] = useState("");
 
-    const handleSearch = useCallback(async () => {
-        try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/search', {
-                params: {
-                    search: searchQuery,
-                    categoriaid: selectedCategoria
-                }
-            });
-            setBooks(response.data);
-        } catch (error) {
-            console.error('Error buscando los libros:', error);
-        }
-    }, [searchQuery, selectedCategoria]);
-
-    useEffect(() => {
-        handleSearch();
-    }, [handleSearch]);
-
+    //fetch para obtener todas las categorias de la caja
     const fetchCategorias = async () => {
         try {
             const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
             setCategorias(response.data);
         } catch (error) {
-            console.error('Error obteniendo las categorías:', error);
+            console.error('Error obteniendo las categorias:', error);
         }
     };
 
-    const fetchLibros = async () => {
+    useEffect(() => {
+        fetchCategorias();
+    }, []);
+
+    //fetch de busqueda, ya sea por nombre o categoria
+    const fetchLibros = useCallback(async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
-            setBooks(response.data);
+            setLibros([]);
+            console.log('Parámetros de búsqueda:', {
+                search: searchQuery,
+                categoriaid: selectedCategoria,
+                autor: autor,
+                calificacion: calificacion,
+                isbn: isbn,
+            });
+    
+            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/search`, {
+                params: {
+                    search: searchQuery,
+                    categoriaid: selectedCategoria || undefined,
+                    autor: autor || undefined,
+                    calificacion: calificacion || undefined,
+                    isbn: isbn || undefined,
+                }
+            });
+            setLibros(response.data);
         } catch (error) {
             console.error('Error obteniendo los libros:', error);
         }
-    };
+    }, [searchQuery, selectedCategoria, autor, calificacion, isbn]);
 
-    const fetchAutores = async () => {
-        try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
-            setAutores(response.data);
-        } catch (error) {
-            console.error('Error obteniendo los autores:', error);
-        }
-    };
+    useEffect(() => {
+        fetchLibros();
+    }, [fetchLibros]);
 
-    const fetchEditoriales = async () => {
-        try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
-            setEditoriales(response.data);
-        } catch (error) {
-            console.error('Error obteniendo las editoriales:', error);
-        }
-    };
+    const toggleAdvancedSearch = () => setShowAdvanced(!showAdvanced);
 
-    return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <h2 className="text-3xl font-bold text-center mb-6 text-gray-700">Catálogo de Libros</h2>
+    
+//full diseño
+return (
+    <div className="container mx-auto p-4">
+        <h2 className="text-3xl font-bold text-center mb-6">Buscar Libros</h2>
 
-            {/* Search and Filter Controls */}
-            <div className="flex flex-col md:flex-row justify-center items-center mb-6 space-y-4 md:space-y-0 md:space-x-4 w-full max-w-5xl mx-auto">
+        {/* Filtro de Categorías */}
+        <div className="flex justify-center mb-4">
+            <select
+                value={selectedCategoria}
+                onChange={(e) => setSelectedCategoria(e.target.value)}
+                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
+            >
+                <option value="">Todas las categorías</option>
+                {categorias.map((categoria) => (
+                    <option key={categoria.categoriaid} value={categoria.categoriaid}>
+                        {categoria.nombre_categoria}
+                    </option>
+                ))}
+            </select>
+        </div>
+
+        {/* Campo de búsqueda */}
+        <div className="flex justify-center mb-4">
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar libro por título..."
+                className="border border-gray-300 rounded-md py-2 px-4 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+
+        {/* Botón para mostrar búsqueda avanzada */}
+        <div className="flex justify-center mb-4">
+            <button onClick={toggleAdvancedSearch} className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                {showAdvanced ? "Ocultar Búsqueda Avanzada" : "Mostrar Búsqueda Avanzada"}
+            </button>
+        </div>
+
+        {/* Formulario de búsqueda avanzada */}
+        {showAdvanced && (
+            <div className="flex flex-col items-center mb-6">
                 <select
                     value={selectedCategoria}
                     onChange={(e) => setSelectedCategoria(e.target.value)}
-                    className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/3"
+                    className="border border-gray-300 rounded-md py-2 px-4 mb-4 w-80"
                 >
                     <option value="">Todas las categorías</option>
                     {categorias.map((categoria) => (
@@ -89,45 +117,56 @@ const Books = () => {
                         </option>
                     ))}
                 </select>
-                <div className="flex w-full md:w-2/3">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Buscar libro por título..."
-                        className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
+                <input
+                    type="text"
+                    value={autor}
+                    onChange={(e) => setAutor(e.target.value)}
+                    placeholder="Buscar por autor"
+                    className="border border-gray-300 rounded-md py-2 px-4 mb-4 w-80"
+                />
+                <input
+                    type="text"
+                    value={isbn}
+                    onChange={(e) => setIsbn(e.target.value)}
+                    placeholder="Buscar por ISBN"
+                    className="border border-gray-300 rounded-md py-2 px-4 mb-4 w-80"
+                />
+                <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    value={calificacion}
+                    onChange={(e) => setCalificacion(e.target.value)}
+                    placeholder="Buscar por calificación (1-5)"
+                    className="border border-gray-300 rounded-md py-2 px-4 mb-4 w-80"
+                />
             </div>
+        )}
 
-            {/* Display Books in a Responsive Grid */}
-            {books.length > 0 ? (
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                    {books.map((book) => (
-                        <li key={book.libroid} className="bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-xl font-semibold text-gray-700">{book.titulo}</h3>
-                                <p className="text-gray-600 mt-1">
-                                    <strong>Autor:</strong> {autores.find(a => a.autorid === book.autorid)?.nombre || 'Desconocido'}
-                                </p>
-                                <p className="text-gray-600">
-                                    <strong>Editorial:</strong> {editoriales.find(e => e.editorialid === book.editorialid)?.nombre_editorial || 'Desconocida'}
-                                </p>
-                                <p className="text-gray-600">
-                                    <strong>Categoría:</strong> {categorias.find(c => c.categoriaid === book.categoriaid)?.nombre_categoria || 'General'}
-                                </p>
-                            </div>
-                            <Link to={`/libro/${book.libroid}`} className="text-blue-500 mt-4 block text-center hover:underline">
-                                Ver detalles
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p className="text-center text-gray-500 mt-8">No se encontraron libros.</p>
-            )}
-        </div>
-    );
+        <button onClick={fetchLibros} className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mb-6">
+            Buscar
+        </button>
+
+        {/* Resultados de libros */}
+        {books.length > 0 ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {books.map((book) => (
+                    <li key={book.libroid} className="border p-4 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <Link to={`/libro/${book.libroid}`} className="text-lg font-semibold text-blue-600 hover:underline">
+                            {book.titulo}
+                        </Link>
+                        {/* Mostrar la calificación promedio */}
+                        <p className="text-gray-500 mt-1">
+                        Calificación Promedio: {isNaN(parseFloat(book.calificacion)) || book.calificacion === null ? 'N/A' : `${parseFloat(book.calificacion).toFixed(1)} ⭐`}
+                        </p>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <p className="text-center text-gray-500 mt-6">No se encontraron libros.</p>
+        )}
+    </div>
+);
 };
 
 export default Books;

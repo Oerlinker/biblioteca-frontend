@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import './Header.css';
 
 const Header = ({ handleLogout }) => {
     const { isLoggedIn, user } = useContext(UserContext);
@@ -18,6 +19,7 @@ const Header = ({ handleLogout }) => {
 
     return (
         <header className="bg-blue-500 text-white px-6 py-4 shadow-lg">
+            <div className="header"></div> {/* Línea azul */}
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className="text-2xl font-bold tracking-wide">Biblioteca Alejandría</Link>
                 {isLoggedIn ? (

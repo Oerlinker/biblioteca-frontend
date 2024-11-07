@@ -1,26 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import axios from 'axios';
 import './header.css';
 
 const Header = ({ handleLogout }) => {
-    const { isLoggedIn, user, setUser } = useContext(UserContext);
+    const { isLoggedIn, user } = useContext(UserContext);
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`)
-                .then(response => {
-                    setUser(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching user data:', error);
-                });
-        }
-    }, [isLoggedIn, user.id, setUser]);
 
     const handleLogoutAndRedirect = () => {
         handleLogout();
@@ -38,6 +25,7 @@ const Header = ({ handleLogout }) => {
     return (
         <header className="bg-blue-600 text-white px-6 py-4 shadow-md relative">
             <div className="container mx-auto flex justify-between items-center">
+
                 <nav className="hidden md:flex space-x-4 mx-auto">
                     <Link to="/" className="hover:text-gray-200">Home</Link>
                     <Link to="/books" className="hover:text-gray-200">Books</Link>

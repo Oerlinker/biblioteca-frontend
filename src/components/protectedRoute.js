@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route,Navigate} from 'react-router-dom';
 import { UserContext } from '../UserContext';
+
 
 const ProtectedRoute = ({ component: Component, requiredRole, ...rest }) => {
     const { user } = useContext(UserContext);
@@ -12,7 +13,7 @@ const ProtectedRoute = ({ component: Component, requiredRole, ...rest }) => {
                 user && user.rol >= requiredRole ? (
                     <Component {...props} />
                 ) : (
-                    <Redirect to="/login" />
+                    <Navigate to="/login" />
                 )
             }
         />

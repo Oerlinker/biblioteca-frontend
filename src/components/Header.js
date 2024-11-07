@@ -10,23 +10,17 @@ const Header = ({ handleLogout }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-   useEffect(() => {
-    if (isLoggedIn) {
-        axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`)
-            .then(response => {
-                setUser(response.data);
-            })
-            .catch(error => {
-                if (error.response) {
-                    console.error('Error fetching user data:', error.response.data);
-                } else if (error.request) {
-                    console.error('No response received:', error.request);
-                } else {
-                    console.error('Error setting up request:', error.message);
-                }
-            });
-    }
-}, [isLoggedIn, user.id, setUser]);
+    useEffect(() => {
+        if (isLoggedIn) {
+            axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`)
+                .then(response => {
+                    setUser(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+                });
+        }
+    }, [isLoggedIn, user.id, setUser]);
 
     const handleLogoutAndRedirect = () => {
         handleLogout();

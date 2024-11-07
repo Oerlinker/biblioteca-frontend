@@ -29,7 +29,7 @@ const Login = () => {
 
             // Navigate based on user role
             if (userData.rol === 4) {
-                navigate("/admin");
+                navigate("/");
             } else {
                 navigate("/books");
             }

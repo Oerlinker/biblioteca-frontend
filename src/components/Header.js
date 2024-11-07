@@ -1,6 +1,44 @@
 import { useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../UserContext';
+import LandingPage from "./Landing";
+import Register from "../Pages/Register";
+import Login from "../Pages/login";
+import Books from "../Pages/Books";
+import BookDetail from "../Pages/BookDetails";
+import AccountForm from "../Pages/AccountForm";
+import EditName from "../Pages/EditName";
+import EditEmail from "../Pages/EditEmail";
+import EditPassword from "../Pages/EditPassword";
+import SubscriptionForm from "../Pages/SubscriptionForm";
+import GestionarPrestamos from "../Pages/GestionarPrestamos";
+import BookCrud from "./BookCrud";
+import AdministrarUsuarios from "../Pages/AdministrarUsuario";
+import GetAllUsuarios from "../Pages/GetAllUsuarios";
+import AdministrarRoles from "../Pages/AdministrarRoles";
+import ActivityLog from "../Pages/ActivityLog";
+import AdministrarMiembrosForm from "../Pages/AdministrarMiembrosForm";
+import ProveedorForm from "../Pages/ProveedorForm";
+import EditorialForm from "../Pages/EditorialForm";
+import CategoriaForm from "../Pages/CategoriaForm";
+import EdicionesForm from "../Pages/EdicionesForm";
+import AutorForm from "../Pages/autorForm";
+
+function BookCrud() {
+    return null;
+}
+
+function BookCrud() {
+    return null;
+}
+
+function BookCrud() {
+    return null;
+}
+
+function ProveedorForm() {
+    return null;
+}
 
 function App() {
     const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);

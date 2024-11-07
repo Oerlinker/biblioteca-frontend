@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import ProtectedComponent from './protectedComponent';
+import ProtectedComponent from './protectedComponents';
 
 const Sidebar = () => {
     const [isUsersOpen, setIsUsersOpen] = useState(false);

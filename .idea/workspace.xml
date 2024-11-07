@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdministrarMiembrosForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdministrarMiembrosForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AdministrarRoles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AdministrarRoles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/BookDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/BookDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/EditorialForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/EditorialForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,26 +26,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
+    &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;Oerlinker&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Oerlinker/biblioteca-frontend.git&quot;,
     &quot;accountId&quot;: &quot;a20d3442-5283-4f16-a346-b903636b9bac&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="JsbtTreeLayoutManager">
     <layout place="tools.popupnpm">
       <scroll-view-position x="0" y="0" />
     </layout>
   </component>
   <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
+    &quot;customColor&quot;: &quot;&quot;,
+    &quot;associatedIndex&quot;: 5
+    }</component>
   <component name="ProjectId" id="2nm7TDeJGXOiczy8sM2rpH2WhD4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -102,7 +102,7 @@
       <workItem from="1730309427295" duration="2739000" />
       <workItem from="1730316741267" duration="13566000" />
       <workItem from="1730335906103" duration="12676000" />
-      <workItem from="1730357888531" duration="14012000" />
+      <workItem from="1730357888531" duration="15065000" />
     </task>
     <servers />
   </component>

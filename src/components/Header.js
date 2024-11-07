@@ -23,6 +23,8 @@ import EditorialForm from "../Pages/EditorialForm";
 import CategoriaForm from "../Pages/CategoriaForm";
 import EdicionesForm from "../Pages/EdicionesForm";
 import AutorForm from "../Pages/autorForm";
+import Sidebar from "./Sidebar";
+import {Route, Routes} from "react-router-dom";
 
 
 function App() {

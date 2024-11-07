@@ -8,5 +8,5 @@ const ProtectedComponent = ({ user }) => {
 
     return <div>Protected Content for Admins</div>;
 };
-
+//el navigate era el error
 export default ProtectedComponent;

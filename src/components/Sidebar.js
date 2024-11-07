@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
+import ProtectedComponent from './protectedComponent';
 
 const Sidebar = () => {
     const [isUsersOpen, setIsUsersOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { user } = useContext(UserContext);
 
     const toggleUsers = () => setIsUsersOpen(!isUsersOpen);
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
     return (
+        <ProtectedComponent user={user} requiredRole={4}>
         <div>
             <button onClick={toggleSidebar} className="p-4 bg-gray-800 text-white fixed top-0 left-0 z-50">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +44,7 @@ const Sidebar = () => {
                 </nav>
             </div>
         </div>
+        </ProtectedComponent>
     );
 };
 

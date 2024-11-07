@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
-import { Route,Navigate} from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
-
-const ProtectedRoute = ({ component: Component, requiredRole, ...rest }) => {
+const ProtectedRoute = ({ element: Component, requiredRole, ...rest }) => {
     const { user } = useContext(UserContext);
 
     return (
         <Route
             {...rest}
-            render={props =>
+            element={
                 user && user.rol >= requiredRole ? (
-                    <Component {...props} />
+                    <Component />
                 ) : (
                     <Navigate to="/login" />
                 )
@@ -19,5 +18,4 @@ const ProtectedRoute = ({ component: Component, requiredRole, ...rest }) => {
         />
     );
 };
-
 export default ProtectedRoute;

@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="que cagada" />
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="que cagada 3">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/protectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/protectedRoute.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +102,7 @@
       <workItem from="1730316741267" duration="13566000" />
       <workItem from="1730335906103" duration="12676000" />
       <workItem from="1730357888531" duration="15065000" />
-      <workItem from="1730985960695" duration="3591000" />
+      <workItem from="1730985960695" duration="4759000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -108,7 +112,31 @@
       <option name="project" value="LOCAL" />
       <updated>1730991141322</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="que cagada">
+      <option name="closed" value="true" />
+      <created>1730991404281</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730991404281</updated>
+    </task>
+    <task id="LOCAL-00003" summary="que cagada 2">
+      <option name="closed" value="true" />
+      <created>1730991563278</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730991563278</updated>
+    </task>
+    <task id="LOCAL-00004" summary="que cagada 3">
+      <option name="closed" value="true" />
+      <created>1730992174482</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730992174482</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +155,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="que cagada" />
-    <option name="LAST_COMMIT_MESSAGE" value="que cagada" />
+    <MESSAGE value="que cagada 2" />
+    <MESSAGE value="que cagada 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="que cagada 3" />
   </component>
 </project>

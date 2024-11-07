@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -69,9 +68,7 @@ function App() {
                         <Route path="/subscription" element={<SubscriptionForm />} />
 
                         {isLoggedIn && user.rol === 2 && (
-                            <>
-                                <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
-                            </>
+                            <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>

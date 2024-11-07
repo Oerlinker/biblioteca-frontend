@@ -24,21 +24,6 @@ import CategoriaForm from "../Pages/CategoriaForm";
 import EdicionesForm from "../Pages/EdicionesForm";
 import AutorForm from "../Pages/autorForm";
 
-function BookCrud() {
-    return null;
-}
-
-function BookCrud() {
-    return null;
-}
-
-function BookCrud() {
-    return null;
-}
-
-function ProveedorForm() {
-    return null;
-}
 
 function App() {
     const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);

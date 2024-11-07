@@ -72,21 +72,21 @@ function App() {
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>
-                                <ProtectedRoute path="/admin/agregar-libro" element={<BookCrud />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/modificar-libro/:id" element={<BookCrud />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/obtener-libros" element={<BookCrud />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/actualizar-libro" element={<BookCrud />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/eliminar-libro" element={<BookCrud />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/administrar-usuarios/*" element={<AdministrarUsuarios />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/administrar-usuarios/administrar-roles" element={<AdministrarRoles />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/administrar-usuarios/administrar-miembros" element={<AdministrarMiembrosForm />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/gestionar-proveedores" element={<ProveedorForm />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/gestionar-editoriales" element={<EditorialForm />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/gestionar-categorias" element={<CategoriaForm />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/gestionar-ediciones" element={<EdicionesForm />} requiredRole={4} />
-                                <ProtectedRoute path="/admin/gestionar-autores" element={<AutorForm />} requiredRole={4} />
+                                <Route path="/admin/agregar-libro" element={<ProtectedRoute element={BookCrud} requiredRole={4} />} />
+                                <Route path="/admin/modificar-libro/:id" element={<ProtectedRoute element={BookCrud} requiredRole={4} />} />
+                                <Route path="/admin/obtener-libros" element={<ProtectedRoute element={BookCrud} requiredRole={4} />} />
+                                <Route path="/admin/actualizar-libro" element={<ProtectedRoute element={BookCrud} requiredRole={4} />} />
+                                <Route path="/admin/eliminar-libro" element={<ProtectedRoute element={BookCrud} requiredRole={4} />} />
+                                <Route path="/admin/administrar-usuarios/*" element={<ProtectedRoute element={AdministrarUsuarios} requiredRole={4} />} />
+                                <Route path="/admin/administrar-usuarios/getall-usuarios" element={<ProtectedRoute element={GetAllUsuarios} requiredRole={4} />} />
+                                <Route path="/admin/administrar-usuarios/administrar-roles" element={<ProtectedRoute element={AdministrarRoles} requiredRole={4} />} />
+                                <Route path="/admin/administrar-usuarios/activity-log" element={<ProtectedRoute element={ActivityLog} requiredRole={4} />} />
+                                <Route path="/admin/administrar-usuarios/administrar-miembros" element={<ProtectedRoute element={AdministrarMiembrosForm} requiredRole={4} />} />
+                                <Route path="/admin/gestionar-proveedores" element={<ProtectedRoute element={ProveedorForm} requiredRole={4} />} />
+                                <Route path="/admin/gestionar-editoriales" element={<ProtectedRoute element={EditorialForm} requiredRole={4} />} />
+                                <Route path="/admin/gestionar-categorias" element={<ProtectedRoute element={CategoriaForm} requiredRole={4} />} />
+                                <Route path="/admin/gestionar-ediciones" element={<ProtectedRoute element={EdicionesForm} requiredRole={4} />} />
+                                <Route path="/admin/gestionar-autores" element={<ProtectedRoute element={AutorForm} requiredRole={4} />} />
                             </>
                         )}
                     </Routes>

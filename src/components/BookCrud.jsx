@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from "./axiosInstance";
 
 const BookCrud = () => {
     const [libros, setLibros] = useState([]);
@@ -24,7 +24,7 @@ const BookCrud = () => {
 
     const fetchLibros = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/libros');
             setLibros(response.data);
         } catch (error) {
             console.error('Error fetching libros:', error);
@@ -34,9 +34,9 @@ const BookCrud = () => {
     const fetchAutoresEditorialesCategorias = async () => {
         try {
             const [autoresResponse, editorialesResponse, categoriasResponse] = await Promise.all([
-                axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores'),
-                axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales'),
-                axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias')
+                axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores'),
+                axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales'),
+                axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias')
             ]);
             setAutores(autoresResponse.data);
             setEditoriales(editorialesResponse.data);
@@ -50,11 +50,11 @@ const BookCrud = () => {
         e.preventDefault();
         try {
             if (selectedLibro) {
-                await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro.libroid}`, {
+                await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${selectedLibro.libroid}`, {
                     Titulo, Genero, AutorID, EditorialID, CategoriaID
                 });
             } else {
-                await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', {
+                await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/libros', {
                     Titulo, Genero, AutorID, EditorialID, CategoriaID
                 });
             }
@@ -67,7 +67,7 @@ const BookCrud = () => {
 
     const handleDeleteBook = async (libroId) => {
         try {
-            await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libroId}`);
+            await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libroId}`);
             fetchLibros(); // Actualiza la lista de libros
         } catch (error) {
             console.error('Error deleting book:', error);
@@ -94,11 +94,11 @@ const BookCrud = () => {
 
     const handleViewClick = async (libro) => {
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libro.libroid}`);
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libro.libroid}`);
             setViewLibro(response.data);
-            const edicionesResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libro.libroid}/ediciones`);
+            const edicionesResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${libro.libroid}/ediciones`);
             setEdicionesDisponibles(edicionesResponse.data);
-            const disponibilidadResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${libro.libroid}/disponibilidad`);
+            const disponibilidadResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${libro.libroid}/disponibilidad`);
             setDisponible(disponibilidadResponse.data.disponible);
         } catch (error) {
             console.error('Error obteniendo los detalles del libro:', error);

@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="mejoras al sidebar">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment=".-.">
+      <change afterPath="$PROJECT_DIR$/src/components/axiosInstance.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BookCrud.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookCrud.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/protectedComponents.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/protectedRoute.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/auth.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +45,9 @@
     <layout place="tools.popupnpm">
       <scroll-view-position x="0" y="0" />
     </layout>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -103,7 +112,7 @@
       <workItem from="1730357888531" duration="15065000" />
       <workItem from="1730985960695" duration="5567000" />
       <workItem from="1731029910050" duration="1472000" />
-      <workItem from="1731031588916" duration="2866000" />
+      <workItem from="1731031588916" duration="10480000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -161,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731032692761</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="mejoras al side bar solo era desplegable en responsive .-.">
+      <option name="closed" value="true" />
+      <created>1731035404769</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731035404769</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +202,8 @@
     <MESSAGE value="que cagada 65" />
     <MESSAGE value="sidebar fixed" />
     <MESSAGE value="mejoras al sidebar" />
-    <option name="LAST_COMMIT_MESSAGE" value="mejoras al sidebar" />
+    <MESSAGE value="mejoras al side bar solo era desplegable en responsive .-." />
+    <MESSAGE value=".-." />
+    <option name="LAST_COMMIT_MESSAGE" value=".-." />
   </component>
 </project>

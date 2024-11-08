@@ -21,7 +21,7 @@ const Sidebar = () => {
                     onClick={toggleSidebar}
                     className="p-4 bg-blue-600 text-white fixed top-0 left-0 z-50 md:hidden"
                 >
-                    {/* Icono de Menú (Hamburguesa) */}
+                    {/* Icono de Menú  */}
                     <svg
                         className="w-6 h-6"
                         fill="none"

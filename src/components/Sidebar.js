@@ -18,9 +18,9 @@ const Sidebar = () => {
 
             <div className={`fixed top-0 left-0 h-full ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 z-40 transition-transform transform w-64 px-4 py-8 overflow-y-auto bg-white border-r dark:bg-gray-900 dark:border-gray-700`}>
                 <div className="flex items-center justify-between">
-                    <a href="#">
+                    <button className="text-left">
                         <img className="w-auto h-6 sm:h-7" src="https://merakiui.com/images/logo.svg" alt="Logo" />
-                    </a>
+                    </button>
                     <button onClick={toggleSidebar} className="lg:hidden p-2 text-gray-600 dark:text-gray-300">
                         ×
                     </button>

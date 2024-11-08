@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="que cagada 3">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="que cagada 65">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/protectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/protectedRoute.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +100,8 @@
       <workItem from="1730316741267" duration="13566000" />
       <workItem from="1730335906103" duration="12676000" />
       <workItem from="1730357888531" duration="15065000" />
-      <workItem from="1730985960695" duration="4759000" />
+      <workItem from="1730985960695" duration="5567000" />
+      <workItem from="1731029910050" duration="584000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -136,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730992174482</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="que cagada 65">
+      <option name="closed" value="true" />
+      <created>1730992760086</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730992760086</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +164,7 @@
     <MESSAGE value="que cagada" />
     <MESSAGE value="que cagada 2" />
     <MESSAGE value="que cagada 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="que cagada 3" />
+    <MESSAGE value="que cagada 65" />
+    <option name="LAST_COMMIT_MESSAGE" value="que cagada 65" />
   </component>
 </project>

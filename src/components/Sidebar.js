@@ -16,10 +16,12 @@ const Sidebar = () => {
         <ProtectedComponent user={user} requiredRole={4}>
             <div className="relative">
 
+                {/* Botón de Menú para Pantallas Móviles */}
                 <button
                     onClick={toggleSidebar}
                     className="p-4 bg-blue-600 text-white fixed top-0 left-0 z-50 md:hidden"
                 >
+                    {/* Icono de Menú (Hamburguesa) */}
                     <svg
                         className="w-6 h-6"
                         fill="none"
@@ -36,14 +38,16 @@ const Sidebar = () => {
                     </svg>
                 </button>
 
-                {/* Sidebar */}
+                {/* Sidebar Desplegable */}
                 <div
                     className={`fixed top-0 left-0 h-full bg-gray-800 text-white z-40 transition-transform transform ${
                         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } md:translate-x-0 md:flex md:flex-col md:w-64 overflow-y-auto`}
                 >
+                    {/* Encabezado del Sidebar con Botón de Cierre */}
                     <div className="p-4 flex items-center justify-between md:block">
                         <h2 className="text-2xl font-bold">Panel</h2>
+                        {/* Botón de Cierre para el Sidebar en Móviles */}
                         <button
                             onClick={toggleSidebar}
                             className="md:hidden p-2 text-gray-300 hover:text-white"
@@ -51,6 +55,8 @@ const Sidebar = () => {
                             ×
                         </button>
                     </div>
+
+                    {/* Navegación del Sidebar */}
                     <nav className="mt-4">
                         <Link to="/admin/agregar-libro" className="block px-4 py-2 hover:bg-gray-700">
                             Gestionar Catálogo
@@ -73,6 +79,7 @@ const Sidebar = () => {
                         <button onClick={toggleUsers} className="w-full text-left px-4 py-2 hover:bg-gray-700">
                             Administrar Usuarios
                         </button>
+                        {/* Submenú Desplegable para Administrar Usuarios */}
                         {isUsersOpen && (
                             <div className="pl-4">
                                 <Link to="/admin/administrar-usuarios/getall-usuarios" className="block px-4 py-2 hover:bg-gray-700">

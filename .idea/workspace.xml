@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="sera que fixeamos prestamo2?">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/GestionarPrestamos.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/GestionarPrestamos.js" afterDir="false" />
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="sera que fixeamos prestamo3?">
+      <change beforePath="$PROJECT_DIR$/src/UserContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +107,7 @@
       <workItem from="1731029910050" duration="1472000" />
       <workItem from="1731031588916" duration="11391000" />
       <workItem from="1731451543775" duration="1445000" />
-      <workItem from="1731456305615" duration="11540000" />
+      <workItem from="1731456305615" duration="12116000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -230,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731471142068</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="sera que fixeamos prestamo3?">
+      <option name="closed" value="true" />
+      <created>1731471927505</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731471927505</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +269,7 @@
     <MESSAGE value="sera que fixeamos algo?" />
     <MESSAGE value="sera que fixeamos prestamo?" />
     <MESSAGE value="sera que fixeamos prestamo2?" />
-    <option name="LAST_COMMIT_MESSAGE" value="sera que fixeamos prestamo2?" />
+    <MESSAGE value="sera que fixeamos prestamo3?" />
+    <option name="LAST_COMMIT_MESSAGE" value="sera que fixeamos prestamo3?" />
   </component>
 </project>

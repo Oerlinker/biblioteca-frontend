@@ -18,7 +18,7 @@ const GestionarPrestamos = () => {
 
     useEffect(() => {
         const fetchUser = () => {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('Token');
             if (token) {
                 const decodedToken = jwtDecode(token);
                 setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
@@ -30,26 +30,15 @@ const GestionarPrestamos = () => {
     }, [setUser]);
 
     const fetchPrestamos = useCallback(async () => {
-    if (!user) return;
-    const { miembroid } = user;
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        console.error('Token no encontrado');
-        return;
-    }
-
-    try {
-        const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        setPrestamos(response.data);
-    } catch (error) {
-        console.error('Error al obtener préstamos api:', error);
-    }
-}, [user]);
+        if (!user) return;
+        const { miembroid } = user;
+        try {
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`);
+            setPrestamos(response.data);
+        } catch (error) {
+            console.error('Error al obtener préstamos api:', error);
+        }
+    }, [user]);
 
     useEffect(() => {
         fetchPrestamos();

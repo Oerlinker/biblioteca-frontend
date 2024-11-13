@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
+import { UserContext } from '../UserContext';
 
 const GestionarPrestamos = () => {
+    const { user } = useContext(UserContext);
     const [prestamos, setPrestamos] = useState([]);
-    const [user, setUser] = useState(null);
     const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [review, setReview] = useState({
@@ -19,7 +19,7 @@ const GestionarPrestamos = () => {
         if (!user) return; // Espera a que user esté definido antes de continuar
         const { miembroid } = user;
         try {
-            const response = await axiosInstance.get(`users/prestamos/activos/${miembroid}`);
+            const response = await axiosInstance.get(`/users/prestamos/activos/${miembroid}`);
             setPrestamos(response.data);
         } catch (error) {
             console.error('Error al obtener préstamos api:', error);
@@ -27,14 +27,10 @@ const GestionarPrestamos = () => {
     }, [user]);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = jwtDecode(token);
-            setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
-            console.log('Usuario:', decodedToken);
+        if (user) {
+            fetchPrestamos();
         }
-        fetchPrestamos();
-    }, [fetchPrestamos]);
+    }, [user, fetchPrestamos]);
 
     const handleDevolucion = async (prestamoid) => {
         try {

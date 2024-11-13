@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import fondo from '../assets/fondo.jpeg'; // Imagen de fondo
+import fondo from '../assets/fondo.jpeg';
+import axiosInstance from "../components/axiosInstance"; // Imagen de fondo
 
 const Register = () => {
     const [nombre, setNombre] = useState('');
@@ -13,7 +14,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/register', { nombre, email, password });
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/register', { nombre, email, password });
             setMessage('Registro exitoso');
             setTimeout(() => {
                 navigate('/login');

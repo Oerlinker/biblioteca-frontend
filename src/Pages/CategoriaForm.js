@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const CategoriaForm = () => {
     const [categorias, setCategorias] = useState([]);
@@ -11,7 +11,7 @@ const CategoriaForm = () => {
     // Fetch categorias
     const fetchCategorias = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
             setCategorias(response.data);
         } catch (error) {
             console.error('Error obteniendo las categorías:', error);
@@ -25,7 +25,7 @@ const CategoriaForm = () => {
     // Insertar categoria
     const insertarCategoria = async () => {
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/categorias', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/categorias', {
                 Nombre_Categoria: nombreCategoria,
                 Descripcion: descripcion
             });
@@ -40,7 +40,7 @@ const CategoriaForm = () => {
     // Actualizar categoria
     const actualizarCategoria = async () => {
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${categoriaID}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${categoriaID}`, {
                 Nombre_Categoria: nombreCategoria,
                 Descripcion: descripcion
             });
@@ -56,7 +56,7 @@ const CategoriaForm = () => {
     const eliminarCategoria = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
             try {
-                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${id}`);
+                await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${id}`);
                 setSuccessMessage('Categoría eliminada exitosamente');
                 fetchCategorias();
             } catch (error) {

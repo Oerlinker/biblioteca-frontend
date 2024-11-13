@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const EditorialForm = () => {
     const [editoriales, setEditoriales] = useState([]);
@@ -24,7 +25,7 @@ const EditorialForm = () => {
 
     const insertarEditorial = async () => {
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales', {
                 Nombre_Editorial: nombreEditorial,
                 Direccion: direccion,
                 Contacto: contacto
@@ -39,7 +40,7 @@ const EditorialForm = () => {
 
     const actualizarEditorial = async () => {
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${editorialID}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${editorialID}`, {
                 Nombre_Editorial: nombreEditorial,
                 Direccion: direccion,
                 Contacto: contacto
@@ -55,7 +56,7 @@ const EditorialForm = () => {
     const eliminarEditorial = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta editorial?')) {
             try {
-                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${id}`);
+                await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${id}`);
                 setSuccessMessage('Editorial eliminada exitosamente');
                 fetchEditoriales();
             } catch (error) {

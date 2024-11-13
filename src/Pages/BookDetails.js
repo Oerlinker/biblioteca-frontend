@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 import { useParams, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
@@ -21,24 +21,24 @@ const BookDetail = () => {
 
     const fetchBookDetails = useCallback(async () => {
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}`);
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}`);
             setBook(response.data);
 
-            const autorResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${response.data.autorid}`);
+            const autorResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${response.data.autorid}`);
             setAutor(autorResponse.data.nombre);
 
-            const editorialResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${response.data.editorialid}`);
+            const editorialResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${response.data.editorialid}`);
             setEditorial(editorialResponse.data.nombre_editorial);
 
-            const categoriaResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${response.data.categoriaid}`);
+            const categoriaResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${response.data.categoriaid}`);
             setCategoria(categoriaResponse.data.nombre_categoria);
 
             //adicion prestamo
             // Obtener ediciones disponibles
-            const edicionesResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/ediciones`);
+            const edicionesResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/ediciones`);
             setEdicionesDisponibles(edicionesResponse.data);
             // Verificar disponibilidad del libro
-            const disponibilidadResponse = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${id}/disponibilidad`);
+            const disponibilidadResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${id}/disponibilidad`);
             setDisponible(disponibilidadResponse.data.disponible);
             console.log('Disponibilidad:', disponibilidadResponse.data);
 
@@ -49,7 +49,7 @@ const BookDetail = () => {
 
     const fetchReviews = useCallback(async () => {
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/review/libro/${id}`);
+            const response = await axiosInstance().get(`https://backend-proyecto-production-13fc.up.railway.app/api/review/libro/${id}`);
             setReviews(response.data);
         } catch (error) {
             console.error('Error fetching reviews:', error);
@@ -76,7 +76,7 @@ const BookDetail = () => {
     const handleSolicitarPrestamo = async (edicionidSeleccionada) => {
         if (user && book && disponible) {
             try {
-                await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos`, {
+                await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos`, {
                     id: user.id,
                     miembroid: user.miembroid,
                     edicionid: edicionidSeleccionada,

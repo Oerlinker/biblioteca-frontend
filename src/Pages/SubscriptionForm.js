@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import fondo from '../assets/fondo.jpeg';
 import { UserContext } from '../UserContext';
+import axiosInstance from "../components/axiosInstance";
 
 const SubscriptionForm = () => {
     const { user, setUser } = useContext(UserContext);
@@ -26,7 +27,7 @@ const SubscriptionForm = () => {
         try {
             const usuarioid = user?.id;
 
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
+            await axiosInstance().post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 nombre,
                 telefono,
                 direccion,

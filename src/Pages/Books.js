@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 import { Link } from 'react-router-dom';
 
 const Books = () => {
@@ -14,7 +14,7 @@ const Books = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
             setCategorias(response.data);
         } catch (error) {
             console.error('Error obteniendo las categorias:', error);
@@ -28,7 +28,7 @@ const Books = () => {
     const fetchLibros = useCallback(async () => {
         try {
             setLibros([]);
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/search`, {
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/search`, {
                 params: {
                     search: searchQuery,
                     categoriaid: selectedCategoria || undefined,

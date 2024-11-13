@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const AutorForm = () => {
     const [autores, setAutores] = useState([]);
@@ -12,7 +12,7 @@ const AutorForm = () => {
     // Fetch autores
     const fetchAutores = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
             setAutores(response.data);
         } catch (error) {
             console.error('Error obteniendo los autores:', error);
@@ -26,7 +26,7 @@ const AutorForm = () => {
     // Insertar autor
     const insertarAutor = async () => {
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/autores', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/autores', {
                 Nombre: nombre,
                 Biografia: biografia,
                 Nacionalidad: nacionalidad
@@ -42,7 +42,7 @@ const AutorForm = () => {
     // Actualizar autor
     const actualizarAutor = async () => {
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${autorID}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${autorID}`, {
                 Nombre: nombre,
                 Biografia: biografia,
                 Nacionalidad: nacionalidad

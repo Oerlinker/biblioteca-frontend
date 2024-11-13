@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import axiosInstance from "../components/axiosInstance";
 
 const EditUserName = () => {
     const { user, setUser } = useContext(UserContext);
@@ -15,7 +16,7 @@ const EditUserName = () => {
             return;
         }
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/name/${user.id}`, { nombre });
             alert("Nombre de usuario actualizado con éxito");
             setUser({ ...user, nombre }); // Update the UserContext
             navigate("/account");

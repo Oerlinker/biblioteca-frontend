@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axiosInstance from "../components/axiosInstance";
 
 const EditPassword = () => {
     const location = useLocation();
@@ -19,7 +20,7 @@ const EditPassword = () => {
             return;
         }
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/password/${user.id}`, { password });
             alert("Contraseña actualizada con éxito");
             navigate("/account");
             setPassword('');

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const ProveedorForm = () => {
     const [proveedores, setProveedores] = useState([]);
@@ -14,7 +15,7 @@ const ProveedorForm = () => {
     // Fetch proveedores
     const fetchProveedores = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/proveedores');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/proveedores');
             setProveedores(response.data);
         } catch (error) {
             console.error('Error obteniendo los proveedores:', error);

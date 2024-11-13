@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment-timezone';
+import axiosInstance from "../components/axiosInstance";
 
 
 const GestionarPrestamos = () => {
@@ -34,7 +35,7 @@ const GestionarPrestamos = () => {
         if (!user) return; // Espera a que user esté definido antes de continuar
         const { miembroid } = user;
         try {
-            const response = await axios.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`);
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`);
             setPrestamos(response.data);
         } catch (error) {
             console.error('Error al obtener préstamos api:', error);
@@ -47,7 +48,7 @@ const GestionarPrestamos = () => {
 
     const handleDevolucion = async (prestamoid) => {
         try {
-            await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/devolver/${prestamoid}`);
+            await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/devolver/${prestamoid}`);
             // Actualiza la lista de préstamos después de la devolución
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
             alert('Libro devuelto con éxito.');
@@ -69,7 +70,7 @@ const GestionarPrestamos = () => {
         e.preventDefault();
         console.log('reseña',review);
         try {
-            await axios.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
+            await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
                 id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,

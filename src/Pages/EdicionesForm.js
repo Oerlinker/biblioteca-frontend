@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const EdicionForm = () => {
     const [ediciones, setEdiciones] = useState([]);
@@ -13,7 +13,7 @@ const EdicionForm = () => {
 
     const fetchEdiciones = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones');
             setEdiciones(response.data);
         } catch (error) {
             console.error('Error obteniendo las ediciones:', error);
@@ -26,7 +26,7 @@ const EdicionForm = () => {
 
     const insertarEdicion = async () => {
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/ediciones', {
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
@@ -43,7 +43,7 @@ const EdicionForm = () => {
 
     const actualizarEdicion = async () => {
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${edicionID}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${edicionID}`, {
                 isbn,
                 numero_edicion: numeroEdicion,
                 fecha_publicacion: fechaPublicacion,
@@ -61,7 +61,7 @@ const EdicionForm = () => {
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {
             try {
-                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${id}`);
+                await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/${id}`);
                 setSuccessMessage('Edición eliminada exitosamente');
                 fetchEdiciones();
             } catch (error) {

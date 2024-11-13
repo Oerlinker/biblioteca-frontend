@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axiosInstance from "../components/axiosInstance";
 
 const EditEmail = () => {
     const location = useLocation();
@@ -15,7 +15,7 @@ const EditEmail = () => {
             return;
         }
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/users/email/${user.id}`, { correo });
             alert("Correo actualizado con éxito");
             navigate("/account");
             setCorreo('');

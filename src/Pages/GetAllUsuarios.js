@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const GetAllUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/users')
+        axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/users')
             .then((response) => {
                 setUsuarios(response.data);
             })

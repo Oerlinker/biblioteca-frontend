@@ -56,7 +56,7 @@ const BookDetail = () => {
         const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            setUser({ id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol });
+            setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol });
         }
         fetchBookDetails();
         fetchReviews();

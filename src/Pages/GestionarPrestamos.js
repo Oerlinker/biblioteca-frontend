@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
 import { UserContext } from '../UserContext';
@@ -15,21 +15,22 @@ const GestionarPrestamos = () => {
         comentario: '',
     });
 
-    useEffect(() => {
-        const fetchPrestamos = async () => {
-            if (!user || !user.miembroid) {
-                console.error("miembroid no está definido");
-                return; // Evita hacer la solicitud si miembroid es undefined
-            }
-            try {
-                const response = await axiosInstance.get(`/users/prestamos/activos/${user.miembroid}`);
-                setPrestamos(response.data);
-            } catch (error) {
-                console.error('Error al obtener préstamos:', error);
-            }
-        };
-        fetchPrestamos();
+    const fetchPrestamos = useCallback(async () => {
+        if (!user || !user.miembroid) {
+            console.error("miembroid no está definido");
+            return; // Evita hacer la solicitud si miembroid es undefined
+        }
+        try {
+            const response = await axiosInstance.get(`/users/prestamos/activos/${user.miembroid}`);
+            setPrestamos(response.data);
+        } catch (error) {
+            console.error('Error al obtener préstamos:', error);
+        }
     }, [user]);
+
+    useEffect(() => {
+        fetchPrestamos();
+    }, [user, fetchPrestamos]);
 
     const handleDevolucion = async (prestamoid) => {
         try {

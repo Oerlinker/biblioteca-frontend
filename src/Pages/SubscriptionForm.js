@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import fondo from '../assets/fondo.jpeg';
 import { UserContext } from '../UserContext';

@@ -1,6 +1,6 @@
 // UpdateUserForm.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from "../components/axiosInstance";
 
 const UpdateUserForm = () => {
     const [users, setUsers] = useState([]);
@@ -12,7 +12,7 @@ const UpdateUserForm = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/usuarios');
+                const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/usuarios');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -34,7 +34,7 @@ const UpdateUserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/usuarios/${selectedUser.usuarioid}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/usuarios/${selectedUser.usuarioid}`, {
                 nombre,
                 email,
                 rol

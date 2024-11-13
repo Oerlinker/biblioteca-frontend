@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import axiosInstance from "../components/axiosInstance";
 
 const AdministrarRoles = () => {
@@ -21,7 +20,7 @@ const AdministrarRoles = () => {
             return;
         }
 
-        axios.put('https://backend-proyecto-production-13fc.up.railway.app/api/users/update', { userId, newRole })
+        axiosInstance.put('https://backend-proyecto-production-13fc.up.railway.app/api/users/update', { userId, newRole })
             .then((response) => {
                 alert('Rol actualizado exitosamente');
                 setUsuarios((prev) =>

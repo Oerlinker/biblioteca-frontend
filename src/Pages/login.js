@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
-import axios from 'axios';
 import { UserContext } from '../UserContext';
 import fondo from '../assets/fondo.jpeg';
 import axiosInstance from "../components/axiosInstance";

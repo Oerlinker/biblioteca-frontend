@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import moment from 'moment-timezone';

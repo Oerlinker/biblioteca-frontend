@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import axiosInstance from "../components/axiosInstance";
 
 const EditorialForm = () => {
@@ -12,7 +11,7 @@ const EditorialForm = () => {
 
     const fetchEditoriales = async () => {
         try {
-            const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
+            const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/editoriales');
             setEditoriales(response.data);
         } catch (error) {
             console.error('Error obteniendo las editoriales:', error);

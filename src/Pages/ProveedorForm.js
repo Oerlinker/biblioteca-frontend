@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import axiosInstance from "../components/axiosInstance";
 
 const ProveedorForm = () => {
@@ -29,7 +28,7 @@ const ProveedorForm = () => {
     // Insertar proveedor
     const insertarProveedor = async () => {
         try {
-            await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/proveedores', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/proveedores', {
                 nombre_proveedor: nombreProveedor,
                 contacto_proveedor: contactoProveedor,
                 correo_proveedor: correoProveedor,
@@ -47,7 +46,7 @@ const ProveedorForm = () => {
     // Actualizar proveedor
     const actualizarProveedor = async () => {
         try {
-            await axios.put(`https://backend-proyecto-production-13fc.up.railway.app/api/proveedores/${proveedorID}`, {
+            await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/proveedores/${proveedorID}`, {
                 nombre_proveedor: nombreProveedor,
                 contacto_proveedor: contactoProveedor,
                 correo_proveedor: correoProveedor,
@@ -66,7 +65,7 @@ const ProveedorForm = () => {
     const eliminarProveedor = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
             try {
-                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/proveedores/${id}`);
+                await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/proveedores/${id}`);
                 setSuccessMessage('Proveedor eliminado exitosamente');
                 fetchProveedores();
             } catch (error) {

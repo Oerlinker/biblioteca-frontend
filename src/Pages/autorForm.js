@@ -59,7 +59,7 @@ const AutorForm = () => {
     const eliminarAutor = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este autor?')) {
             try {
-                await axios.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${id}`);
+                await axiosInstance.delete(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${id}`);
                 setSuccessMessage('Autor eliminado exitosamente');
                 fetchAutores();
             } catch (error) {

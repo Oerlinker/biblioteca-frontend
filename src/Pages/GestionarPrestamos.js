@@ -18,7 +18,7 @@ const GestionarPrestamos = () => {
 
     useEffect(() => {
         const fetchUser = () => {
-            const token = localStorage.getItem('Token');
+            const token = localStorage.getItem('Token'); // Use 'Token' to match the key used in login.js and axiosInstance.js
             if (token) {
                 const decodedToken = jwtDecode(token);
                 setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });

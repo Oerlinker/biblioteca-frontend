@@ -1,3 +1,4 @@
+// src/components/axiosInstance.js
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -6,9 +7,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('Token');
+        const token = localStorage.getItem('Token'); // Obtiene el token desde localStorage
         if (token) {
-            config.headers['x-auth-token'] = token;
+            config.headers['Authorization'] = `Bearer ${token}`; // Cambia a Authorization con el formato Bearer
         }
         return config;
     },

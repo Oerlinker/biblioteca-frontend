@@ -17,7 +17,7 @@ const Login = () => {
         try {
             const response = await axios.post('https://backend-proyecto-production-13fc.up.railway.app/api/login', { email, password });
 
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('Token', response.data.token);
 
             // Decode the token to get user data
             const decodedToken = jwtDecode(response.data.token);

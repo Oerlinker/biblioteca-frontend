@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
 import { UserContext } from '../UserContext';
@@ -15,22 +15,21 @@ const GestionarPrestamos = () => {
         comentario: '',
     });
 
-    const fetchPrestamos = useCallback(async () => {
-        if (!user) return; // Espera a que user esté definido antes de continuar
-        const { miembroid } = user;
-        try {
-            const response = await axiosInstance.get(`/users/prestamos/activos/${miembroid}`);
-            setPrestamos(response.data);
-        } catch (error) {
-            console.error('Error al obtener préstamos api:', error);
-        }
-    }, [user]);
-
     useEffect(() => {
-        if (user) {
-            fetchPrestamos();
-        }
-    }, [user, fetchPrestamos]);
+        const fetchPrestamos = async () => {
+            if (!user || !user.miembroid) {
+                console.error("miembroid no está definido");
+                return; // Evita hacer la solicitud si miembroid es undefined
+            }
+            try {
+                const response = await axiosInstance.get(`/users/prestamos/activos/${user.miembroid}`);
+                setPrestamos(response.data);
+            } catch (error) {
+                console.error('Error al obtener préstamos:', error);
+            }
+        };
+        fetchPrestamos();
+    }, [user]);
 
     const handleDevolucion = async (prestamoid) => {
         try {
@@ -55,7 +54,7 @@ const GestionarPrestamos = () => {
         e.preventDefault();
         console.log('reseña', review);
         try {
-            await axiosInstance.post(`api/users/review`, {
+            await axiosInstance.post(`users/review`, {
                 id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,

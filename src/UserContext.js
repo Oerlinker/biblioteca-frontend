@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
+            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol, miembroid: decodedToken.miembroid };
             setUser(userData);
             setIsLoggedIn(true);
         }

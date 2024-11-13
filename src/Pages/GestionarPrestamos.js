@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
-
 
 const GestionarPrestamos = () => {
     const [prestamos, setPrestamos] = useState([]);
@@ -10,39 +9,36 @@ const GestionarPrestamos = () => {
     const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [review, setReview] = useState({
-    edicionid: null,
-    libroid: null,
-    calificacion: 0,
-    comentario: '',
-});
-    // Usar useCallback para memoizar la función fetchPrestamos
+        edicionid: null,
+        libroid: null,
+        calificacion: 0,
+        comentario: '',
+    });
+
     const fetchPrestamos = useCallback(async () => {
         if (!user) return; // Espera a que user esté definido antes de continuar
         const { miembroid } = user;
         try {
-            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`);
+            const response = await axiosInstance.get(`users/prestamos/activos/${miembroid}`);
             setPrestamos(response.data);
         } catch (error) {
             console.error('Error al obtener préstamos api:', error);
         }
-    }, [user]); // Dependencia de user
-
+    }, [user]);
 
     useEffect(() => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
-                console.log('Usuario:', decodedToken);
-            }
-    fetchPrestamos();
-}, [fetchPrestamos,setUser]);
-
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
+            console.log('Usuario:', decodedToken);
+        }
+        fetchPrestamos();
+    }, [fetchPrestamos]);
 
     const handleDevolucion = async (prestamoid) => {
         try {
-            await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/devolver/${prestamoid}`);
-            // Actualiza la lista de préstamos después de la devolución
+            await axiosInstance.post(`users/prestamos/devolver/${prestamoid}`);
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
             alert('Libro devuelto con éxito.');
         } catch (error) {
@@ -61,9 +57,9 @@ const GestionarPrestamos = () => {
 
     const handleSubmitReview = async (e) => {
         e.preventDefault();
-        console.log('reseña',review);
+        console.log('reseña', review);
         try {
-            await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
+            await axiosInstance.post(`api/users/review`, {
                 id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,
@@ -71,10 +67,9 @@ const GestionarPrestamos = () => {
                 calificacion: review.calificacion,
                 comentario: review.comentario,
             });
-            // Reiniciar el formulario
             setReview({ edicionid: null, libroid: null, calificacion: 0, comentario: '' });
             setIsReviewFormVisible(false);
-            fetchPrestamos(); // Para actualizar la lista de préstamos si es necesario
+            fetchPrestamos();
             setSuccessMessage('¡Reseña enviada con éxito!');
             setTimeout(() => {
                 setSuccessMessage('');
@@ -153,7 +148,6 @@ const GestionarPrestamos = () => {
                                     </button>
                                 </div>
                             </div>
-                            {/* Formulario de reseña para el préstamo seleccionado */}
                             {isReviewFormVisible === prestamo.prestamoid && (
                                 <form onSubmit={handleSubmitReview} style={{ marginTop: '10px' }}>
                                     <input

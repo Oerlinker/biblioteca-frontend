@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://backend-proyecto-production-13fc.up.railway.app/api',
+    baseURL: 'https://backend-proyecto-production-13fc.up.railway.app/api/',
 });
 
 axiosInstance.interceptors.request.use(

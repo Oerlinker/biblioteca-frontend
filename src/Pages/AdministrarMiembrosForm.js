@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import axiosInstance from "../components/axiosInstance";
 
 const AdministrarMiembrosForm = () => {
     const [miembros, setMiembros] = useState([]);
@@ -9,7 +10,7 @@ const AdministrarMiembrosForm = () => {
     useEffect(() => {
         const fetchMiembros = async () => {
             try {
-                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/users/members');
+                const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/users/members');
                 setMiembros(response.data);
             } catch (error) {
                 console.error('Error fetching members:', error);

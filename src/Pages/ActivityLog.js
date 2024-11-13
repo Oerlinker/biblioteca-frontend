@@ -3,6 +3,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import moment from 'moment-timezone';
+import axiosInstance from "../components/axiosInstance";
 
 const ActivityLog = () => {
     const [logs, setLogs] = useState([]);
@@ -12,7 +13,7 @@ const ActivityLog = () => {
     useEffect(() => {
         const fetchLogs = async () => {
             try {
-                const response = await axios.get('https://backend-proyecto-production-13fc.up.railway.app/api/activity-log');
+                const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/activity-log');
     
                 // Procesa cada log para manejar casos donde `action` no es JSON válido
                 const logsWithParsedAction = response.data.map(log => {

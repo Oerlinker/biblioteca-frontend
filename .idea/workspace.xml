@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="sera? 2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/BookDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/BookDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/autorForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/autorForm.js" afterDir="false" />
-    </list>
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="sera? 2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +105,7 @@
       <workItem from="1731029910050" duration="1472000" />
       <workItem from="1731031588916" duration="11391000" />
       <workItem from="1731451543775" duration="1445000" />
-      <workItem from="1731456305615" duration="2057000" />
+      <workItem from="1731456305615" duration="2442000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />

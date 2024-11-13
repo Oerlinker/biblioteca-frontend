@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axiosInstance from "../components/axiosInstance";
 import { useParams, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { UserContext } from '../UserContext';
 
 const BookDetail = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
     const [reviews, setReviews] = useState([]);
-
-    //adicion prestamo
-    const [user, setUser] = useState(null);
+    const { user, setUser } = useContext(UserContext);
     const [disponible, setDisponible] = useState(false);
     const [edicionesDisponibles, setEdicionesDisponibles] = useState([]);
     const [edicionSeleccionada, setEdicionSeleccionada] = useState(null);
-
     const [autor, setAutor] = useState('');
     const [editorial, setEditorial] = useState('');
     const [categoria, setCategoria] = useState('');
@@ -33,11 +31,9 @@ const BookDetail = () => {
             const categoriaResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${response.data.categoriaid}`);
             setCategoria(categoriaResponse.data.nombre_categoria);
 
-            //adicion prestamo
-            // Obtener ediciones disponibles
             const edicionesResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/ediciones`);
             setEdicionesDisponibles(edicionesResponse.data);
-            // Verificar disponibilidad del libro
+
             const disponibilidadResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${id}/disponibilidad`);
             setDisponible(disponibilidadResponse.data.disponible);
             console.log('Disponibilidad:', disponibilidadResponse.data);
@@ -49,30 +45,23 @@ const BookDetail = () => {
 
     const fetchReviews = useCallback(async () => {
         try {
-            const response = await axiosInstance().get(`https://backend-proyecto-production-13fc.up.railway.app/api/review/libro/${id}`);
+            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/review/libro/${id}`);
             setReviews(response.data);
         } catch (error) {
             console.error('Error fetching reviews:', error);
         }
     }, [id]);
 
-    //adicion prestamo
-    const fetchUser = () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = jwtDecode(token); // Decodificar el token
-            setUser({ id: decodedToken.id, miembroid: decodedToken.miembroid, nombre: decodedToken.nombre, rol: decodedToken.rol, correo: decodedToken.correo });
-            console.log('Usuario:', decodedToken);
-        }
-    };
-
     useEffect(() => {
+        const token = localStorage.getItem('Token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUser({ id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol });
+        }
         fetchBookDetails();
         fetchReviews();
-        fetchUser();
-    }, [fetchBookDetails,fetchReviews]);
+    }, [fetchBookDetails, fetchReviews, setUser]);
 
-    //adicion prestamo
     const handleSolicitarPrestamo = async (edicionidSeleccionada) => {
         if (user && book && disponible) {
             try {
@@ -90,7 +79,6 @@ const BookDetail = () => {
         }
     };
 
-    //adicion prestamo
     const handleEdicionChange = (e) => {
         setEdicionSeleccionada(e.target.value);
     };
@@ -167,7 +155,6 @@ const BookDetail = () => {
                     )}
                 </div>
 
-                {/* Reviews Section */}
                 <div className="mt-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">Reseñas</h3>
                     {reviews.length > 0 ? (

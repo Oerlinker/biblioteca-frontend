@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
-
+import { UserContext } from '../UserContext';
 
 const GestionarPrestamos = () => {
+    const { user, setUser } = useContext(UserContext);
     const [prestamos, setPrestamos] = useState([]);
-    const [user, setUser] = useState(null); 
     const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [review, setReview] = useState({
-    edicionid: null,
-    libroid: null,
-    calificacion: 0,
-    comentario: '',
-});
+        edicionid: null,
+        libroid: null,
+        calificacion: 0,
+        comentario: '',
+    });
 
     useEffect(() => {
         const fetchUser = () => {
@@ -26,12 +26,11 @@ const GestionarPrestamos = () => {
             }
         };
 
-    fetchUser();
-}, [user?.id]); 
+        fetchUser();
+    }, [setUser]);
 
-    // Usar useCallback para memoizar la función fetchPrestamos
     const fetchPrestamos = useCallback(async () => {
-        if (!user) return; // Espera a que user esté definido antes de continuar
+        if (!user) return;
         const { miembroid } = user;
         try {
             const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/activos/${miembroid}`);
@@ -39,7 +38,7 @@ const GestionarPrestamos = () => {
         } catch (error) {
             console.error('Error al obtener préstamos api:', error);
         }
-    }, [user]); // Dependencia de user
+    }, [user]);
 
     useEffect(() => {
         fetchPrestamos();
@@ -48,7 +47,6 @@ const GestionarPrestamos = () => {
     const handleDevolucion = async (prestamoid) => {
         try {
             await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/prestamos/devolver/${prestamoid}`);
-            // Actualiza la lista de préstamos después de la devolución
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
             alert('Libro devuelto con éxito.');
         } catch (error) {
@@ -64,10 +62,10 @@ const GestionarPrestamos = () => {
             [name]: value,
         }));
     };
-    
+
     const handleSubmitReview = async (e) => {
         e.preventDefault();
-        console.log('reseña',review);
+        console.log('reseña', review);
         try {
             await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/users/review`, {
                 id: user.id,
@@ -77,14 +75,13 @@ const GestionarPrestamos = () => {
                 calificacion: review.calificacion,
                 comentario: review.comentario,
             });
-            // Reiniciar el formulario
             setReview({ edicionid: null, libroid: null, calificacion: 0, comentario: '' });
             setIsReviewFormVisible(false);
-            fetchPrestamos(); // Para actualizar la lista de préstamos si es necesario
+            fetchPrestamos();
             setSuccessMessage('¡Reseña enviada con éxito!');
             setTimeout(() => {
                 setSuccessMessage('');
-            }, 3000); 
+            }, 3000);
         } catch (error) {
             console.error('Error al enviar la reseña:', error);
         }
@@ -159,7 +156,6 @@ const GestionarPrestamos = () => {
                                     </button>
                                 </div>
                             </div>
-                            {/* Formulario de reseña para el préstamo seleccionado */}
                             {isReviewFormVisible === prestamo.prestamoid && (
                                 <form onSubmit={handleSubmitReview} style={{ marginTop: '10px' }}>
                                     <input

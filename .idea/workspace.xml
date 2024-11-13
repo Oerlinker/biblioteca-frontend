@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="sera? 2">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="cambio a usercontext">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +107,7 @@
       <workItem from="1731029910050" duration="1472000" />
       <workItem from="1731031588916" duration="11391000" />
       <workItem from="1731451543775" duration="1445000" />
-      <workItem from="1731456305615" duration="6830000" />
+      <workItem from="1731456305615" duration="9537000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -189,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731044998020</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="cambio a usercontext">
+      <option name="closed" value="true" />
+      <created>1731466294797</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731466294797</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +225,7 @@
     <MESSAGE value=".-." />
     <MESSAGE value="sera?" />
     <MESSAGE value="sera? 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="sera? 2" />
+    <MESSAGE value="cambio a usercontext" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambio a usercontext" />
   </component>
 </project>

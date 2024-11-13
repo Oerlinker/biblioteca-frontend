@@ -26,7 +26,7 @@ const SubscriptionForm = () => {
         try {
             const usuarioid = user?.id;
 
-            await axiosInstance().post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 nombre,
                 telefono,
                 direccion,

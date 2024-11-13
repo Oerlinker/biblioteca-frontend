@@ -16,19 +16,6 @@ const GestionarPrestamos = () => {
         comentario: '',
     });
 
-    useEffect(() => {
-        const fetchUser = () => {
-            const token = localStorage.getItem('Token'); // Use 'Token' to match the key used in login.js and axiosInstance.js
-            if (token) {
-                const decodedToken = jwtDecode(token);
-                setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
-                console.log('Usuario:', decodedToken);
-            }
-        };
-
-        fetchUser();
-    }, [setUser]);
-
     const fetchPrestamos = useCallback(async () => {
         if (!user) return;
         const { miembroid } = user;
@@ -41,8 +28,14 @@ const GestionarPrestamos = () => {
     }, [user]);
 
     useEffect(() => {
+        const token = localStorage.getItem('Token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setUser({ miembroid: decodedToken.miembroid, id: decodedToken.id, nombre: decodedToken.nombre });
+            console.log('Usuario:', decodedToken);
+        }
         fetchPrestamos();
-    }, [fetchPrestamos]);
+    }, [fetchPrestamos, setUser]);
 
     const handleDevolucion = async (prestamoid) => {
         try {

@@ -24,10 +24,6 @@ const Sidebar = () => {
         { name: "Reporte de Miembros", path: "/admin/administrar-usuarios/administrar-miembros" },
     ];
 
-    if (!user || (user.role !== 3 && user.role !== 4)) {
-        return null;
-    }
-
     return (
         <div
             className={`fixed top-0 left-0 h-full z-40 transition-all duration-300 ease-in-out transform ${

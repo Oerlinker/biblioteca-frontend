@@ -26,6 +26,12 @@ const VerPdf = ({ edicionId }) => {
         }
     }, [edicionId]);
 
+    useEffect(() => {
+        if (pdfUrl && !isMobile) {
+            window.open(pdfUrl, '_blank');
+        }
+    }, [pdfUrl, isMobile]);
+
     return (
         <div className="w-full flex justify-center bg-gray-100 p-2 rounded-lg overflow-hidden">
             {pdfUrl ? (
@@ -34,12 +40,7 @@ const VerPdf = ({ edicionId }) => {
                         Descargar PDF
                     </a>
                 ) : (
-                    <iframe
-                        src={pdfUrl}
-                        title="PDF Viewer"
-                        className="w-full h-[500px] md:h-[700px] lg:h-[80vh] border rounded-md"
-                        style={{ border: "none", width: "100%" }}
-                    ></iframe>
+                    <p className="text-center">El PDF se ha abierto en una nueva ventana.</p>
                 )
             ) : (
                 <p className="text-center">Cargando PDF...</p>

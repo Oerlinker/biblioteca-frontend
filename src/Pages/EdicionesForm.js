@@ -51,41 +51,45 @@ const EdicionForm = () => {
         }
     };
 
-    const actualizarEdicion = async () => {
-        try {
-            const formData = new FormData();
-            formData.append("isbn", isbn);
-            formData.append("numero_edicion", numeroEdicion);
-            formData.append("fecha_publicacion", fechaPublicacion);
-            formData.append("titulo_libro", tituloLibro);
-            formData.append("nombre_proveedor", nombreProveedor);
-            if (pdfFile) formData.append("pdf", pdfFile);
+  const actualizarEdicion = async () => {
+    try {
+        const formData = new FormData();
+        formData.append("isbn", isbn);
+        formData.append("numero_edicion", numeroEdicion);
+        formData.append("fecha_publicacion", fechaPublicacion);
+        formData.append("titulo_libro", tituloLibro);
+        formData.append("nombre_proveedor", nombreProveedor);
+        if (pdfFile) formData.append("pdf", pdfFile);
 
-            console.log('Updating edition with data:', {
-                isbn,
-                numeroEdicion,
-                fechaPublicacion,
-                tituloLibro,
-                nombreProveedor,
-                pdfFile
-            });
+        console.log('Updating edition with data:', {
+            isbn,
+            numeroEdicion,
+            fechaPublicacion,
+            tituloLibro,
+            nombreProveedor,
+            pdfFile
+        });
 
-            await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+        const response = await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
 
-            resetForm();
-            setSuccessMessage('Edición actualizada exitosamente');
-            fetchEdiciones();
-        } catch (error) {
-            console.error('Error actualizando la edición:', error);
-            if (error.response) {
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-                console.error('Response headers:', error.response.headers);
-            }
+        console.log('Update response:', response);
+
+        resetForm();
+        setSuccessMessage('Edición actualizada exitosamente');
+        fetchEdiciones();
+    } catch (error) {
+        console.error('Error actualizando la edición:', error);
+        if (error.response) {
+            console.error('Response data:', error.response.data);
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
+        } else {
+            console.error('Error message:', error.message);
         }
-    };
+    }
+};
 
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {

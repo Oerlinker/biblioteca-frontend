@@ -8,7 +8,8 @@ const VerPdf = ({ edicionId }) => {
         const fetchPdf = async () => {
             try {
                 const response = await axiosInstance.get(`/ediciones/download-pdf/${edicionId}`, {
-                    responseType: 'blob'
+                    responseType: 'blob',
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }  // Ensure token is included
                 });
                 const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
                 setPdfUrl(url);

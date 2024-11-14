@@ -20,7 +20,6 @@ const VerPdf = ({ edicionId }) => {
         };
         fetchPdf();
 
-        // Detect if the user is on a mobile device
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         if (/android|iPad|iPhone|iPod/.test(userAgent.toLowerCase())) {
             setIsMobile(true);
@@ -39,7 +38,7 @@ const VerPdf = ({ edicionId }) => {
                         src={pdfUrl}
                         title="PDF Viewer"
                         className="w-full h-[500px] md:h-[700px] lg:h-[80vh] border rounded-md"
-                        style={{ border: "none" }}
+                        style={{ border: "none", width: "100%" }}
                     ></iframe>
                 )
             ) : (

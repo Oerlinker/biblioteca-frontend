@@ -52,7 +52,7 @@ const GestionarPrestamos = () => {
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axiosInstance.post('/reviews', review);
+            await axiosInstance.post('users/reviews', review);
             setIsReviewFormVisible(false);
             setSuccessMessage('Reseña enviada con éxito.');
         } catch (error) {

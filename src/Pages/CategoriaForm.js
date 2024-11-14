@@ -8,7 +8,6 @@ const CategoriaForm = () => {
     const [categoriaID, setCategoriaID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    // Fetch categorias
     const fetchCategorias = async () => {
         try {
             const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/categorias');
@@ -22,7 +21,6 @@ const CategoriaForm = () => {
         fetchCategorias();
     }, []);
 
-    // Insertar categoria
     const insertarCategoria = async () => {
         try {
             await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/categorias', {
@@ -37,7 +35,6 @@ const CategoriaForm = () => {
         }
     };
 
-    // Actualizar categoria
     const actualizarCategoria = async () => {
         try {
             await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${categoriaID}`, {
@@ -52,7 +49,6 @@ const CategoriaForm = () => {
         }
     };
 
-    // Eliminar categoria con confirmación
     const eliminarCategoria = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
             try {
@@ -65,14 +61,12 @@ const CategoriaForm = () => {
         }
     };
 
-    // Reset form
     const resetForm = () => {
         setNombreCategoria('');
         setDescripcion('');
         setCategoriaID(null);
     };
 
-    // Manejar el submit del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         if (categoriaID) {
@@ -82,7 +76,6 @@ const CategoriaForm = () => {
         }
     };
 
-    // Manejar la selección de una categoría para editar
     const handleEdit = (categoria) => {
         setNombreCategoria(categoria.nombre_categoria);
         setDescripcion(categoria.descripcion);

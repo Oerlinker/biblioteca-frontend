@@ -8,7 +8,6 @@ const GestionarPrestamos = () => {
     const { user } = useContext(UserContext);
     const [prestamos, setPrestamos] = useState([]);
     const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
     const [review, setReview] = useState({
         edicionid: null,
         libroid: null,
@@ -38,8 +37,7 @@ const GestionarPrestamos = () => {
         try {
             await axiosInstance.post(`users/prestamos/devolver/${prestamoid}`);
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
-            setSuccessMessage('Libro devuelto con éxito.');
-            setTimeout(() => setSuccessMessage(''), 3000);
+            alert('Libro devuelto con éxito.');
         } catch (error) {
             console.error('Error al devolver el libro:', error);
             alert('Error al devolver el libro. Intenta nuevamente.');
@@ -50,103 +48,126 @@ const GestionarPrestamos = () => {
         setShowPdf(showPdf === edicionId ? null : edicionId);
     };
 
-    const handleReviewSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axiosInstance.post(`reviews/${review.edicionid}`, {
-                calificacion: review.calificacion,
-                comentario: review.comentario,
-                libroid: review.libroid,
-            });
-            setSuccessMessage('Reseña enviada con éxito.');
-            setTimeout(() => setSuccessMessage(''), 3000);
-            setReview({
-                edicionid: null,
-                libroid: null,
-                calificacion: 0,
-                comentario: '',
-            });
-            setIsReviewFormVisible(false);
-        } catch (error) {
-            console.error('Error al enviar reseña:', error);
-        }
-    };
-
     return (
-        <div className="container mx-auto p-4 max-w-4xl">
-            <h2 className="text-2xl font-semibold text-center mb-8">Préstamos Activos</h2>
+        <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
+            <h2 style={{ textAlign: 'center' }}>Préstamos Activos</h2>
             {successMessage && (
-                <div className="bg-green-100 text-green-700 px-4 py-2 rounded mb-4 text-center">
+                <div style={{
+                    backgroundColor: '#d4edda',
+                    color: '#155724',
+                    padding: '10px',
+                    borderRadius: '5px',
+                    marginBottom: '15px',
+                    textAlign: 'center',
+                }}>
                     {successMessage}
                 </div>
             )}
-            <ul className="space-y-4">
-                {prestamos.map((prestamo) => (
-                    <li key={prestamo.prestamoid} className="p-4 border rounded-md bg-white shadow-md">
-                        <div className="flex flex-col md:flex-row justify-between">
-                            <div>
-                                <h4 className="font-semibold text-lg">{prestamo.titulo}</h4>
-                                <p><strong>Número de Edición:</strong> {prestamo.numero_edicion}</p>
-                                <p><strong>Fecha de Devolución:</strong> {moment(prestamo.fecha_devolucion).format('DD/MM/YYYY')}</p>
+            {prestamos.length > 0 ? (
+                <ul style={{ listStyleType: 'none', padding: 0 }}>
+                    {prestamos.map((prestamo) => (
+                        <li key={prestamo.prestamoid} style={{
+                            padding: '15px',
+                            marginBottom: '10px',
+                            border: '1px solid #ccc',
+                            borderRadius: '5px',
+                            backgroundColor: '#f9f9f9'
+                        }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div>
+                                    <h4 style={{ margin: '0' }}>{prestamo.titulo}</h4>
+                                    <p style={{ margin: '5px 0' }}>
+                                        <strong>Número de Edición:</strong> {prestamo.numero_edicion}
+                                    </p>
+                                    <p style={{ margin: '5px 0' }}>
+                                        <strong>Fecha de Devolución:</strong> {moment(prestamo.fecha_devolucion).format('DD/MM/YYYY')}
+                                    </p>
+                                </div>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <button onClick={() => handleDevolucion(prestamo.prestamoid)} style={{
+                                        backgroundColor: '#007BFF',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer',
+                                    }}>
+                                        Devolver
+                                    </button>
+                                    <button onClick={() => {
+                                        setReview((prevReview) => {
+                                            const updatedReview = {
+                                                ...prevReview,
+                                                edicionid: prestamo.edicionid,
+                                                libroid: prestamo.libroid,
+                                            };
+                                            return updatedReview;
+                                        });
+                                        setIsReviewFormVisible(isReviewFormVisible === prestamo.prestamoid ? null : prestamo.prestamoid);
+                                    }} style={{
+                                        backgroundColor: '#28A745',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer',
+                                    }}>
+                                        {isReviewFormVisible === prestamo.prestamoid ? 'Cancelar Reseña' : 'Hacer Reseña'}
+                                    </button>
+                                    <button onClick={() => togglePdfView(prestamo.edicionid)} style={{
+                                        backgroundColor: '#17a2b8',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer',
+                                    }}>
+                                        {showPdf === prestamo.edicionid ? 'Cerrar PDF' : 'Ver PDF'}
+                                    </button>
+                                </div>
                             </div>
-                            <div className="mt-4 md:mt-0 flex space-x-2">
-                                <button onClick={() => handleDevolucion(prestamo.prestamoid)} className="bg-blue-500 text-white px-3 py-1 rounded">
-                                    Devolver
-                                </button>
-                                <button onClick={() => togglePdfView(prestamo.edicionid)} className="bg-teal-500 text-white px-3 py-1 rounded">
-                                    {showPdf === prestamo.edicionid ? 'Cerrar PDF' : 'Ver PDF'}
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setIsReviewFormVisible(true);
-                                        setReview((prev) => ({
-                                            ...prev,
-                                            edicionid: prestamo.edicionid,
-                                            libroid: prestamo.libroid,
-                                        }));
-                                    }}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded"
-                                >
-                                    Reseñar
-                                </button>
-                            </div>
-                        </div>
-                        {showPdf === prestamo.edicionid && (
-                            <div className="mt-4">
-                                <VerPdf edicionId={prestamo.edicionid} />
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
-
-            {isReviewFormVisible && (
-                <form onSubmit={handleReviewSubmit} className="mt-8 p-4 border rounded-md shadow-md bg-white max-w-md mx-auto">
-                    <h3 className="text-lg font-semibold mb-4">Enviar Reseña</h3>
-                    <label className="block mb-2">Calificación (1-5):</label>
-                    <input
-                        type="number"
-                        min="1"
-                        max="5"
-                        value={review.calificacion}
-                        onChange={(e) => setReview({ ...review, calificacion: e.target.value })}
-                        className="w-full mb-4 p-2 border rounded"
-                    />
-                    <label className="block mb-2">Comentario:</label>
-                    <textarea
-                        value={review.comentario}
-                        onChange={(e) => setReview({ ...review, comentario: e.target.value })}
-                        className="w-full mb-4 p-2 border rounded"
-                    />
-                    <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">Enviar Reseña</button>
-                    <button
-                        type="button"
-                        onClick={() => setIsReviewFormVisible(false)}
-                        className="ml-2 bg-gray-300 px-4 py-2 rounded"
-                    >
-                        Cancelar
-                    </button>
-                </form>
+                            {isReviewFormVisible === prestamo.prestamoid && (
+                                <form onSubmit={handleSubmitReview} style={{ marginTop: '10px' }}>
+                                    <input
+                                        type="number"
+                                        name="calificacion"
+                                        step="0.1"
+                                        min="1"
+                                        max="5"
+                                        placeholder="Calificación (1.0 - 5.0)"
+                                        value={review.calificacion}
+                                        onChange={(e) => setReview({ ...review, calificacion: e.target.value })}
+                                        required
+                                        style={{ marginRight: '10px', width: '100%' }}
+                                    />
+                                    <textarea
+                                        name="comentario"
+                                        placeholder="Escribe tu comentario"
+                                        value={review.comentario}
+                                        onChange={(e) => setReview({ ...review, comentario: e.target.value })}
+                                        required
+                                        style={{ display: 'block', margin: '10px 0', width: '100%' }}
+                                    />
+                                    <button type="submit" style={{
+                                        backgroundColor: '#28A745',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer'
+                                    }}>Enviar Reseña</button>
+                                </form>
+                            )}
+                            {showPdf === prestamo.edicionid && (
+                                <div style={{ marginTop: '10px' }}>
+                                    <VerPdf edicionId={prestamo.edicionid} />
+                                </div>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p style={{ textAlign: 'center' }}>No tienes préstamos activos.</p>
             )}
         </div>
     );

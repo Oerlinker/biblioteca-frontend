@@ -61,6 +61,15 @@ const EdicionForm = () => {
             formData.append("nombre_proveedor", nombreProveedor);
             if (pdfFile) formData.append("pdf", pdfFile);
 
+            console.log('Updating edition with data:', {
+                isbn,
+                numeroEdicion,
+                fechaPublicacion,
+                tituloLibro,
+                nombreProveedor,
+                pdfFile
+            });
+
             await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
@@ -70,6 +79,11 @@ const EdicionForm = () => {
             fetchEdiciones();
         } catch (error) {
             console.error('Error actualizando la edición:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+            }
         }
     };
 

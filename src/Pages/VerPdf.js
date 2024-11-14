@@ -3,6 +3,7 @@ import axiosInstance from '../components/axiosInstance';
 
 const VerPdf = ({ edicionId }) => {
     const [pdfUrl, setPdfUrl] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const fetchPdf = async () => {
@@ -18,17 +19,29 @@ const VerPdf = ({ edicionId }) => {
             }
         };
         fetchPdf();
+
+        // Detect if the user is on a mobile device
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android|iPad|iPhone|iPod/.test(userAgent.toLowerCase())) {
+            setIsMobile(true);
+        }
     }, [edicionId]);
 
     return (
         <div className="w-full flex justify-center bg-gray-100 p-2 rounded-lg overflow-hidden">
             {pdfUrl ? (
-                <iframe
-                    src={pdfUrl}
-                    title="PDF Viewer"
-                    className="w-full h-[500px] md:h-[700px] lg:h-[80vh] border rounded-md"
-                    style={{ border: "none" }}
-                ></iframe>
+                isMobile ? (
+                    <a href={pdfUrl} download="document.pdf" className="text-blue-500 hover:underline">
+                        Descargar PDF
+                    </a>
+                ) : (
+                    <iframe
+                        src={pdfUrl}
+                        title="PDF Viewer"
+                        className="w-full h-[500px] md:h-[700px] lg:h-[80vh] border rounded-md"
+                        style={{ border: "none" }}
+                    ></iframe>
+                )
             ) : (
                 <p className="text-center">Cargando PDF...</p>
             )}

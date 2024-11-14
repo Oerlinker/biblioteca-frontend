@@ -20,11 +20,9 @@ const EdicionForm = () => {
             console.error('Error obteniendo las ediciones:', error);
         }
     };
-
     useEffect(() => {
         fetchEdiciones();
     }, []);
-
 
     const insertarEdicion = async () => {
         const data = {

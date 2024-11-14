@@ -38,8 +38,9 @@ const Sidebar = () => {
     const librosLinks = [
         { name: "CU:3 Buscar libros en el catálogo", path: "/books", roles: [1, 2, 3, 4] },
         { name: "CU:7 Hacer reseñas y calificar libros", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:14 Búsqueda avanzada de libros", path: "/books", roles: [2] },
-        { name: "CU:16 Ver detalles de un libro", path: "/books", roles: [2, 3, 4] },
+        { name: "CU:13 Búsqueda de libro por nombre", path: "/books", roles: [1,2,3,4] },
+        { name: "CU:14 Búsqueda avanzada de libros", path: "/books", roles: [1,2,3,4] },
+        { name: "CU:16 Ver detalles de un libro", path: "/books", roles: [1,2,3,4] },
     ];
 
     const prestamosLinks = [
@@ -52,9 +53,9 @@ const Sidebar = () => {
     const usuariosLinks = [
         { name: "CU:1 Registrarse en el sistema", path: "/register", roles: [1] },
         { name: "CU:2 Iniciar sesión", path: "/login", roles: [1] },
-        { name: "CU:17 Acceder como visitante", path: "/", roles: [1, 2, 3, 4] },
+        { name: "CU:17 Acceder como visitante", path: "/", roles: [1] },
         { name: "CU:18 Ver historial de préstamos y actividad", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:15 Modificar perfil", path: "/account/*", roles: [2] },
+        { name: "CU:15 Modificar perfil", path: "/account/*", roles: [2,3,4] },
         { name: "CU:19 Marcar posición de lectura", path: "/gestionar-prestamos", roles: [2] },
         { name: "CU:20 Ver historial de libros leídos", path: "/gestionar-prestamos", roles: [2] },
     ];

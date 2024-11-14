@@ -17,6 +17,11 @@ const GestionarPrestamos = () => {
     });
     const [showPdf, setShowPdf] = useState(null);
 
+    // Function to check if the device is mobile
+    const isMobileDevice = () => {
+        return /Mobi|Android/i.test(navigator.userAgent);
+    };
+
     const fetchPrestamos = useCallback(async () => {
         if (!user || !user.miembroid) {
             console.error("miembroid no está definido");
@@ -46,8 +51,14 @@ const GestionarPrestamos = () => {
         }
     };
 
-    const togglePdfView = (edicionId) => {
-        setShowPdf(showPdf === edicionId ? null : edicionId);
+    const togglePdfView = (edicionId, pdfUrl) => {
+        if (isMobileDevice()) {
+            // Open the PDF in a new tab on mobile devices
+            window.open(pdfUrl, '_blank');
+        } else {
+            // Toggle inline PDF view for desktop
+            setShowPdf(showPdf === edicionId ? null : edicionId);
+        }
     };
 
     const handleReviewSubmit = async (e) => {
@@ -90,10 +101,10 @@ const GestionarPrestamos = () => {
                                 <p><strong>Fecha de Devolución:</strong> {moment(prestamo.fecha_devolucion).format('DD/MM/YYYY')}</p>
                             </div>
                             <div className="mt-4 md:mt-0 flex space-x-2">
-                                <button onClick={() => handleDevolucion(prestamo.prestamoid)} className="bg-blue-500 text-white px-3 py-1 rounded">
+                                <button onClick={() => handleDevolucion(prestamo.prestamoid)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm md:text-base">
                                     Devolver
                                 </button>
-                                <button onClick={() => togglePdfView(prestamo.edicionid)} className="bg-teal-500 text-white px-3 py-1 rounded">
+                                <button onClick={() => togglePdfView(prestamo.edicionid, prestamo.pdfUrl)} className="bg-teal-500 text-white px-3 py-1 rounded text-sm md:text-base">
                                     {showPdf === prestamo.edicionid ? 'Cerrar PDF' : 'Ver PDF'}
                                 </button>
                                 <button
@@ -105,13 +116,13 @@ const GestionarPrestamos = () => {
                                             libroid: prestamo.libroid,
                                         }));
                                     }}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded"
+                                    className="bg-yellow-500 text-white px-3 py-1 rounded text-sm md:text-base"
                                 >
                                     Reseñar
                                 </button>
                             </div>
                         </div>
-                        {showPdf === prestamo.edicionid && (
+                        {showPdf === prestamo.edicionid && !isMobileDevice() && (
                             <div className="mt-4">
                                 <VerPdf edicionId={prestamo.edicionid} />
                             </div>

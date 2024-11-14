@@ -39,7 +39,7 @@ const EdicionForm = () => {
             formData.append("nombre_proveedor", nombreProveedor);
             if (pdfFile) formData.append("pdf", pdfFile);
 
-            await axiosInstance.post('/api/ediciones', formData, {
+            await axiosInstance.post('/ediciones', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -61,7 +61,7 @@ const EdicionForm = () => {
             formData.append("nombre_proveedor", nombreProveedor);
             if (pdfFile) formData.append("pdf", pdfFile);
 
-            await axiosInstance.put(`/api/ediciones/${edicionID}`, formData, {
+            await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -76,7 +76,7 @@ const EdicionForm = () => {
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {
             try {
-                await axiosInstance.delete(`/api/ediciones/${id}`);
+                await axiosInstance.delete(`/ediciones/${id}`);
                 setSuccessMessage('Edición eliminada exitosamente');
                 fetchEdiciones();
             } catch (error) {

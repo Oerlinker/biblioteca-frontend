@@ -14,7 +14,7 @@ const EdicionForm = () => {
 
     const fetchEdiciones = async () => {
         try {
-            const response = await axiosInstance.get('ediciones');
+            const response = await axiosInstance.get('/ediciones');
             setEdiciones(response.data);
         } catch (error) {
             console.error('Error obteniendo las ediciones:', error);

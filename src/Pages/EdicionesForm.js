@@ -32,11 +32,13 @@ const EdicionForm = () => {
         formData.append('fecha_publicacion', fechaPublicacion);
         formData.append('titulo_libro', tituloLibro);
         formData.append('nombre_proveedor', nombreProveedor);
+        
         if (pdfFile) {
             formData.append('pdf', pdfFile); // Agregar el archivo PDF
         }
 
         try {
+            console.log('formulario',formData);
             await axiosInstance.post('/ediciones', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',

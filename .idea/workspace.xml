@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="get usuarios fixed2?">
-      <change beforePath="$PROJECT_DIR$/src/components/BookCrud.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookCrud.jsx" afterDir="false" />
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="responsive 3.O">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/EdicionesForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +109,7 @@
       <workItem from="1731031588916" duration="11391000" />
       <workItem from="1731451543775" duration="1445000" />
       <workItem from="1731456305615" duration="13743000" />
-      <workItem from="1731536587764" duration="11471000" />
+      <workItem from="1731536587764" duration="13585000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -350,7 +351,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731548057781</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="responsive 3.O">
+      <option name="closed" value="true" />
+      <created>1731549290060</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1731549290060</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +377,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="que cagada" />
     <MESSAGE value="que cagada 2" />
     <MESSAGE value="que cagada 3" />
     <MESSAGE value="que cagada 65" />
@@ -393,6 +401,7 @@
     <MESSAGE value="puto dir de assets" />
     <MESSAGE value="get usuarios fixed?" />
     <MESSAGE value="get usuarios fixed2?" />
-    <option name="LAST_COMMIT_MESSAGE" value="get usuarios fixed2?" />
+    <MESSAGE value="responsive 3.O" />
+    <option name="LAST_COMMIT_MESSAGE" value="responsive 3.O" />
   </component>
 </project>

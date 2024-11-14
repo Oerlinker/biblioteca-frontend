@@ -9,7 +9,7 @@ const VerPdf = ({ edicionId }) => {
             try {
                 const response = await axiosInstance.get(`/ediciones/download-pdf/${edicionId}`, {
                     responseType: 'blob',
-                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }  // Ensure token is included
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                 });
                 const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
                 setPdfUrl(url);
@@ -21,11 +21,16 @@ const VerPdf = ({ edicionId }) => {
     }, [edicionId]);
 
     return (
-        <div>
+        <div className="w-full flex justify-center bg-gray-100 p-2 rounded-lg overflow-hidden">
             {pdfUrl ? (
-                <iframe src={pdfUrl} width="100%" height="600px" title="PDF Viewer"></iframe>
+                <iframe
+                    src={pdfUrl}
+                    title="PDF Viewer"
+                    className="w-full h-[500px] md:h-[700px] lg:h-[80vh] border rounded-md"
+                    style={{ border: "none" }}
+                ></iframe>
             ) : (
-                <p>Cargando PDF...</p>
+                <p className="text-center">Cargando PDF...</p>
             )}
         </div>
     );

@@ -26,29 +26,45 @@ const EdicionForm = () => {
     }, []);
 
     const insertarEdicion = async () => {
-        const formData = new FormData();
-        formData.append('isbn', isbn);
-        formData.append('numero_edicion', numeroEdicion);
-        formData.append('fecha_publicacion', fechaPublicacion);
-        formData.append('titulo_libro', tituloLibro);
-        formData.append('nombre_proveedor', nombreProveedor);
-        
+        const data = {
+            isbn,
+            numero_edicion: numeroEdicion,
+            fecha_publicacion: fechaPublicacion,
+            titulo_libro: tituloLibro,
+            nombre_proveedor: nombreProveedor,
+        };
+    
         if (pdfFile) {
-            formData.append('pdf', pdfFile); // Agregar el archivo PDF
-        }
-
-        try {
-            console.log('formulario',formData);
-            await axiosInstance.post('/ediciones', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            resetForm();
-            setSuccessMessage('Edición agregada exitosamente');
-            fetchEdiciones();
-        } catch (error) {
-            console.error('Error insertando la edición:', error);
+            const reader = new FileReader();
+            reader.readAsDataURL(pdfFile);
+            reader.onloadend = async () => {
+                data.pdf = reader.result; // Esto convierte el PDF en una cadena base64
+                try {
+                    await axiosInstance.post('/ediciones', data, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    resetForm();
+                    setSuccessMessage('Edición agregada exitosamente');
+                    fetchEdiciones();
+                } catch (error) {
+                    console.error('Error insertando la edición:', error);
+                }
+            };
+        } else {
+            try {
+                await axiosInstance.post('/ediciones', data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                resetForm();
+                setSuccessMessage('Edición agregada exitosamente');
+                fetchEdiciones();
+            } catch (error) {
+                console.error('Error insertando la edición:', error);
+            }
         }
     };
 

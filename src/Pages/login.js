@@ -15,7 +15,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/login', { email, password });
+            const response = await axiosInstance.post('/login', { email, password });
 
             localStorage.setItem('Token', response.data.token);
 

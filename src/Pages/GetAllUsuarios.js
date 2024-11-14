@@ -15,31 +15,55 @@ const GetAllUsuarios = () => {
     }, []);
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-5xl">
-            <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">Todos los Usuarios</h2>
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-100">
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol ID</th>
-                    </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                    {usuarios.map((usuario) => (
-                        <tr key={usuario.usuarioid} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{usuario.usuarioid}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.nombre_usuario}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.correo_electronico}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.rolid}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+        <section className="container mx-auto px-4 flex flex-col items-center">
+            <h2 className="text-2xl font-bold text-gray-800 text-center">Usuarios</h2>
+            <p className="mt-1 text-sm text-gray-500 text-center">Estos son los usuarios actuales del sistema.</p>
+
+            <div className="flex flex-col mt-6 w-full max-w-3xl">
+                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div className="overflow-hidden border border-gray-200 md:rounded-lg">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" className="py-3.5 px-4 text-sm font-normal text-center text-gray-500">
+                                            <span>ID</span>
+                                        </th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center text-gray-500">
+                                            Nombre
+                                        </th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center text-gray-500">
+                                            Correo
+                                        </th>
+                                        <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center text-gray-500">
+                                            Rol ID
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {usuarios.length > 0 ? (
+                                        usuarios.map((usuario) => (
+                                            <tr key={usuario.usuarioid}>
+                                                <td className="px-4 py-4 text-sm font-medium text-gray-800 text-center">{usuario.usuarioid}</td>
+                                                <td className="px-4 py-4 text-sm font-medium text-gray-600 text-center">{usuario.nombre_usuario}</td>
+                                                <td className="px-4 py-4 text-sm font-medium text-gray-600 text-center">{usuario.correo_electronico}</td>
+                                                <td className="px-4 py-4 text-sm font-medium text-gray-500 text-center">{usuario.rolid}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="4" className="px-4 py-4 text-center text-sm text-gray-500">
+                                                No se encontraron usuarios.
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

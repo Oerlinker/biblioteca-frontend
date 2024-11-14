@@ -34,15 +34,17 @@ const EdicionForm = () => {
         };
 
         try {
+
             const response = await axiosInstance.post('/ediciones', data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
 
-            const edicionId = response.data.id;
+            const edicionId = response.data.body.edicionid;
 
-            if (pdfFile) {
+
+            if (pdfFile && edicionId) {
                 const formData = new FormData();
                 formData.append('pdf', pdfFile);
 

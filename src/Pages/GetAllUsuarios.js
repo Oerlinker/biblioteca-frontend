@@ -5,7 +5,7 @@ const GetAllUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/users')
+        axiosInstance.get('users')
             .then((response) => {
                 setUsuarios(response.data);
             })
@@ -15,27 +15,27 @@ const GetAllUsuarios = () => {
     }, []);
 
     return (
-        <div className="container mx-auto p-6 max-w-3xl">
-            <h2 className="text-3xl font-bold mb-6 text-center">Todos los Usuarios</h2>
-            <div className="overflow-x-auto">
-                <table className="min-w-full border border-gray-200">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            <th className="border border-gray-300 p-2 text-center">ID</th>
-                            <th className="border border-gray-300 p-2 text-center">Nombre</th>
-                            <th className="border border-gray-300 p-2 text-center">Correo</th>
-                            <th className="border border-gray-300 p-2 text-center">Rol ID</th>
-                        </tr>
+        <div className="container mx-auto px-4 py-8 max-w-5xl">
+            <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">Todos los Usuarios</h2>
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-100">
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol ID</th>
+                    </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {usuarios.map((usuario) => (
-                            <tr key={usuario.usuarioid}>
-                                <td className="border border-gray-300 p-2 text-center">{usuario.usuarioid}</td>
-                                <td className="border border-gray-300 p-2 text-center">{usuario.nombre_usuario}</td>
-                                <td className="border border-gray-300 p-2 text-center">{usuario.correo_electronico}</td>
-                                <td className="border border-gray-300 p-2 text-center">{usuario.rolid}</td>
-                            </tr>
-                        ))}
+                    {usuarios.map((usuario) => (
+                        <tr key={usuario.usuarioid} className="hover:bg-gray-50">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{usuario.usuarioid}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.nombre_usuario}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.correo_electronico}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{usuario.rolid}</td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

@@ -7,8 +7,10 @@ const Sidebar = () => {
     const { user } = useContext(UserContext);
     const [isAdminOpen, setIsAdminOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
 
     const toggleAdminMenu = () => setIsAdminOpen(!isAdminOpen);
+    const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
 
 
     if (!user || user.rol !== 4) {

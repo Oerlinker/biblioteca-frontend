@@ -36,7 +36,7 @@ const Sidebar = () => {
     ];
 
     const librosLinks = [
-        { name: "CU:3 Buscar libros en el catálogo", path: "/libros/buscar" },
+        { name: "CU:3 Buscar libros en el catálogo", path: "/books" },
         { name: "CU:7 Hacer reseñas y calificar libros", path: "/libros/reseñas" },
         { name: "CU:10 Generar reportes de uso", path: "/libros/reportes" },
         { name: "CU:14 Búsqueda avanzada de libros", path: "/libros/busqueda-avanzada" },

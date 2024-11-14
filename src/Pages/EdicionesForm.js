@@ -40,7 +40,7 @@ const EdicionForm = () => {
             reader.onloadend = async () => {
                 data.pdf = reader.result; // Esto convierte el PDF en una cadena base64
                 try {
-                    await axiosInstance.post('ediciones/upload-pdf/${edicionId}', data, {
+                    await axiosInstance.post(`ediciones/upload-pdf/ ${edicionId}`, data, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -54,7 +54,7 @@ const EdicionForm = () => {
             };
         } else {
             try {
-                await axiosInstance.post('/ediciones', data, { ///ediciones/upload-pdf/${edicionId}
+                await axiosInstance.post('/ediciones', data, {
                     headers: {
                         'Content-Type': 'application/json',
                     },

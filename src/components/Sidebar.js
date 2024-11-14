@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/logo.png';
+import { UserContext } from '../UserContext';
+import Logo from './assets/logo.png';
 
 const Sidebar = () => {
-
+    const { user } = useContext(UserContext);
     const [isAdminOpen, setIsAdminOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
     const toggleAdminMenu = () => setIsAdminOpen(!isAdminOpen);
 
+
+    if (!user || user.rol !== 4) {
+        return null;
+    }
 
     const adminLinks = [
         { name: "CU:8 Administrar Catalogo", path: "/admin/agregar-libro" },
@@ -32,21 +37,7 @@ const Sidebar = () => {
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="flex items-center justify-center p-4">
-                <img className="w-8 h-8" src={Logo} alt="Logo" />
-            </div>
-
-            {/* Barra de búsqueda, oculta cuando el sidebar está contraído */}
-            <div className={`relative mt-6 ${isHovered ? 'block' : 'hidden'}`}>
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
-                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                    </svg>
-                </span>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    className="w-full py-2 pl-10 pr-4 text-gray-700 bg-gray-800 border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-                />
+                <img className="w-12 h-12" src={Logo} alt="Logo" />
             </div>
 
             {/* Menú principal */}
@@ -56,10 +47,11 @@ const Sidebar = () => {
                     onClick={toggleAdminMenu}
                     className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white"
                 >
-                    <span className="mx-4 font-medium">Administración</span>
+                    <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>
+                        Administración
+                    </span>
                     <svg
-                        className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isAdminOpen ? 'rotate-90' : ''
-                        }`}
+                        className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isAdminOpen ? 'rotate-90' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -69,8 +61,8 @@ const Sidebar = () => {
                     </svg>
                 </button>
 
-                {/* Links de Administración, solo visibles cuando isAdminOpen es true */}
-                {isAdminOpen && (
+
+                {isAdminOpen && isHovered && (
                     <div className="pl-8 space-y-2">
                         {adminLinks.map((link) => (
                             <Link
@@ -78,7 +70,9 @@ const Sidebar = () => {
                                 to={link.path}
                                 className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white"
                             >
-                                {link.name}
+                                <span className={`${isHovered ? 'inline' : 'hidden'}`}>
+                                    {link.name}
+                                </span>
                             </Link>
                         ))}
                     </div>

@@ -15,6 +15,7 @@ const GestionarPrestamos = () => {
         comentario: '',
     });
     const [showPdf, setShowPdf] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     const fetchPrestamos = useCallback(async () => {
         if (!user || !user.miembroid) {
@@ -37,7 +38,7 @@ const GestionarPrestamos = () => {
         try {
             await axiosInstance.post(`users/prestamos/devolver/${prestamoid}`);
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
-            alert('Libro devuelto con éxito.');
+            setSuccessMessage('Libro devuelto con éxito.');
         } catch (error) {
             console.error('Error al devolver el libro:', error);
             alert('Error al devolver el libro. Intenta nuevamente.');
@@ -46,6 +47,18 @@ const GestionarPrestamos = () => {
 
     const togglePdfView = (edicionId) => {
         setShowPdf(showPdf === edicionId ? null : edicionId);
+    };
+
+    const handleReviewSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axiosInstance.post('/reviews', review);
+            setIsReviewFormVisible(false);
+            setSuccessMessage('Reseña enviada con éxito.');
+        } catch (error) {
+            console.error('Error al enviar la reseña:', error);
+            alert('Error al enviar la reseña. Intenta nuevamente.');
+        }
     };
 
     return (

@@ -29,56 +29,83 @@ const Sidebar = () => {
     ];
 
     return (
-        <div
-            className={`fixed top-0 left-0 h-full z-40 transition-all duration-300 ease-in-out transform ${
-                isHovered ? 'w-64' : 'w-16'
-            } bg-gray-900 text-white border-r border-gray-700`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <div className="flex items-center justify-center p-4">
-                <img className="w-12 h-12" src={Logo} alt="Logo" />
+        <>
+            {/* Botón de menú para dispositivos móviles */}
+            <button
+                className="md:hidden fixed top-4 left-4 z-50 p-2 text-white bg-gray-900 rounded-md"
+                onClick={toggleMobileSidebar}
+            >
+                <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            {/* Sidebar */}
+            <div
+                className={`fixed top-0 left-0 h-full z-40 transition-all duration-300 ease-in-out transform ${
+                    isHovered ? 'w-64' : 'w-16'
+                } ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 bg-gray-900 text-white border-r border-gray-700`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div className="flex items-center justify-center p-4">
+                    <img className="w-12 h-12" src={Logo} alt="Logo" />
+                </div>
+
+                {/* Menú principal */}
+                <nav className="flex flex-col mt-6 space-y-2">
+                    {/* Botón de Administración */}
+                    <button
+                        onClick={toggleAdminMenu}
+                        className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white"
+                    >
+                        <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>
+                            Administración
+                        </span>
+                        <svg
+                            className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isAdminOpen ? 'rotate-90' : ''}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+
+                    {isAdminOpen && isHovered && (
+                        <div className="pl-8 space-y-2">
+                            {adminLinks.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white"
+                                    onClick={() => setIsMobileOpen(false)} // Cerrar el sidebar en móviles al hacer clic en un link
+                                >
+                                    <span className={`${isHovered ? 'inline' : 'hidden'}`}>
+                                        {link.name}
+                                    </span>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </nav>
             </div>
 
-            {/* Menú principal */}
-            <nav className="flex flex-col mt-6 space-y-2">
-                {/* Botón de Administración */}
-                <button
-                    onClick={toggleAdminMenu}
-                    className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white"
-                >
-                    <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>
-                        Administración
-                    </span>
-                    <svg
-                        className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isAdminOpen ? 'rotate-90' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-
-
-                {isAdminOpen && isHovered && (
-                    <div className="pl-8 space-y-2">
-                        {adminLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white"
-                            >
-                                <span className={`${isHovered ? 'inline' : 'hidden'}`}>
-                                    {link.name}
-                                </span>
-                            </Link>
-                        ))}
-                    </div>
-                )}
-            </nav>
-        </div>
+            {/* Overlay para cerrar el sidebar en móviles */}
+            {isMobileOpen && (
+                <div
+                    className="fixed inset-0 z-30 bg-black opacity-50 md:hidden"
+                    onClick={toggleMobileSidebar}
+                ></div>
+            )}
+        </>
     );
 };
 

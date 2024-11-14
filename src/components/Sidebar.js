@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../UserContext';
 import Logo from '../assets/logo.png';
 
 const Sidebar = () => {
-    const { user } = useContext(UserContext);
+
     const [isAdminOpen, setIsAdminOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 

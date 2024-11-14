@@ -8,9 +8,9 @@ const EdicionForm = () => {
     const [fechaPublicacion, setFechaPublicacion] = useState('');
     const [tituloLibro, setTituloLibro] = useState('');
     const [nombreProveedor, setNombreProveedor] = useState('');
+    const [pdfFile, setPdfFile] = useState(null);
     const [edicionID, setEdicionID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
-    const [pdfFile, setPdfFile] = useState(null);
 
     const fetchEdiciones = async () => {
         try {
@@ -20,33 +20,28 @@ const EdicionForm = () => {
             console.error('Error obteniendo las ediciones:', error);
         }
     };
+
     useEffect(() => {
         fetchEdiciones();
     }, []);
 
+    const handlePdfChange = (e) => {
+        setPdfFile(e.target.files[0]);
+    };
+
     const insertarEdicion = async () => {
-        const data = {
-            isbn,
-            numero_edicion: numeroEdicion,
-            fecha_publicacion: fechaPublicacion,
-            titulo_libro: tituloLibro,
-            nombre_proveedor: nombreProveedor,
-        };
-
         try {
-            const response = await axiosInstance.post('/ediciones', data);
-            const edicionId = response.data.body.edicionid;
+            const formData = new FormData();
+            formData.append("isbn", isbn);
+            formData.append("numero_edicion", numeroEdicion);
+            formData.append("fecha_publicacion", fechaPublicacion);
+            formData.append("titulo_libro", tituloLibro);
+            formData.append("nombre_proveedor", nombreProveedor);
+            if (pdfFile) formData.append("pdf", pdfFile);
 
-            if (pdfFile && edicionId) {
-                const formData = new FormData();
-                formData.append('pdf', pdfFile);
-
-                await axiosInstance.post(`/ediciones/upload-pdf/${edicionId}`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-            }
+            await axiosInstance.post('/api/ediciones', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
 
             resetForm();
             setSuccessMessage('Edición agregada exitosamente');
@@ -57,22 +52,19 @@ const EdicionForm = () => {
     };
 
     const actualizarEdicion = async () => {
-        const formData = new FormData();
-        formData.append('isbn', isbn);
-        formData.append('numero_edicion', numeroEdicion);
-        formData.append('fecha_publicacion', fechaPublicacion);
-        formData.append('titulo_libro', tituloLibro);
-        formData.append('nombre_proveedor', nombreProveedor);
-        if (pdfFile) {
-            formData.append('pdf', pdfFile);
-        }
-
         try {
-            await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+            const formData = new FormData();
+            formData.append("isbn", isbn);
+            formData.append("numero_edicion", numeroEdicion);
+            formData.append("fecha_publicacion", fechaPublicacion);
+            formData.append("titulo_libro", tituloLibro);
+            formData.append("nombre_proveedor", nombreProveedor);
+            if (pdfFile) formData.append("pdf", pdfFile);
+
+            await axiosInstance.put(`/api/ediciones/${edicionID}`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
+
             resetForm();
             setSuccessMessage('Edición actualizada exitosamente');
             fetchEdiciones();
@@ -84,7 +76,7 @@ const EdicionForm = () => {
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {
             try {
-                await axiosInstance.delete(`/ediciones/${id}`);
+                await axiosInstance.delete(`/api/ediciones/${id}`);
                 setSuccessMessage('Edición eliminada exitosamente');
                 fetchEdiciones();
             } catch (error) {
@@ -99,8 +91,8 @@ const EdicionForm = () => {
         setFechaPublicacion('');
         setTituloLibro('');
         setNombreProveedor('');
-        setEdicionID(null);
         setPdfFile(null);
+        setEdicionID(null);
     };
 
     const handleSubmit = (e) => {
@@ -119,10 +111,6 @@ const EdicionForm = () => {
         setTituloLibro(edicion.titulo_libro);
         setNombreProveedor(edicion.nombre_proveedor);
         setEdicionID(edicion.edicionid);
-    };
-
-    const handlePdfChange = (e) => {
-        setPdfFile(e.target.files[0]);
     };
 
     return (
@@ -144,7 +132,53 @@ const EdicionForm = () => {
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>
-                <input type="file" onChange={handlePdfChange} />
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Número de Edición</label>
+                    <input
+                        type="text"
+                        value={numeroEdicion}
+                        onChange={(e) => setNumeroEdicion(e.target.value)}
+                        placeholder="Número de edición"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Fecha de Publicación</label>
+                    <input
+                        type="date"
+                        value={fechaPublicacion}
+                        onChange={(e) => setFechaPublicacion(e.target.value)}
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Titulo del Libro</label>
+                    <input
+                        type="text"
+                        value={tituloLibro}
+                        onChange={(e) => setTituloLibro(e.target.value)}
+                        placeholder="Titulo del Libro"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre del Proveedor</label>
+                    <input
+                        type="text"
+                        value={nombreProveedor}
+                        onChange={(e) => setNombreProveedor(e.target.value)}
+                        placeholder="Nombre del proveedor"
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Subir PDF</label>
+                    <input
+                        type="file"
+                        onChange={handlePdfChange}
+                        className="border border-gray-300 rounded-md py-2 px-4 w-full"
+                    />
+                </div>
                 <button type="submit" className={`w-full py-2 px-4 rounded-md text-white ${edicionID ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
                     {edicionID ? 'Actualizar Edición' : 'Agregar Edición'}
                 </button>
@@ -152,10 +186,28 @@ const EdicionForm = () => {
             <ul className="space-y-4">
                 {ediciones.map((edicion) => (
                     <li key={edicion.edicionid} className="border p-4 rounded-md shadow-md flex justify-between items-center">
-                        <span>{edicion.titulo_libro}</span>
                         <div>
-                            <button onClick={() => handleEdit(edicion)} className="bg-yellow-500 text-white p-2 rounded mr-2">Editar</button>
-                            <button onClick={() => eliminarEdicion(edicion.edicionid)} className="bg-red-500 text-white p-2 rounded">Eliminar</button>
+                            <h3 className="font-semibold text-lg">ISBN: {edicion.isbn}</h3>
+                            <p className="text-gray-500">Número de Edición: {edicion.numero_edicion}</p>
+                            <p className="text-gray-500">Fecha de Publicación: {edicion.fecha_publicacion}</p>
+                            {edicion.pdf_url && (
+                                <a
+                                    href={edicion.pdf_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    Ver PDF
+                                </a>
+                            )}
+                        </div>
+                        <div className="flex space-x-2">
+                            <button onClick={() => handleEdit(edicion)} className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600">
+                                Editar
+                            </button>
+                            <button onClick={() => eliminarEdicion(edicion.edicionid)} className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">
+                                Eliminar
+                            </button>
                         </div>
                     </li>
                 ))}
@@ -163,5 +215,6 @@ const EdicionForm = () => {
         </div>
     );
 };
+
 
 export default EdicionForm;

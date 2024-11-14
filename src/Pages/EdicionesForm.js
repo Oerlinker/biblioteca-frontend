@@ -25,6 +25,7 @@ const EdicionForm = () => {
         fetchEdiciones();
     }, []);
 
+
     const insertarEdicion = async () => {
         const data = {
             isbn,
@@ -33,38 +34,32 @@ const EdicionForm = () => {
             titulo_libro: tituloLibro,
             nombre_proveedor: nombreProveedor,
         };
-    
-        if (pdfFile) {
-            const reader = new FileReader();
-            reader.readAsDataURL(pdfFile);
-            reader.onloadend = async () => {
-                data.pdf = reader.result; // Esto convierte el PDF en una cadena base64
-                try {
-                    await axiosInstance.post('/ediciones', data, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-                    resetForm();
-                    setSuccessMessage('Edición agregada exitosamente');
-                    fetchEdiciones();
-                } catch (error) {
-                    console.error('Error insertando la edición:', error);
-                }
-            };
-        } else {
-            try {
-                await axiosInstance.post(`ediciones/upload-pdf/ ${edicionID}`, data, {
+
+        try {
+            const response = await axiosInstance.post('/ediciones', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const edicionId = response.data.id;
+
+            if (pdfFile) {
+                const formData = new FormData();
+                formData.append('pdf', pdfFile);
+
+                await axiosInstance.post(`/ediciones/upload-pdf/${edicionId}`, formData, {
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'multipart/form-data',
                     },
                 });
-                resetForm();
-                setSuccessMessage('Edición agregada exitosamente');
-                fetchEdiciones();
-            } catch (error) {
-                console.error('Error insertando la edición:', error);
             }
+
+            resetForm();
+            setSuccessMessage('Edición agregada exitosamente');
+            fetchEdiciones();
+        } catch (error) {
+            console.error('Error insertando la edición:', error);
         }
     };
 

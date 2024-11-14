@@ -37,27 +37,26 @@ const Sidebar = () => {
 
     const librosLinks = [
         { name: "CU:3 Buscar libros en el catálogo", path: "/books" },
-        { name: "CU:7 Hacer reseñas y calificar libros", path: "/libros/reseñas" },
-        { name: "CU:10 Generar reportes de uso", path: "/libros/reportes" },
-        { name: "CU:14 Búsqueda avanzada de libros", path: "/libros/busqueda-avanzada" },
-        { name: "CU:16 Ver detalles de un libro", path: "/libros/detalles" },
+        { name: "CU:7 Hacer reseñas y calificar libros", path: "/gestionar-prestamos" },
+        { name: "CU:14 Búsqueda avanzada de libros", path: "/books" },
+        { name: "CU:16 Ver detalles de un libro", path: "/books" },
     ];
 
     const prestamosLinks = [
-        { name: "CU:4 Solicitar préstamo de un libro", path: "/prestamos/solicitar" },
-        { name: "CU:5 Gestionar préstamos", path: "/prestamos/gestionar" },
-        { name: "CU:6 Devolver un libro", path: "/prestamos/devolver" },
-        { name: "CU:21 Leer libros", path: "/prestamos/leer" },
+        { name: "CU:4 Solicitar préstamo de un libro", path: "/books" },
+        { name: "CU:5 Gestionar préstamos", path: "/gestionar-prestamos" },
+        { name: "CU:6 Devolver un libro", path: "/gestionar-prestamos" },
+        { name: "CU:21 Leer libros", path: "/gestionar-prestamos" },
     ];
 
     const usuariosLinks = [
-        { name: "CU:1 Registrarse en el sistema", path: "/usuarios/registrarse" },
-        { name: "CU:2 Iniciar sesión", path: "/usuarios/iniciar-sesion" },
-        { name: "CU:17 Acceder como visitante", path: "/usuarios/visitante" },
-        { name: "CU:18 Ver historial de préstamos y actividad", path: "/usuarios/historial" },
-        { name: "CU:15 Modificar perfil", path: "/usuarios/modificar-perfil" },
-        { name: "CU:19 Marcar posición de lectura", path: "/usuarios/marcar-posicion" },
-        { name: "CU:20 Ver historial de libros leídos", path: "/usuarios/historial-leidos" },
+        { name: "CU:1 Registrarse en el sistema", path: "/register" },
+        { name: "CU:2 Iniciar sesión", path: "/login" },
+        { name: "CU:17 Acceder como visitante", path: "/" },
+        { name: "CU:18 Ver historial de préstamos y actividad", path: "/gestionar-prestamos" },
+        { name: "CU:15 Modificar perfil", path: "/account/*" },
+        { name: "CU:19 Marcar posición de lectura", path: "/gestionar-prestamos" },
+        { name: "CU:20 Ver historial de libros leídos", path: "/gestionar-prestamos" },
     ];
 
     return (

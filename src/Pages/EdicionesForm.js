@@ -10,7 +10,7 @@ const EdicionForm = () => {
     const [nombreProveedor, setNombreProveedor] = useState('');
     const [edicionID, setEdicionID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
-    const [pdfFile, setPdfFile] = useState(null); // Estado para el archivo PDF
+    const [pdfFile, setPdfFile] = useState(null);
 
     const fetchEdiciones = async () => {
         try {
@@ -34,17 +34,9 @@ const EdicionForm = () => {
         };
 
         try {
-            // Crear la edición sin el PDF inicialmente
-            const response = await axiosInstance.post('/ediciones', data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            // Obtén el ID de la nueva edición desde la respuesta del backend
+            const response = await axiosInstance.post('/ediciones', data);
             const edicionId = response.data.body.edicionid;
 
-            // Si hay un archivo PDF seleccionado y un ID de edición, realiza la carga del PDF
             if (pdfFile && edicionId) {
                 const formData = new FormData();
                 formData.append('pdf', pdfFile);
@@ -108,7 +100,7 @@ const EdicionForm = () => {
         setTituloLibro('');
         setNombreProveedor('');
         setEdicionID(null);
-        setPdfFile(null); // Resetear el archivo PDF
+        setPdfFile(null);
     };
 
     const handleSubmit = (e) => {
@@ -142,7 +134,6 @@ const EdicionForm = () => {
                 </div>
             )}
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
-                {/* Campos del formulario */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">ISBN</label>
                     <input
@@ -153,7 +144,7 @@ const EdicionForm = () => {
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                 </div>
-                {/* Resto de campos */}
+                <input type="file" onChange={handlePdfChange} />
                 <button type="submit" className={`w-full py-2 px-4 rounded-md text-white ${edicionID ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
                     {edicionID ? 'Actualizar Edición' : 'Agregar Edición'}
                 </button>
@@ -161,7 +152,11 @@ const EdicionForm = () => {
             <ul className="space-y-4">
                 {ediciones.map((edicion) => (
                     <li key={edicion.edicionid} className="border p-4 rounded-md shadow-md flex justify-between items-center">
-                        {/* Datos de la edición */}
+                        <span>{edicion.titulo_libro}</span>
+                        <div>
+                            <button onClick={() => handleEdit(edicion)} className="bg-yellow-500 text-white p-2 rounded mr-2">Editar</button>
+                            <button onClick={() => eliminarEdicion(edicion.edicionid)} className="bg-red-500 text-white p-2 rounded">Eliminar</button>
+                        </div>
                     </li>
                 ))}
             </ul>

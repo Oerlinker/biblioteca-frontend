@@ -9,7 +9,6 @@ const AutorForm = () => {
     const [autorID, setAutorID] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    // Fetch autores
     const fetchAutores = async () => {
         try {
             const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/autores');
@@ -23,7 +22,6 @@ const AutorForm = () => {
         fetchAutores();
     }, []);
 
-    // Insertar autor
     const insertarAutor = async () => {
         try {
             await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/autores', {
@@ -39,7 +37,6 @@ const AutorForm = () => {
         }
     };
 
-    // Actualizar autor
     const actualizarAutor = async () => {
         try {
             await axiosInstance.put(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${autorID}`, {
@@ -55,7 +52,6 @@ const AutorForm = () => {
         }
     };
 
-    // Eliminar autor con confirmación
     const eliminarAutor = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este autor?')) {
             try {
@@ -68,7 +64,6 @@ const AutorForm = () => {
         }
     };
 
-    // Reset form
     const resetForm = () => {
         setNombre('');
         setBiografia('');
@@ -76,7 +71,6 @@ const AutorForm = () => {
         setAutorID(null);
     };
 
-    // Manejar el submit del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         if (autorID) {
@@ -86,7 +80,6 @@ const AutorForm = () => {
         }
     };
 
-    // Manejar la selección de un autor para editar
     const handleEdit = (autor) => {
         setNombre(autor.nombre);
         setBiografia(autor.biografia);

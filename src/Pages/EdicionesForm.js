@@ -12,7 +12,6 @@ const EdicionForm = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [pdfFile, setPdfFile] = useState(null); // Estado para el archivo PDF
 
-
     const fetchEdiciones = async () => {
         try {
             const response = await axiosInstance.get('ediciones');
@@ -38,9 +37,9 @@ const EdicionForm = () => {
         }
 
         try {
-            await axiosInstance.post('ediciones', formData, {
+            await axiosInstance.post('/ediciones', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data', // Asegurarse de que se maneje como formulario con archivo
+                    'Content-Type': 'multipart/form-data',
                 },
             });
             resetForm();
@@ -59,11 +58,11 @@ const EdicionForm = () => {
         formData.append('titulo_libro', tituloLibro);
         formData.append('nombre_proveedor', nombreProveedor);
         if (pdfFile) {
-            formData.append('pdf', pdfFile); // Agregar el archivo PDF si existe
+            formData.append('pdf', pdfFile);
         }
 
         try {
-            await axiosInstance.put(`ediciones/${edicionID}`, formData, {
+            await axiosInstance.put(`/ediciones/${edicionID}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -79,7 +78,7 @@ const EdicionForm = () => {
     const eliminarEdicion = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar esta edición?')) {
             try {
-                await axiosInstance.delete(`ediciones/${id}`);
+                await axiosInstance.delete(`/ediciones/${id}`);
                 setSuccessMessage('Edición eliminada exitosamente');
                 fetchEdiciones();
             } catch (error) {

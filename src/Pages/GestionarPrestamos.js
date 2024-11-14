@@ -34,8 +34,42 @@ const GestionarPrestamos = () => {
         fetchPrestamos();
     }, [user, fetchPrestamos]);
 
+    const handleDevolucion = async (prestamoid) => {
+        try {
+            await axiosInstance.post(`users/prestamos/devolver/${prestamoid}`);
+            setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
+            setSuccessMessage('Libro devuelto con éxito.');
+            setTimeout(() => setSuccessMessage(''), 3000);
+        } catch (error) {
+            console.error('Error al devolver el libro:', error);
+            alert('Error al devolver el libro. Intenta nuevamente.');
+        }
+    };
+
     const togglePdfView = (edicionId) => {
         setShowPdf(showPdf === edicionId ? null : edicionId);
+    };
+
+    const handleReviewSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axiosInstance.post(`reviews/${review.edicionid}`, {
+                calificacion: review.calificacion,
+                comentario: review.comentario,
+                libroid: review.libroid,
+            });
+            setSuccessMessage('Reseña enviada con éxito.');
+            setTimeout(() => setSuccessMessage(''), 3000);
+            setReview({
+                edicionid: null,
+                libroid: null,
+                calificacion: 0,
+                comentario: '',
+            });
+            setIsReviewFormVisible(false);
+        } catch (error) {
+            console.error('Error al enviar reseña:', error);
+        }
     };
 
     return (
@@ -56,8 +90,24 @@ const GestionarPrestamos = () => {
                                 <p><strong>Fecha de Devolución:</strong> {moment(prestamo.fecha_devolucion).format('DD/MM/YYYY')}</p>
                             </div>
                             <div className="mt-4 md:mt-0 flex space-x-2">
+                                <button onClick={() => handleDevolucion(prestamo.prestamoid)} className="bg-blue-500 text-white px-3 py-1 rounded">
+                                    Devolver
+                                </button>
                                 <button onClick={() => togglePdfView(prestamo.edicionid)} className="bg-teal-500 text-white px-3 py-1 rounded">
                                     {showPdf === prestamo.edicionid ? 'Cerrar PDF' : 'Ver PDF'}
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setIsReviewFormVisible(true);
+                                        setReview((prev) => ({
+                                            ...prev,
+                                            edicionid: prestamo.edicionid,
+                                            libroid: prestamo.libroid,
+                                        }));
+                                    }}
+                                    className="bg-yellow-500 text-white px-3 py-1 rounded"
+                                >
+                                    Reseñar
                                 </button>
                             </div>
                         </div>
@@ -69,6 +119,35 @@ const GestionarPrestamos = () => {
                     </li>
                 ))}
             </ul>
+
+            {isReviewFormVisible && (
+                <form onSubmit={handleReviewSubmit} className="mt-8 p-4 border rounded-md shadow-md bg-white max-w-md mx-auto">
+                    <h3 className="text-lg font-semibold mb-4">Enviar Reseña</h3>
+                    <label className="block mb-2">Calificación (1-5):</label>
+                    <input
+                        type="number"
+                        min="1"
+                        max="5"
+                        value={review.calificacion}
+                        onChange={(e) => setReview({ ...review, calificacion: e.target.value })}
+                        className="w-full mb-4 p-2 border rounded"
+                    />
+                    <label className="block mb-2">Comentario:</label>
+                    <textarea
+                        value={review.comentario}
+                        onChange={(e) => setReview({ ...review, comentario: e.target.value })}
+                        className="w-full mb-4 p-2 border rounded"
+                    />
+                    <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">Enviar Reseña</button>
+                    <button
+                        type="button"
+                        onClick={() => setIsReviewFormVisible(false)}
+                        className="ml-2 bg-gray-300 px-4 py-2 rounded"
+                    >
+                        Cancelar
+                    </button>
+                </form>
+            )}
         </div>
     );
 };

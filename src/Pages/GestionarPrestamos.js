@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useCallback } from 'react';
 import moment from 'moment-timezone';
 import axiosInstance from "../components/axiosInstance";
 import { UserContext } from '../UserContext';
+import VerPdf from './VerPdf';
 
 const GestionarPrestamos = () => {
     const { user } = useContext(UserContext);
@@ -14,6 +15,7 @@ const GestionarPrestamos = () => {
         calificacion: 0,
         comentario: '',
     });
+    const [showPdf, setShowPdf] = useState(null); // Track which PDF is being shown
 
     const fetchPrestamos = useCallback(async () => {
         if (!user || !user.miembroid) {
@@ -72,6 +74,10 @@ const GestionarPrestamos = () => {
         } catch (error) {
             console.error('Error al enviar la reseña:', error);
         }
+    };
+
+    const togglePdfView = (edicionId) => {
+        setShowPdf(showPdf === edicionId ? null : edicionId); // Toggle the PDF viewer
     };
 
     return (
@@ -140,20 +146,16 @@ const GestionarPrestamos = () => {
                                     }}>
                                         {isReviewFormVisible === prestamo.prestamoid ? 'Cancelar Reseña' : 'Hacer Reseña'}
                                     </button>
-                                    <a href={`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/download-pdf/${prestamo.edicionid}`}
-                                       target="_blank"
-                                       rel="noopener noreferrer"
-                                       style={{
-                                           backgroundColor: '#17a2b8',
-                                           color: 'white',
-                                           border: 'none',
-                                           borderRadius: '5px',
-                                           padding: '10px 15px',
-                                           textDecoration: 'none',
-                                           textAlign: 'center'
-                                       }}>
-                                        Ver PDF
-                                    </a>
+                                    <button onClick={() => togglePdfView(prestamo.edicionid)} style={{
+                                        backgroundColor: '#17a2b8',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer',
+                                    }}>
+                                        {showPdf === prestamo.edicionid ? 'Cerrar PDF' : 'Ver PDF'}
+                                    </button>
                                 </div>
                             </div>
                             {isReviewFormVisible === prestamo.prestamoid && (
@@ -187,6 +189,11 @@ const GestionarPrestamos = () => {
                                         cursor: 'pointer'
                                     }}>Enviar Reseña</button>
                                 </form>
+                            )}
+                            {showPdf === prestamo.edicionid && (
+                                <div style={{ marginTop: '10px' }}>
+                                    <VerPdf edicionId={prestamo.edicionid} />
+                                </div>
                             )}
                         </li>
                     ))}

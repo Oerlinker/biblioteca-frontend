@@ -19,22 +19,22 @@ const BookDetail = () => {
 
     const fetchBookDetails = useCallback(async () => {
         try {
-            const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}`);
+            const response = await axiosInstance.get(`/libros/${id}`);
             setBook(response.data);
 
-            const autorResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/autores/${response.data.autorid}`);
+            const autorResponse = await axiosInstance.get(`/autores/${response.data.autorid}`);
             setAutor(autorResponse.data.nombre);
 
-            const editorialResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/editoriales/${response.data.editorialid}`);
+            const editorialResponse = await axiosInstance.get(`/editoriales/${response.data.editorialid}`);
             setEditorial(editorialResponse.data.nombre_editorial);
 
-            const categoriaResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/categorias/${response.data.categoriaid}`);
+            const categoriaResponse = await axiosInstance.get(`/categorias/${response.data.categoriaid}`);
             setCategoria(categoriaResponse.data.nombre_categoria);
 
-            const edicionesResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/libros/${id}/ediciones`);
+            const edicionesResponse = await axiosInstance.get(`/libros/${id}/ediciones`);
             setEdicionesDisponibles(edicionesResponse.data);
 
-            const disponibilidadResponse = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos/${id}/disponibilidad`);
+            const disponibilidadResponse = await axiosInstance.get(`/prestamos/${id}/disponibilidad`);
             setDisponible(disponibilidadResponse.data.disponible);
             console.log('Disponibilidad:', disponibilidadResponse.data);
 
@@ -65,7 +65,7 @@ const BookDetail = () => {
     const handleSolicitarPrestamo = async (edicionidSeleccionada) => {
         if (user && book && disponible) {
             try {
-                await axiosInstance.post(`https://backend-proyecto-production-13fc.up.railway.app/api/prestamos`, {
+                await axiosInstance.post(`/prestamos`, {
                     id: user.id,
                     miembroid: user.miembroid,
                     edicionid: edicionidSeleccionada,

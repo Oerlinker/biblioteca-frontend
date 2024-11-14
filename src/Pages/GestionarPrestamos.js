@@ -76,8 +76,16 @@ const GestionarPrestamos = () => {
         }
     };
 
-    const togglePdfView = (edicionId) => {
-        setShowPdf(showPdf === edicionId ? null : edicionId); // Toggle the PDF viewer
+    const togglePdfView = (edicionId, pdfUrl) => {
+        if (showPdf === edicionId) {
+            setShowPdf(null); // Cerrar el PDF
+        } else {
+            setShowPdf(edicionId);
+            // Abre una nueva ventana en móvil como respaldo
+            if (window.innerWidth < 768) {
+                window.open(pdfUrl, '_blank');
+            }
+        }
     };
 
     return (

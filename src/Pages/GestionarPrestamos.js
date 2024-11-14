@@ -18,7 +18,7 @@ const GestionarPrestamos = () => {
     const fetchPrestamos = useCallback(async () => {
         if (!user || !user.miembroid) {
             console.error("miembroid no está definido");
-            return; // Evita hacer la solicitud si miembroid es undefined
+            return;
         }
         try {
             const response = await axiosInstance.get(`/users/prestamos/activos/${user.miembroid}`);
@@ -53,7 +53,6 @@ const GestionarPrestamos = () => {
 
     const handleSubmitReview = async (e) => {
         e.preventDefault();
-        console.log('reseña', review);
         try {
             await axiosInstance.post(`users/review`, {
                 id: user.id,
@@ -111,7 +110,7 @@ const GestionarPrestamos = () => {
                                     </p>
                                 </div>
                                 <div style={{ display: 'flex', gap: '10px' }}>
-                                    <button onClick={() => handleDevolucion(prestamo.prestamoid, prestamo.edicionid)} style={{
+                                    <button onClick={() => handleDevolucion(prestamo.prestamoid)} style={{
                                         backgroundColor: '#007BFF',
                                         color: 'white',
                                         border: 'none',
@@ -128,7 +127,6 @@ const GestionarPrestamos = () => {
                                                 edicionid: prestamo.edicionid,
                                                 libroid: prestamo.libroid,
                                             };
-                                            console.log('Updated review state:', updatedReview);
                                             return updatedReview;
                                         });
                                         setIsReviewFormVisible(isReviewFormVisible === prestamo.prestamoid ? null : prestamo.prestamoid);
@@ -142,6 +140,20 @@ const GestionarPrestamos = () => {
                                     }}>
                                         {isReviewFormVisible === prestamo.prestamoid ? 'Cancelar Reseña' : 'Hacer Reseña'}
                                     </button>
+                                    <a href={`https://backend-proyecto-production-13fc.up.railway.app/api/ediciones/download-pdf/${prestamo.edicionid}`}
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       style={{
+                                           backgroundColor: '#17a2b8',
+                                           color: 'white',
+                                           border: 'none',
+                                           borderRadius: '5px',
+                                           padding: '10px 15px',
+                                           textDecoration: 'none',
+                                           textAlign: 'center'
+                                       }}>
+                                        Ver PDF
+                                    </a>
                                 </div>
                             </div>
                             {isReviewFormVisible === prestamo.prestamoid && (

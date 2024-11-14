@@ -18,45 +18,45 @@ const Sidebar = () => {
     const toggleUsuariosMenu = () => setIsUsuariosOpen(!isUsuariosOpen);
     const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
 
-    if (!user || user.rol !== 4) {
+    if (!user) {
         return null;
     }
 
     const adminLinks = [
-        { name: "CU:8 Administrar Catalogo", path: "/admin/agregar-libro" },
-        { name: "CU:8 Administrar Autores", path: "/admin/gestionar-autores" },
-        { name: "CU:8 Administrar Editoriales", path: "/admin/gestionar-editoriales" },
-        { name: "CU:8 Administrar Categorias", path: "/admin/gestionar-categorias" },
-        { name: "CU:8 Administrar Ediciones", path: "/admin/gestionar-ediciones" },
-        { name: "CU:11&12 Infor/Administrar Proveedores", path: "/admin/gestionar-proveedores" },
-        { name: "Reporte de Usuario", path: "/admin/administrar-usuarios/getall-usuarios" },
-        { name: "CU:9 Administrar Miembros", path: "/admin/administrar-usuarios/administrar-roles" },
-        { name: "CU:10 Generar Reporte De Uso", path: "/admin/administrar-usuarios/activity-log" },
-        { name: "Reporte de Miembros", path: "/admin/administrar-usuarios/administrar-miembros" },
+        { name: "CU:8 Administrar Catalogo", path: "/admin/agregar-libro", roles: [3, 4] },
+        { name: "CU:8 Administrar Autores", path: "/admin/gestionar-autores", roles: [3, 4] },
+        { name: "CU:8 Administrar Editoriales", path: "/admin/gestionar-editoriales", roles: [3, 4] },
+        { name: "CU:8 Administrar Categorias", path: "/admin/gestionar-categorias", roles: [3, 4] },
+        { name: "CU:8 Administrar Ediciones", path: "/admin/gestionar-ediciones", roles: [3, 4] },
+        { name: "CU:11&12 Infor/Administrar Proveedores", path: "/admin/gestionar-proveedores", roles: [4] },
+        { name: "Reporte de Usuario", path: "/admin/administrar-usuarios/getall-usuarios", roles: [4] },
+        { name: "CU:9 Administrar Miembros", path: "/admin/administrar-usuarios/administrar-roles", roles: [4] },
+        { name: "CU:10 Generar Reporte De Uso", path: "/admin/administrar-usuarios/activity-log", roles: [4] },
+        { name: "Reporte de Miembros", path: "/admin/administrar-usuarios/administrar-miembros", roles: [4] },
     ];
 
     const librosLinks = [
-        { name: "CU:3 Buscar libros en el catálogo", path: "/books" },
-        { name: "CU:7 Hacer reseñas y calificar libros", path: "/gestionar-prestamos" },
-        { name: "CU:14 Búsqueda avanzada de libros", path: "/books" },
-        { name: "CU:16 Ver detalles de un libro", path: "/books" },
+        { name: "CU:3 Buscar libros en el catálogo", path: "/books", roles: [1, 2, 3, 4] },
+        { name: "CU:7 Hacer reseñas y calificar libros", path: "/gestionar-prestamos", roles: [2] },
+        { name: "CU:14 Búsqueda avanzada de libros", path: "/books", roles: [2] },
+        { name: "CU:16 Ver detalles de un libro", path: "/books", roles: [2, 3, 4] },
     ];
 
     const prestamosLinks = [
-        { name: "CU:4 Solicitar préstamo de un libro", path: "/books" },
-        { name: "CU:5 Gestionar préstamos", path: "/gestionar-prestamos" },
-        { name: "CU:6 Devolver un libro", path: "/gestionar-prestamos" },
-        { name: "CU:21 Leer libros", path: "/gestionar-prestamos" },
+        { name: "CU:4 Solicitar préstamo de un libro", path: "/books", roles: [2] },
+        { name: "CU:5 Gestionar préstamos", path: "/gestionar-prestamos", roles: [2] },
+        { name: "CU:6 Devolver un libro", path: "/gestionar-prestamos", roles: [2] },
+        { name: "CU:21 Leer libros", path: "/gestionar-prestamos", roles: [2] },
     ];
 
     const usuariosLinks = [
-        { name: "CU:1 Registrarse en el sistema", path: "/register" },
-        { name: "CU:2 Iniciar sesión", path: "/login" },
-        { name: "CU:17 Acceder como visitante", path: "/" },
-        { name: "CU:18 Ver historial de préstamos y actividad", path: "/gestionar-prestamos" },
-        { name: "CU:15 Modificar perfil", path: "/account/*" },
-        { name: "CU:19 Marcar posición de lectura", path: "/gestionar-prestamos" },
-        { name: "CU:20 Ver historial de libros leídos", path: "/gestionar-prestamos" },
+        { name: "CU:1 Registrarse en el sistema", path: "/register", roles: [1] },
+        { name: "CU:2 Iniciar sesión", path: "/login", roles: [1] },
+        { name: "CU:17 Acceder como visitante", path: "/", roles: [1, 2, 3, 4] },
+        { name: "CU:18 Ver historial de préstamos y actividad", path: "/gestionar-prestamos", roles: [2] },
+        { name: "CU:15 Modificar perfil", path: "/account/*", roles: [2] },
+        { name: "CU:19 Marcar posición de lectura", path: "/gestionar-prestamos", roles: [2] },
+        { name: "CU:20 Ver historial de libros leídos", path: "/gestionar-prestamos", roles: [2] },
     ];
 
     return (
@@ -66,13 +66,7 @@ const Sidebar = () => {
                 className="md:hidden fixed top-4 left-4 z-50 p-2 text-white bg-gray-900 rounded-md"
                 onClick={toggleMobileSidebar}
             >
-                <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
@@ -94,77 +88,72 @@ const Sidebar = () => {
                     {/* Paquete de Administración */}
                     <button onClick={toggleAdminMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
                         <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Administración</span>
-                        <svg className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isAdminOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </button>
                     {isAdminOpen && isHovered && (
                         <div className="pl-8 space-y-2">
-                            {adminLinks.map(link => (
-                                <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                    {link.name}
-                                </Link>
-                            ))}
+                            {adminLinks
+                                .filter(link => link.roles.includes(user.rol))
+                                .map(link => (
+                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
+                                        {link.name}
+                                    </Link>
+                                ))
+                            }
                         </div>
                     )}
 
                     {/* Paquete de Libros */}
                     <button onClick={toggleLibrosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
                         <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Libros</span>
-                        <svg className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isLibrosOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </button>
                     {isLibrosOpen && isHovered && (
                         <div className="pl-8 space-y-2">
-                            {librosLinks.map(link => (
-                                <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                    {link.name}
-                                </Link>
-                            ))}
+                            {librosLinks
+                                .filter(link => link.roles.includes(user.rol))
+                                .map(link => (
+                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
+                                        {link.name}
+                                    </Link>
+                                ))
+                            }
                         </div>
                     )}
 
                     {/* Paquete de Préstamos */}
                     <button onClick={togglePrestamosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
                         <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Préstamos</span>
-                        <svg className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isPrestamosOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </button>
                     {isPrestamosOpen && isHovered && (
                         <div className="pl-8 space-y-2">
-                            {prestamosLinks.map(link => (
-                                <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                    {link.name}
-                                </Link>
-                            ))}
+                            {prestamosLinks
+                                .filter(link => link.roles.includes(user.rol))
+                                .map(link => (
+                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
+                                        {link.name}
+                                    </Link>
+                                ))
+                            }
                         </div>
                     )}
 
                     {/* Paquete de Usuarios */}
                     <button onClick={toggleUsuariosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
                         <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Usuarios</span>
-                        <svg className={`w-5 h-5 ml-auto transform transition-transform duration-300 ${isUsuariosOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </button>
                     {isUsuariosOpen && isHovered && (
                         <div className="pl-8 space-y-2">
-                            {usuariosLinks.map(link => (
-                                <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                    {link.name}
-                                </Link>
-                            ))}
+                            {usuariosLinks
+                                .filter(link => link.roles.includes(user.rol))
+                                .map(link => (
+                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
+                                        {link.name}
+                                    </Link>
+                                ))
+                            }
                         </div>
                     )}
                 </nav>
             </div>
-
-            {/* Overlay para cerrar el sidebar en móviles */}
-            {isMobileOpen && (
-                <div className="fixed inset-0 z-30 bg-black opacity-50 md:hidden" onClick={toggleMobileSidebar}></div>
-            )}
         </>
     );
 };

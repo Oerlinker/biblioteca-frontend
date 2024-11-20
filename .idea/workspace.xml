@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="responsive 3.O">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SubscriptionForm.js" afterDir="false" />
-    </list>
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="responsive 3.O" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +117,7 @@
       <workItem from="1731593604869" duration="1686000" />
       <workItem from="1731788331307" duration="6478000" />
       <workItem from="1731802179905" duration="6567000" />
-      <workItem from="1732071095718" duration="6579000" />
+      <workItem from="1732071095718" duration="6918000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />

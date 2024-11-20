@@ -48,22 +48,6 @@ const SubscriptionForm = () => {
         }
     };
 
-    useEffect(() => {
-        // Fetch updated user data when user state changes
-        const fetchUpdatedUser = async () => {
-            try {
-                const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`);
-                setUser(response.data);
-            } catch (error) {
-                console.error('Error fetching updated user data:', error);
-            }
-        };
-
-        if (user?.id) {
-            fetchUpdatedUser();
-        }
-    }, [user?.id, setUser]);
-
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
             {/* Imagen de fondo */}

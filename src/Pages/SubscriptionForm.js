@@ -91,7 +91,7 @@ const SubscriptionForm = () => {
                         type="text"
                         value={semestre}
                         onChange={(e) => setSemestre(e.target.value)}
-                        placeholder="Semestre"
+                        placeholder="Semestre Ej:8"
                         className="border border-gray-300 rounded-md py-2 px-4 w-full"
                     />
                     <input

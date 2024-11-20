@@ -24,26 +24,16 @@ const SubscriptionForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const usuarioid = user?.id;
+            const usuarioid = user.id;
 
-            console.log('Payload being sent:', {
+            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
                 nombre,
                 telefono,
                 direccion,
                 carrera,
                 semestre,
                 registro,
-                usuarioid, // Check if this is null or undefined
-            });
-
-            await axiosInstance.post('/create-subscription', {
-                nombre,
-                telefono,
-                direccion,
-                carrera,
-                semestre,
-                registro,
-                usuarioid,
+                usuarioid
             });
 
             // Update user context
@@ -51,7 +41,7 @@ const SubscriptionForm = () => {
             setUser(updatedUser);
 
             alert('Suscripción creada con éxito');
-            navigate('/');
+            navigate('/'); // Redirect to home page
         } catch (error) {
             console.error('Error creando la suscripción', error);
             alert('Error creando la suscripción');
@@ -62,7 +52,7 @@ const SubscriptionForm = () => {
         // Fetch updated user data when user state changes
         const fetchUpdatedUser = async () => {
             try {
-                const response = await axiosInstance.get(`/users/${user.id}`);
+                const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`);
                 setUser(response.data);
             } catch (error) {
                 console.error('Error fetching updated user data:', error);

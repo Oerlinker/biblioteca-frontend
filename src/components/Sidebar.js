@@ -6,9 +6,6 @@ import Logo from '../assets/logo.png';
 const Sidebar = () => {
     const { user } = useContext(UserContext);
     const [isAdminOpen, setIsAdminOpen] = useState(false);
-    const [isLibrosOpen, setIsLibrosOpen] = useState(false);
-    const [isPrestamosOpen, setIsPrestamosOpen] = useState(false);
-    const [isUsuariosOpen, setIsUsuariosOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 

@@ -26,6 +26,16 @@ const SubscriptionForm = () => {
         try {
             const usuarioid = user?.id;
 
+            console.log('Payload being sent:', {
+                nombre,
+                telefono,
+                direccion,
+                carrera,
+                semestre,
+                registro,
+                usuarioid, // Check if this is null or undefined
+            });
+
             await axiosInstance.post('/create-subscription', {
                 nombre,
                 telefono,
@@ -33,7 +43,7 @@ const SubscriptionForm = () => {
                 carrera,
                 semestre,
                 registro,
-                usuarioid
+                usuarioid,
             });
 
             // Update user context
@@ -41,7 +51,7 @@ const SubscriptionForm = () => {
             setUser(updatedUser);
 
             alert('Suscripción creada con éxito');
-            navigate('/'); // Redirect to home page
+            navigate('/');
         } catch (error) {
             console.error('Error creando la suscripción', error);
             alert('Error creando la suscripción');

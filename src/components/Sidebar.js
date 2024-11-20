@@ -18,7 +18,6 @@ const Sidebar = () => {
     const toggleUsuariosMenu = () => setIsUsuariosOpen(!isUsuariosOpen);
     const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
 
-
     if (!user || (user.rol !== 3 && user.rol !== 4)) {
         return null;
     }
@@ -69,57 +68,6 @@ const Sidebar = () => {
                     {isAdminOpen && isHovered && (
                         <div className="pl-8 space-y-2">
                             {adminLinks
-                                .filter(link => link.roles.includes(user.rol))
-                                .map(link => (
-                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                        {link.name}
-                                    </Link>
-                                ))
-                            }
-                        </div>
-                    )}
-
-                    {/* Paquete de Libros */}
-                    <button onClick={toggleLibrosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
-                        <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Libros</span>
-                    </button>
-                    {isLibrosOpen && isHovered && (
-                        <div className="pl-8 space-y-2">
-                            {librosLinks
-                                .filter(link => link.roles.includes(user.rol))
-                                .map(link => (
-                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                        {link.name}
-                                    </Link>
-                                ))
-                            }
-                        </div>
-                    )}
-
-                    {/* Paquete de Préstamos */}
-                    <button onClick={togglePrestamosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
-                        <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Préstamos</span>
-                    </button>
-                    {isPrestamosOpen && isHovered && (
-                        <div className="pl-8 space-y-2">
-                            {prestamosLinks
-                                .filter(link => link.roles.includes(user.rol))
-                                .map(link => (
-                                    <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>
-                                        {link.name}
-                                    </Link>
-                                ))
-                            }
-                        </div>
-                    )}
-
-                    {/* Paquete de Usuarios */}
-                    <button onClick={toggleUsuariosMenu} className="flex items-center w-full px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700 hover:text-white">
-                        <span className={`mx-4 font-medium ${isHovered ? 'inline' : 'hidden'}`}>Usuarios</span>
-                    </button>
-                    {isUsuariosOpen && isHovered && (
-                        <div className="pl-8 space-y-2">
-                            {usuariosLinks
                                 .filter(link => link.roles.includes(user.rol))
                                 .map(link => (
                                     <Link key={link.name} to={link.path} className="block px-4 py-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white" onClick={() => setIsMobileOpen(false)}>

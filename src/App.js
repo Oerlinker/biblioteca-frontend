@@ -32,7 +32,7 @@ function App() {
     const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
             const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };

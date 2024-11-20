@@ -26,7 +26,7 @@ const SubscriptionForm = () => {
         try {
             const usuarioid = user?.id;
 
-            await axiosInstance.post('https://backend-proyecto-production-13fc.up.railway.app/api/create-subscription', {
+            await axiosInstance.post('/create-subscription', {
                 nombre,
                 telefono,
                 direccion,
@@ -52,7 +52,7 @@ const SubscriptionForm = () => {
         // Fetch updated user data when user state changes
         const fetchUpdatedUser = async () => {
             try {
-                const response = await axiosInstance.get(`https://backend-proyecto-production-13fc.up.railway.app/api/users/${user.id}`);
+                const response = await axiosInstance.get(`/users/${user.id}`);
                 setUser(response.data);
             } catch (error) {
                 console.error('Error fetching updated user data:', error);

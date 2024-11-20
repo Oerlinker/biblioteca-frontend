@@ -13,9 +13,6 @@ const Sidebar = () => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 
     const toggleAdminMenu = () => setIsAdminOpen(!isAdminOpen);
-    const toggleLibrosMenu = () => setIsLibrosOpen(!isLibrosOpen);
-    const togglePrestamosMenu = () => setIsPrestamosOpen(!isPrestamosOpen);
-    const toggleUsuariosMenu = () => setIsUsuariosOpen(!isUsuariosOpen);
     const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
 
     if (!user || (user.rol !== 3 && user.rol !== 4)) {

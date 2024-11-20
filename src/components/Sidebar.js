@@ -18,7 +18,8 @@ const Sidebar = () => {
     const toggleUsuariosMenu = () => setIsUsuariosOpen(!isUsuariosOpen);
     const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
 
-    if (!user) {
+
+    if (!user || (user.rol !== 3 && user.rol !== 4)) {
         return null;
     }
 
@@ -33,31 +34,6 @@ const Sidebar = () => {
         { name: "CU:9 Administrar Miembros", path: "/admin/administrar-usuarios/administrar-roles", roles: [4] },
         { name: "CU:10 Generar Reporte De Uso", path: "/admin/administrar-usuarios/activity-log", roles: [4] },
         { name: "Reporte de Miembros", path: "/admin/administrar-usuarios/administrar-miembros", roles: [4] },
-    ];
-
-    const librosLinks = [
-        { name: "CU:3 Buscar libros en el catálogo", path: "/books", roles: [1, 2, 3, 4] },
-        { name: "CU:7 Hacer reseñas y calificar libros", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:13 Búsqueda de libro por nombre", path: "/books", roles: [1,2,3,4] },
-        { name: "CU:14 Búsqueda avanzada de libros", path: "/books", roles: [1,2,3,4] },
-        { name: "CU:16 Ver detalles de un libro", path: "/books", roles: [1,2,3,4] },
-    ];
-
-    const prestamosLinks = [
-        { name: "CU:4 Solicitar préstamo de un libro", path: "/books", roles: [2] },
-        { name: "CU:5 Gestionar préstamos", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:6 Devolver un libro", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:21 Leer libros", path: "/gestionar-prestamos", roles: [2] },
-    ];
-
-    const usuariosLinks = [
-        { name: "CU:1 Registrarse en el sistema", path: "/register", roles: [1] },
-        { name: "CU:2 Iniciar sesión", path: "/login", roles: [1] },
-        { name: "CU:17 Acceder como visitante", path: "/", roles: [1] },
-        { name: "CU:18 Ver historial de préstamos y actividad", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:15 Modificar perfil", path: "/account/*", roles: [2,3,4] },
-        { name: "CU:19 Marcar posición de lectura", path: "/gestionar-prestamos", roles: [2] },
-        { name: "CU:20 Ver historial de libros leídos", path: "/gestionar-prestamos", roles: [2] },
     ];
 
     return (

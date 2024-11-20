@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="responsive 3.O">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -36,6 +40,9 @@
 }</component>
   <component name="JsbtTreeLayoutManager">
     <layout place="tools.popupnpm">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+    <layout place="tools.popupGrunt">
       <scroll-view-position x="0" y="0" />
     </layout>
   </component>
@@ -68,6 +75,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Andres\Desktop\biblioteca-frontend\src\assets" />
       <recent name="C:\Users\andre\biblioteca-frontend\src\Pages" />
     </key>
   </component>
@@ -110,7 +118,11 @@
       <workItem from="1731456305615" duration="13743000" />
       <workItem from="1731536587764" duration="14478000" />
       <workItem from="1731555312195" duration="5718000" />
-      <workItem from="1731563063201" duration="13906000" />
+      <workItem from="1731563063201" duration="14954000" />
+      <workItem from="1731593604869" duration="1686000" />
+      <workItem from="1731788331307" duration="6478000" />
+      <workItem from="1731802179905" duration="6567000" />
+      <workItem from="1732071095718" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />

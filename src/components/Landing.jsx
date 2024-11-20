@@ -30,7 +30,7 @@ const LandingPage = () => {
                                     <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zM12 14c-3.1 0-9 1.5-9 4.5V22h18v-3.5c0-3-5.9-4.5-9-4.5z" />
                                 </svg>
                             </div>
-                            <p className="font-semibold text-lg">Juany Velasquez</p>
+                            <p className="font-semibold text-lg">Andres Segovia</p>
                             <p className="text-gray-500 text-center">“Gracias a esta librería, he encontrado libros que realmente cambiaron mi vida. Muy recomendada.”</p>
                         </div>
 
@@ -50,7 +50,7 @@ const LandingPage = () => {
                                     <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zM12 14c-3.1 0-9 1.5-9 4.5V22h18v-3.5c0-3-5.9-4.5-9-4.5z" />
                                 </svg>
                             </div>
-                            <p className="font-semibold text-lg">Pilar Santivañez</p>
+                            <p className="font-semibold text-lg">Victor Lozada</p>
                             <p className="text-gray-500 text-center">“Los libros de aquí me han inspirado a aprender y crecer en muchas áreas. Me encanta la selección.”</p>
                         </div>
                     </div>

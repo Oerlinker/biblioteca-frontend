@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import fondo from '../assets/fondo.jpeg';
@@ -14,6 +14,30 @@ const UpdateMembersForm = () => {
         registro: ''
     });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchMemberData = async () => {
+            try {
+                const response = await fetch(`/users/members/${user.id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setFormData(data);
+                } else {
+                    console.error('Error fetching member data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchMemberData();
+    }, [user.id, user.token]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

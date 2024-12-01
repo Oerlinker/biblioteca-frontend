@@ -1,5 +1,5 @@
 // src/App.js
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Login from './Pages/login';
@@ -18,24 +18,30 @@ import SubscriptionForm from './Pages/SubscriptionForm';
 import ProveedorForm from "./Pages/ProveedorForm";
 import GestionarPrestamos from './Pages/GestionarPrestamos';
 import AdministrarMiembrosForm from './Pages/AdministrarMiembrosForm';
-import { useEffect, useContext } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import { UserContext } from './UserContext';
+import {useEffect, useContext} from 'react';
+import {jwtDecode} from 'jwt-decode';
+import {UserContext} from './UserContext';
 import BookCrud from './components/BookCrud';
 import LandingPage from './components/Landing';
 import EdicionesForm from "./Pages/EdicionesForm";
 import AutorForm from './Pages/autorForm';
 import EditorialForm from "./Pages/EditorialForm";
 import CategoriaForm from "./Pages/CategoriaForm";
+import UpdateMembersForm from "./Pages/UpdateMembersForm";
 
 function App() {
-    const { user, isLoggedIn, setUser, setIsLoggedIn } = useContext(UserContext);
+    const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
+            const userData = {
+                id: decodedToken.id,
+                nombre: decodedToken.nombre,
+                correo: decodedToken.correo,
+                rol: decodedToken.rol
+            };
             setUser(userData);
             setIsLoggedIn(true);
             console.log("Usuario logueado:", userData);
@@ -51,45 +57,48 @@ function App() {
 
     return (
         <Router>
-            <Header handleLogout={handleLogout} />
+            <Header handleLogout={handleLogout}/>
             <div className="flex">
-                 <Sidebar />
+                <Sidebar/>
                 <div className="flex-1">
                     <Routes>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/books" element={<Books />} />
-                        <Route path="/libro/:id" element={<BookDetail />} />
-                        <Route path="/account/*" element={<AccountForm />} />
-                        <Route path="/account/edit-name" element={<EditName />} />
-                        <Route path="/account/edit-email" element={<EditEmail />} />
-                        <Route path="/account/edit-password" element={<EditPassword />} />
-                        <Route path="/subscription" element={<SubscriptionForm />} />
+                        <Route path="/" element={<LandingPage/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/books" element={<Books/>}/>
+                        <Route path="/libro/:id" element={<BookDetail/>}/>
+                        <Route path="/account/*" element={<AccountForm/>}/>
+                        <Route path="/account/edit-name" element={<EditName/>}/>
+                        <Route path="/account/edit-email" element={<EditEmail/>}/>
+                        <Route path="/account/edit-password" element={<EditPassword/>}/>
+                        <Route path="/subscription" element={<SubscriptionForm/>}/>
 
                         {isLoggedIn && user.rol === 2 && (
                             <>
-                                <Route path="/gestionar-prestamos" element={<GestionarPrestamos />} />
+                                <Route path="/gestionar-prestamos" element={<GestionarPrestamos/>}/>
+                                <Route path="/update-members" element={<UpdateMembersForm/>}/>
                             </>
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>
-                                <Route path="/admin/agregar-libro" element={<BookCrud />} />
-                                <Route path="/admin/modificar-libro/:id" element={<BookCrud />} />
-                                <Route path="/admin/obtener-libros" element={<BookCrud />} />
-                                <Route path="/admin/actualizar-libro" element={<BookCrud />} />
-                                <Route path="/admin/eliminar-libro" element={<BookCrud />} />
-                                <Route path="/admin/administrar-usuarios/*" element={<AdministrarUsuarios />} />
-                                <Route path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios />} />
-                                <Route path="/admin/administrar-usuarios/administrar-roles" element={<AdministrarRoles />} />
-                                <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog />} />
-                                <Route path="/admin/administrar-usuarios/administrar-miembros" element={<AdministrarMiembrosForm />} />
-                                <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
-                                <Route path="/admin/gestionar-proveedores" element={<ProveedorForm />} />
-                                <Route path="/admin/gestionar-editoriales" element={<EditorialForm />} />
-                                <Route path="/admin/gestionar-categorias" element={<CategoriaForm />} />
-                                <Route path="/admin/gestionar-ediciones" element={<EdicionesForm />} />
-                                <Route path="/admin/gestionar-autores" element={<AutorForm />} />
+                                <Route path="/admin/agregar-libro" element={<BookCrud/>}/>
+                                <Route path="/admin/modificar-libro/:id" element={<BookCrud/>}/>
+                                <Route path="/admin/obtener-libros" element={<BookCrud/>}/>
+                                <Route path="/admin/actualizar-libro" element={<BookCrud/>}/>
+                                <Route path="/admin/eliminar-libro" element={<BookCrud/>}/>
+                                <Route path="/admin/administrar-usuarios/*" element={<AdministrarUsuarios/>}/>
+                                <Route path="/admin/administrar-usuarios/getall-usuarios" element={<GetAllUsuarios/>}/>
+                                <Route path="/admin/administrar-usuarios/administrar-roles"
+                                       element={<AdministrarRoles/>}/>
+                                <Route path="/admin/administrar-usuarios/activity-log" element={<ActivityLog/>}/>
+                                <Route path="/admin/administrar-usuarios/administrar-miembros"
+                                       element={<AdministrarMiembrosForm/>}/>
+                                <Route path="/admin/gestionar-proveedores" element={<ProveedorForm/>}/>
+                                <Route path="/admin/gestionar-proveedores" element={<ProveedorForm/>}/>
+                                <Route path="/admin/gestionar-editoriales" element={<EditorialForm/>}/>
+                                <Route path="/admin/gestionar-categorias" element={<CategoriaForm/>}/>
+                                <Route path="/admin/gestionar-ediciones" element={<EdicionesForm/>}/>
+                                <Route path="/admin/gestionar-autores" element={<AutorForm/>}/>
                             </>
                         )}
                     </Routes>

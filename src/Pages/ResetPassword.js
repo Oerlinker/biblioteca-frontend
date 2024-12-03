@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axiosInstance from "../components/axiosInstance";
 
 const ResetPassword = () => {
-    const { token } = useParams();
+    const location = useLocation();
+    const email = new URLSearchParams(location.search).get('email');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,7 +18,7 @@ const ResetPassword = () => {
             return;
         }
         try {
-            await axiosInstance.post(`/reset-password/${token}`, { password });
+            await axiosInstance.post(`/reset-password?email=${encodeURIComponent(email)}`, { password });
             setSuccess('Contraseña actualizada con éxito');
             setTimeout(() => navigate('/login'), 3000);
         } catch (error) {

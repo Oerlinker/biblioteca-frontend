@@ -1,13 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import axiosInstance from '../components/axiosInstance';
 import fondo from '../assets/fondo.jpeg';
 
 const UpdateMembersForm = () => {
-    const { user, isLoading } = useContext(UserContext);
+    const { user, setUser, isLoading, setIsLoading } = useContext(UserContext);
+
+    useEffect(() => {
+        const fetchMemberData = async () => {
+            try {
+                if (!user.miembroid) {
+                    console.error('No se encontró el miembroid en el contexto.');
+                    return;
+                }
+                setIsLoading(true); // Inicia la carga
+                const response = await axiosInstance.get(`/users/members/${user.miembroid}`);
+                setUser((prevUser) => ({ ...prevUser, ...response.data }));
+            } catch (error) {
+                console.error('Error al cargar los datos del miembro:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchMemberData();
+    }, [user.miembroid, setUser, setIsLoading]);
 
     if (isLoading) {
-        return <p>Cargando datos...</p>;
+        return <p>Cargando datos del miembro...</p>;
+    }
+
+    if (!user || !user.miembroid) {
+        return <p>Error: No se pudieron cargar los datos del miembro.</p>;
     }
 
     return (
@@ -21,16 +46,15 @@ const UpdateMembersForm = () => {
                     <div className="text-center">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4">Datos de Miembro</h2>
                         <p className="text-gray-600">Nombre: {user.nombre}</p>
-                        <p className="text-gray-600">Teléfono: {user.telefono}</p>
-                        <p className="text-gray-600">Dirección: {user.direccion}</p>
-                        <p className="text-gray-600">Carrera: {user.carrera}</p>
-                        <p className="text-gray-600">Semestre: {user.semestre}</p>
+                        <p className="text-gray-600">Teléfono: {user.telefono || 'No disponible'}</p>
+                        <p className="text-gray-600">Dirección: {user.direccion || 'No disponible'}</p>
+                        <p className="text-gray-600">Carrera: {user.carrera || 'No disponible'}</p>
+                        <p className="text-gray-600">Semestre: {user.semestre || 'No disponible'}</p>
                     </div>
                 </aside>
 
                 <section className="w-full md:w-2/3 p-6 md:p-10 flex flex-col">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">Gestionar Datos de
-                        Miembro</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">Gestionar Datos de Miembro</h2>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
                         <Link

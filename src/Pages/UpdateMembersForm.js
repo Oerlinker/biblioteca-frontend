@@ -21,12 +21,12 @@ const UpdateMembersForm = () => {
                         <p className="text-gray-600">Dirección: {user.direccion}</p>
                         <p className="text-gray-600">Carrera: {user.carrera}</p>
                         <p className="text-gray-600">Semestre: {user.semestre}</p>
-                        <p className="text-gray-600">Registro: {user.registro}</p>
                     </div>
                 </aside>
 
                 <section className="w-full md:w-2/3 p-6 md:p-10 flex flex-col">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">Gestionar Datos de Miembro</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">Gestionar Datos de
+                        Miembro</h2>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
                         <Link
@@ -63,13 +63,6 @@ const UpdateMembersForm = () => {
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Semestre
-                        </Link>
-                        <Link
-                            to="edit-registro"
-                            state={{ user }}
-                            className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
-                        >
-                            Editar Registro
                         </Link>
                     </div>
                 </section>

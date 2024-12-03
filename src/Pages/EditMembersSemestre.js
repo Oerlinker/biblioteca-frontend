@@ -21,7 +21,7 @@ const EditMembersSemestre = () => {
             return;
         }
         try {
-            await axiosInstance.put(`/users/members/semestre/${user.id}`, { semestre });
+            await axiosInstance.put(`/users/members/semestre/${user.miembroid}`, { semestre });
             alert("Semestre actualizado con éxito");
             setUser({ ...user, semestre });
             navigate("/update-members");

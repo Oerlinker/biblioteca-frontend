@@ -21,7 +21,8 @@ const EditMembersDireccion = () => {
             return;
         }
         try {
-            await axiosInstance.put(`/users/members/direccion/${user.id}`, { direccion });
+            await axiosInstance.put(`/users/members/direccion/${user.miembroid}`, { direccion });
+
             alert("Dirección actualizada con éxito");
             setUser({ ...user, direccion });
             navigate("/update-members");

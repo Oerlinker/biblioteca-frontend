@@ -21,7 +21,7 @@ const EditMembersName = () => {
             return;
         }
         try {
-            await axiosInstance.put(`/users/members/name/${user.id}`, { nombre });
+            await axiosInstance.put(`/users/members/name/${user.miembroid}`, { nombre });
             alert("Nombre de usuario actualizado con éxito");
             setUser({ ...user, nombre });
             navigate("/update-members");

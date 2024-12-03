@@ -30,7 +30,10 @@ const Header = ({handleLogout}) => {
                     <Link to="/" className="hover:text-gray-200">Home</Link>
                     <Link to="/books" className="hover:text-gray-200">Books</Link>
                     {isLoggedIn && user.rol === 4 && (
-                        <Link to="/gestionar-prestamo" className="hover:text-gray-200">Gestión de Préstamos</Link>
+                        <>
+                            <Link to="/gestionar-prestamo" className="hover:text-gray-200">Gestión de Préstamos</Link>
+                            <Link to="/reporte-libro" className="hover:text-gray-200">RepLib</Link>
+                        </>
                     )}
                     {isLoggedIn && user.rol === 2 && (
                         <>

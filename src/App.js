@@ -93,7 +93,6 @@ function App() {
                                 <Route path="/update-members/edit-direction" element={<EditMembersDireccion/>}/>
                                 <Route path="/update-members/edit-career" element={<EditMembersCarrera/>}/>
                                 <Route path="/update-members/edit-semester" element={<EditMembersSemestre/>}/>
-                                <Route path="/reporte-libro" element={<ReporteLibro/>}/>
                             </>
                         )}
                         {isLoggedIn && user.rol === 4 && (
@@ -116,6 +115,7 @@ function App() {
                                 <Route path="/admin/gestionar-categorias" element={<CategoriaForm/>}/>
                                 <Route path="/admin/gestionar-ediciones" element={<EdicionesForm/>}/>
                                 <Route path="/admin/gestionar-autores" element={<AutorForm/>}/>
+                                <Route path="/reporte-libro" element={<ReporteLibro/>}/>
                             </>
                         )}
                     </Routes>

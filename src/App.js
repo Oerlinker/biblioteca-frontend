@@ -28,6 +28,11 @@ import AutorForm from './Pages/autorForm';
 import EditorialForm from "./Pages/EditorialForm";
 import CategoriaForm from "./Pages/CategoriaForm";
 import UpdateMembersForm from "./Pages/UpdateMembersForm";
+import EditMembersName from "./Pages/EditMembersName";
+import EditMembersTelefono from "./Pages/EditMembersTelefono";
+import EditMembersDireccion from "./Pages/EditMembersDireccion";
+import EditMembersCarrera from "./Pages/EditMembersCarrera";
+import EditMembersSemestre from "./Pages/EditMembersSemestre";
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -76,7 +81,12 @@ function App() {
                         {isLoggedIn && user.rol === 2 && (
                             <>
                                 <Route path="/gestionar-prestamos" element={<GestionarPrestamos/>}/>
-                                <Route path="/update-members" element={<UpdateMembersForm/>}/>
+                                <Route path="/update-members/*" element={<UpdateMembersForm/>}/>
+                                <Route path="/update-members/edit-name" element={<EditMembersName/>}/>
+                                <Route path="/update-members/edit-phone" element={<EditMembersTelefono/>}/>
+                                <Route path="/update-members/edit-direction" element={<EditMembersDireccion/>}/>
+                                <Route path="/update-members/edit-career" element={<EditMembersCarrera/>}/>
+                                <Route path="/update-members/edit-semester" element={<EditMembersSemestre/>}/>
                             </>
                         )}
                         {isLoggedIn && user.rol === 4 && (

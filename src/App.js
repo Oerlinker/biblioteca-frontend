@@ -34,7 +34,7 @@ import EditMembersDireccion from "./Pages/EditMembersDireccion";
 import EditMembersCarrera from "./Pages/EditMembersCarrera";
 import EditMembersSemestre from "./Pages/EditMembersSemestre";
 import ResetPassword from './Pages/ResetPassword';
-
+import ForgotPassword from './Pages/ForgotPassword';
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -58,7 +58,7 @@ function App() {
     }, [setUser, setIsLoggedIn]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('Token');
         setIsLoggedIn(false);
         setUser({});
     };
@@ -81,6 +81,7 @@ function App() {
                         <Route path="/account/edit-password" element={<EditPassword/>}/>
                         <Route path="/subscription" element={<SubscriptionForm/>}/>
                         <Route path="/reset-password/:token" element={<ResetPassword />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
 
                         {isLoggedIn && user.rol === 2 && (
                             <>

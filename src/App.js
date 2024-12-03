@@ -35,7 +35,7 @@ import EditMembersCarrera from "./Pages/EditMembersCarrera";
 import EditMembersSemestre from "./Pages/EditMembersSemestre";
 
 function App() {
-    const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
+    const {user, isLoggedIn, setUser, setIsLoggedIn,isLoading} = useContext(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem('Token');

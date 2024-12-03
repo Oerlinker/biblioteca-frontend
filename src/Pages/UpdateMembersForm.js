@@ -9,7 +9,6 @@ const UpdateMembersForm = () => {
     if (isLoading) {
         return <p>Cargando datos...</p>;
     }
-
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>

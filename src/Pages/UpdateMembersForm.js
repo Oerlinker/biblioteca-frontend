@@ -37,28 +37,28 @@ const UpdateMembersForm = () => {
                             Editar Nombre
                         </Link>
                         <Link
-                            to="edit-telefono"
+                            to="edit-phone"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Teléfono
                         </Link>
                         <Link
-                            to="edit-direccion"
+                            to="edit-direction"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Dirección
                         </Link>
                         <Link
-                            to="edit-carrera"
+                            to="edit-career"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Carrera
                         </Link>
                         <Link
-                            to="edit-semestre"
+                            to="edit-semester"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >

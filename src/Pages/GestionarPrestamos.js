@@ -23,7 +23,7 @@ const GestionarPrestamos = () => {
             return;
         }
         try {
-            const response = await axiosInstance.get(/users/prestamos/activos/${user.miembroid});
+            const response = await axiosInstance.get(`/users/prestamos/activos/${user.miembroid}`);
             setPrestamos(response.data);
         } catch (error) {
             console.error('Error al obtener préstamos:', error);
@@ -36,7 +36,7 @@ const GestionarPrestamos = () => {
 
     const handleDevolucion = async (prestamoid) => {
         try {
-            await axiosInstance.post(users/prestamos/devolver/${prestamoid});
+            await axiosInstance.post(`/users/prestamos/devolver/${prestamoid}`);
             setPrestamos((prevPrestamos) => prevPrestamos.filter(p => p.prestamoid !== prestamoid));
             alert('Libro devuelto con éxito.');
         } catch (error) {
@@ -56,7 +56,7 @@ const GestionarPrestamos = () => {
     const handleSubmitReview = async (e) => {
         e.preventDefault();
         try {
-            await axiosInstance.post(users/review, {
+            await axiosInstance.post(`users/review`, {
                 id: user.id,
                 miembroid: user.miembroid,
                 edicionid: review.edicionid,

@@ -1,11 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import axiosInstance from "../components/axiosInstance";
 import UserInfo from './UserInfo';
 import fondo from '../assets/fondo.jpeg';
 
 const AccountForm = () => {
     const { user } = useContext(UserContext);
+    const [email, setEmail] = useState(user.correo);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [step, setStep] = useState(1);
+
+    const handleEmailSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axiosInstance.post('/forgot-password', { email });
+            setMessage('Se ha enviado un código de verificación a tu correo electrónico.');
+            setStep(2);
+        } catch (error) {
+            setError('Error al enviar el correo de restablecimiento de contraseña.');
+        }
+    };
+
+    const handlePasswordSubmit = async (e) => {
+        e.preventDefault();
+        if (newPassword !== confirmPassword) {
+            setError('Las contraseñas no coinciden');
+            return;
+        }
+        try {
+            await axiosInstance.post('/reset-password', { email, code, password: newPassword });
+            setMessage('Contraseña actualizada con éxito');
+            setStep(1);
+        } catch (error) {
+            setError('Error al restablecer la contraseña');
+        }
+    };
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
@@ -29,21 +63,68 @@ const AccountForm = () => {
                         >
                             Editar Usuario
                         </Link>
-                        <Link
-                            to="edit-email"
-                            state={{ user }}
-                            className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
-                        >
-                            Editar Correo
-                        </Link>
-                        <Link
-                            to="edit-password"
-                            state={{ user }}
+                        <button
+                            onClick={() => setStep(1)}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Contraseña
-                        </Link>
+                        </button>
                     </div>
+
+                    {message && <p className="text-green-500">{message}</p>}
+                    {error && <p className="text-red-500">{error}</p>}
+
+                    {step === 1 && (
+                        <form onSubmit={handleEmailSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Enviar Código</button>
+                        </form>
+                    )}
+
+                    {step === 2 && (
+                        <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Código de Verificación</label>
+                                <input
+                                    type="text"
+                                    value={code}
+                                    onChange={(e) => setCode(e.target.value)}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+                                <input
+                                    type="password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+                                <input
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Restablecer Contraseña</button>
+                        </form>
+                    )}
                 </section>
             </div>
         </div>

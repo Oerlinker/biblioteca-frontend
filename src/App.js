@@ -33,6 +33,8 @@ import EditMembersTelefono from "./Pages/EditMembersTelefono";
 import EditMembersDireccion from "./Pages/EditMembersDireccion";
 import EditMembersCarrera from "./Pages/EditMembersCarrera";
 import EditMembersSemestre from "./Pages/EditMembersSemestre";
+import ResetPassword from './Pages/ResetPassword';
+
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -78,6 +80,7 @@ function App() {
                         <Route path="/account/edit-email" element={<EditEmail/>}/>
                         <Route path="/account/edit-password" element={<EditPassword/>}/>
                         <Route path="/subscription" element={<SubscriptionForm/>}/>
+                        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
                         {isLoggedIn && user.rol === 2 && (
                             <>

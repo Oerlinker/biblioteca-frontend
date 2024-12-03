@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, {useState, useContext} from 'react';
+import {useNavigate, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
-import { UserContext } from '../UserContext';
+import {UserContext} from '../UserContext';
 import fondo from '../assets/fondo.jpeg';
 import axiosInstance from "../components/axiosInstance";
 
 const Login = () => {
-    const { setUser, setIsLoggedIn } = useContext(UserContext);
+    const {setUser, setIsLoggedIn} = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -15,13 +15,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post('/login', { email, password });
+            const response = await axiosInstance.post('/login', {email, password});
 
             localStorage.setItem('Token', response.data.token);
 
             // Decode the token to get user data
             const decodedToken = jwtDecode(response.data.token);
-            const userData = { id: decodedToken.id, nombre: decodedToken.nombre, correo: decodedToken.correo, rol: decodedToken.rol };
+            const userData = {
+                id: decodedToken.id,
+                nombre: decodedToken.nombre,
+                correo: decodedToken.correo,
+                rol: decodedToken.rol
+            };
 
             // Update the user context
             setUser(userData);
@@ -40,7 +45,7 @@ const Login = () => {
 
     return (
         <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fondo})` }}>
+            <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: `url(${fondo})`}}>
                 <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             </div>
             <div className="relative bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
@@ -77,8 +82,12 @@ const Login = () => {
                     </button>
                 </form>
                 <div className="mt-6 text-center">
-                    <p className="text-gray-600">¿Olvidaste tu contraseña? <a href="/login" className="text-lightblue-500 hover:underline">Recupérala aquí</a></p>
-                    <p className="text-gray-600 mt-4">¿No tienes una cuenta? <Link to="/register" className="text-lightblue-500 hover:underline">Regístrate</Link></p>
+                    <p className="text-gray-600">¿Olvidaste tu contraseña? <a href="/forgot-password"
+                                                                              className="text-lightblue-500 hover:underline">Recupérala
+                        aquí</a></p>
+                    <p className="text-gray-600 mt-4">¿No tienes una cuenta? <Link to="/register"
+                                                                                   className="text-lightblue-500 hover:underline">Regístrate</Link>
+                    </p>
                 </div>
             </div>
         </div>

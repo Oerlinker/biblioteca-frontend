@@ -45,7 +45,8 @@ function App() {
                 id: decodedToken.id,
                 nombre: decodedToken.nombre,
                 correo: decodedToken.correo,
-                rol: decodedToken.rol
+                rol: decodedToken.rol,
+                miembroid: decodedToken.miembroid
             };
             setUser(userData);
             setIsLoggedIn(true);
@@ -53,6 +54,11 @@ function App() {
             console.log("Token decodificado:", decodedToken);
         }
     }, [setUser, setIsLoggedIn]);
+
+
+    if (isLoading) {
+        return <p>Cargando aplicación...</p>;
+    }
 
     const handleLogout = () => {
         localStorage.removeItem('token');

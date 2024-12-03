@@ -80,7 +80,7 @@ function App() {
                         <Route path="/account/edit-email" element={<EditEmail/>}/>
                         <Route path="/account/edit-password" element={<EditPassword/>}/>
                         <Route path="/subscription" element={<SubscriptionForm/>}/>
-                        <Route path="/reset-password/:token" element={<ResetPassword />} />
+                        <Route path="/reset-password" element={<ResetPassword />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
 
                         {isLoggedIn && user.rol === 2 && (

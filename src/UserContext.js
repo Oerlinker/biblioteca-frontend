@@ -12,22 +12,17 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
-
             const fetchMemberData = async () => {
                 try {
                     const response = await axiosInstance.get(`/users/members/${decodedToken.miembroid}`);
-                    setUser({
-                        ...decodedToken,
-                        ...response.data
-                    });
+                    setUser({ ...decodedToken, ...response.data });
                     setIsLoggedIn(true);
                 } catch (error) {
                     console.error('Error al obtener los datos del miembro:', error);
-                    setUser(decodedToken);
+                    setUser(decodedToken); 
                     setIsLoggedIn(true);
                 }
             };
-
             fetchMemberData();
         }
     }, []);

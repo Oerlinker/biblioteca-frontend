@@ -35,7 +35,7 @@ import EditMembersCarrera from "./Pages/EditMembersCarrera";
 import EditMembersSemestre from "./Pages/EditMembersSemestre";
 
 function App() {
-    const {user, isLoggedIn, setUser, setIsLoggedIn,isLoading} = useContext(UserContext);
+    const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem('Token');
@@ -54,11 +54,6 @@ function App() {
             console.log("Token decodificado:", decodedToken);
         }
     }, [setUser, setIsLoggedIn]);
-
-
-    if (isLoading) {
-        return <p>Cargando aplicación...</p>;
-    }
 
     const handleLogout = () => {
         localStorage.removeItem('token');

@@ -45,6 +45,21 @@ const GestionarPrestamos = () => {
         }
     };
 
+    const handleSolicitudExtension = async (prestamoid) => {
+        try {
+            const response = await axiosInstance.post(`/users/prestamos/solicitar-extension/${prestamoid}`);
+            alert('Extensión solicitada con éxito.');
+            // Actualizar la lista de préstamos con la nueva fecha de devolución
+            const updatedPrestamos = prestamos.map(p => 
+                p.prestamoid === prestamoid ? { ...p, fecha_devolucion: response.data.fecha_devolucion } : p
+            );
+            setPrestamos(updatedPrestamos);
+        } catch (error) {
+            console.error('Error al solicitar la extensión:', error);
+            alert('No se pudo solicitar la extensión. Intenta nuevamente.');
+        }
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setReview((prevReview) => ({
@@ -125,6 +140,16 @@ const GestionarPrestamos = () => {
                                         cursor: 'pointer',
                                     }}>
                                         Devolver
+                                    </button>
+                                    <button onClick={() => handleSolicitudExtension(prestamo.prestamoid)} style={{
+                                        backgroundColor: '#FFC107',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        padding: '10px 15px',
+                                        cursor: 'pointer',
+                                    }}>
+                                        Solicitar Extensión
                                     </button>
                                     <button onClick={() => {
                                         setReview((prevReview) => {

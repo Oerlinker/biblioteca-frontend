@@ -45,6 +45,21 @@ const GestionarPrestamos = () => {
         }
     };
 
+    const handleSolicitudExtension = async (prestamoid) => {
+        try {
+            const response = await axiosInstance.post(`/users/prestamos/solicitar-extension/${prestamoid}`);
+            alert('Extensión solicitada con éxito.');
+            // Actualizar la lista de préstamos con la nueva fecha de devolución
+            const updatedPrestamos = prestamos.map(p => 
+                p.prestamoid === prestamoid ? { ...p, fecha_devolucion: response.data.fecha_devolucion } : p
+            );
+            setPrestamos(updatedPrestamos);
+        } catch (error) {
+            console.error('Error al solicitar la extensión:', error);
+            alert('No se pudo solicitar la extensión. Intenta nuevamente.');
+        }
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setReview((prevReview) => ({
@@ -126,25 +141,15 @@ const GestionarPrestamos = () => {
                                     }}>
                                         Devolver
                                     </button>
-                                    <button onClick={() => {
-                                        setReview((prevReview) => {
-                                            const updatedReview = {
-                                                ...prevReview,
-                                                edicionid: prestamo.edicionid,
-                                                libroid: prestamo.libroid,
-                                            };
-                                            return updatedReview;
-                                        });
-                                        setIsReviewFormVisible(isReviewFormVisible === prestamo.prestamoid ? null : prestamo.prestamoid);
-                                    }} style={{
-                                        backgroundColor: '#28A745',
+                                    <button onClick={() => handleSolicitudExtension(prestamo.prestamoid)} style={{
+                                        backgroundColor: '#FFC107',
                                         color: 'white',
                                         border: 'none',
                                         borderRadius: '5px',
                                         padding: '10px 15px',
                                         cursor: 'pointer',
                                     }}>
-                                        {isReviewFormVisible === prestamo.prestamoid ? 'Cancelar Reseña' : 'Hacer Reseña'}
+                                        Solicitar Extensión
                                     </button>
                                     <button onClick={() => togglePdfView(prestamo.edicionid)} style={{
                                         backgroundColor: '#17a2b8',
@@ -158,43 +163,6 @@ const GestionarPrestamos = () => {
                                     </button>
                                 </div>
                             </div>
-                            {isReviewFormVisible === prestamo.prestamoid && (
-                                <form onSubmit={handleSubmitReview} style={{ marginTop: '10px' }}>
-                                    <input
-                                        type="number"
-                                        name="calificacion"
-                                        step="0.1"
-                                        min="1"
-                                        max="5"
-                                        placeholder="Calificación (1.0 - 5.0)"
-                                        value={review.calificacion}
-                                        onChange={handleInputChange}
-                                        required
-                                        style={{ marginRight: '10px' }}
-                                    />
-                                    <textarea
-                                        name="comentario"
-                                        placeholder="Escribe tu comentario"
-                                        value={review.comentario}
-                                        onChange={handleInputChange}
-                                        required
-                                        style={{ display: 'block', margin: '10px 0', width: '100%' }}
-                                    />
-                                    <button type="submit" style={{
-                                        backgroundColor: '#28A745',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '5px',
-                                        padding: '10px 15px',
-                                        cursor: 'pointer'
-                                    }}>Enviar Reseña</button>
-                                </form>
-                            )}
-                            {showPdf === prestamo.edicionid && (
-                                <div style={{ marginTop: '10px' }}>
-                                    <VerPdf edicionId={prestamo.edicionid} />
-                                </div>
-                            )}
                         </li>
                     ))}
                 </ul>

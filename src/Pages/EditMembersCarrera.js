@@ -21,7 +21,7 @@ const EditMembersCarrera = () => {
             return;
         }
         try {
-            await axiosInstance.put(`/users/members/carrera/${user.id}`, { carrera });
+            await axiosInstance.put(`/users/members/carrera/${user.miembroid}`, { carrera });
             alert("Carrera actualizada con éxito");
             setUser({ ...user, carrera });
             navigate("/update-members");

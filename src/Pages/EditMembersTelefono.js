@@ -21,7 +21,7 @@ const EditMembersTelefono = () => {
             return;
         }
         try {
-            await axiosInstance.put(`/users/members/telefono/${user.id}`, { telefono });
+            await axiosInstance.put(`/users/members/telefono/${user.miembroid}`, { telefono });
             alert("Teléfono actualizado con éxito");
             setUser({ ...user, telefono });
             navigate("/update-members");

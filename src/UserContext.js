@@ -1,6 +1,6 @@
-// src/UserContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import axiosInstance from './components/axiosInstance';
+import jwtDecode from 'jwt-decode';
 
 export const UserContext = createContext();
 
@@ -12,9 +12,23 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('Token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            const userData = { id: decodedToken.id, username: decodedToken.username, correo: decodedToken.correo, rol: decodedToken.rol, miembroid: decodedToken.miembroid, };
-            setUser(userData);
-            setIsLoggedIn(true);
+
+            const fetchMemberData = async () => {
+                try {
+                    const response = await axiosInstance.get(`/users/members/${decodedToken.miembroid}`);
+                    setUser({
+                        ...decodedToken,
+                        ...response.data
+                    });
+                    setIsLoggedIn(true);
+                } catch (error) {
+                    console.error('Error al obtener los datos del miembro:', error);
+                    setUser(decodedToken);
+                    setIsLoggedIn(true);
+                }
+            };
+
+            fetchMemberData();
         }
     }, []);
 

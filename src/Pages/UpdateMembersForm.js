@@ -4,7 +4,11 @@ import { UserContext } from '../UserContext';
 import fondo from '../assets/fondo.jpeg';
 
 const UpdateMembersForm = () => {
-    const { user } = useContext(UserContext);
+    const { user, isLoading } = useContext(UserContext);
+
+    if (isLoading) {
+        return <p>Cargando datos...</p>;
+    }
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
@@ -37,28 +41,28 @@ const UpdateMembersForm = () => {
                             Editar Nombre
                         </Link>
                         <Link
-                            to="edit-phone"
+                            to="edit-telefono"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Teléfono
                         </Link>
                         <Link
-                            to="edit-direction"
+                            to="edit-direccion"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Dirección
                         </Link>
                         <Link
-                            to="edit-career"
+                            to="edit-carrera"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >
                             Editar Carrera
                         </Link>
                         <Link
-                            to="edit-semester"
+                            to="edit-semestre"
                             state={{ user }}
                             className="block bg-blue-500 text-white py-2 md:py-3 rounded-lg shadow-md text-center font-semibold text-base md:text-lg hover:bg-blue-600 transition duration-300"
                         >

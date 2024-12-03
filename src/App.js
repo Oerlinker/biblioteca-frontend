@@ -35,6 +35,7 @@ import EditMembersCarrera from "./Pages/EditMembersCarrera";
 import EditMembersSemestre from "./Pages/EditMembersSemestre";
 import ResetPassword from './Pages/ResetPassword';
 import ForgotPassword from './Pages/ForgotPassword';
+import ReporteLibro from './Pages/reporteLibro';
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -92,6 +93,7 @@ function App() {
                                 <Route path="/update-members/edit-direction" element={<EditMembersDireccion/>}/>
                                 <Route path="/update-members/edit-career" element={<EditMembersCarrera/>}/>
                                 <Route path="/update-members/edit-semester" element={<EditMembersSemestre/>}/>
+                                <Route path="/reporte-libro" element={<ReporteLibro/>}/>
                             </>
                         )}
                         {isLoggedIn && user.rol === 4 && (

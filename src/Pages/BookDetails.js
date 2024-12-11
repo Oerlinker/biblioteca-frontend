@@ -187,7 +187,13 @@ const BookDetail = () => {
                                 </p>
                                 <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
                                 <button
-                                    onClick={() => handleReportReview(review.reseñaid, review.edicionid, review.libroid)}
+                                    onClick={() =>
+                                        handleReportReview(
+                                            reviews[currentPage].reseñaid,
+                                            reviews[currentPage].edicionid,
+                                            reviews[currentPage].libroid
+                                        )
+                                    }
                                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                 >
                                     Reportar Reseña

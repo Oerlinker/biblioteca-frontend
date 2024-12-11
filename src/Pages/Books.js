@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axiosInstance from "../components/axiosInstance";
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 const Books = () => {
+    const { user } = useContext(UserContext);
     const [books, setLibros] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [categorias, setCategorias] = useState([]);

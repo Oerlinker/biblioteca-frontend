@@ -11,40 +11,36 @@ const ReportedReviews = () => {
             try {
                 const response = await axiosInstance.get('/reseñas/reportadas', {
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('Token')}`
-                    }
+                        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+                    },
                 });
                 setReportedReviews(response.data);
             } catch (error) {
                 console.error('Error fetching reported reviews:', error);
             }
         };
-
         fetchReportedReviews();
     }, []);
 
-    const handleDeleteReview = async (reviewId) => {
+    const handleDeleteReview = async (reviewId, editionId, bookId) => {
         try {
-            const response = await axiosInstance.delete(`/reseñas/${reviewId}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            const response = await axiosInstance.delete(
+                `/reseñas/${reviewId}/${editionId}/${bookId}`,
+                {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
                 }
-            });
+            );
             if (response.status === 200) {
                 alert('Reseña eliminada con éxito');
                 setReportedReviews(reportedReviews.filter(review => review.reseñaid !== reviewId));
             } else {
-                alert('Error al eliminar la reseña');
+                alert('Hubo un problema al eliminar la reseña');
             }
         } catch (error) {
-            console.error('Error deleting review:', error);
-            alert('Error al eliminar la reseña');
+            console.error('Error al eliminar la reseña:', error);
+            alert('Hubo un error al eliminar la reseña');
         }
     };
-
-    if (!user || (user.rol !== 3 && user.rol !== 4)) {
-        return <p>No tienes permiso para ver esta página.</p>;
-    }
 
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
@@ -57,8 +53,8 @@ const ReportedReviews = () => {
                                 <p className="text-gray-700"><strong>ID:</strong> {review.reseñaid}</p>
                                 <p className="text-gray-700"><strong>Comentario:</strong> {review.comentario}</p>
                                 <button
-                                    onClick={() => handleDeleteReview(review.reseñaid)}
-                                    className="mt-2 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
+                                    onClick={() => handleDeleteReview(review.reseñaid, review.edicionid, review.libroid)}
+                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                 >
                                     Eliminar Reseña
                                 </button>

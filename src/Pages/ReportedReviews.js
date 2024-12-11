@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axiosInstance from "../components/axiosInstance";
 import { UserContext } from '../UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const ReportedReviews = () => {
     const [reportedReviews, setReportedReviews] = useState([]);
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!user || (user.rol !== 3 && user.rol !== 4)) {
+            navigate('/');
+            return;
+        }
+
         const fetchReportedReviews = async () => {
             try {
                 const response = await axiosInstance.get('/reseñas/reportadas', {
@@ -19,8 +26,9 @@ const ReportedReviews = () => {
                 console.error('Error fetching reported reviews:', error);
             }
         };
+
         fetchReportedReviews();
-    }, []);
+    }, [user, navigate]);
 
     const handleDeleteReview = async (reviewId, editionId, bookId) => {
         try {

@@ -32,7 +32,6 @@ const Header = ({handleLogout}) => {
                     {isLoggedIn && user.rol === 4 && (
                         <>
                             <Link to="/gestionar-prestamo" className="hover:text-gray-200">Gestión de Préstamos</Link>
-                            <Link to="/reporte-libro" className="hover:text-gray-200">RepLib</Link>
                         </>
                     )}
                     {isLoggedIn && user.rol === 2 && (
@@ -40,8 +39,6 @@ const Header = ({handleLogout}) => {
                             <Link to="/gestionar-prestamos" className="hover:text-gray-200">Gestión de Préstamos</Link>
                             <Link to="/update-members" className="hover:text-gray-200">Actualizar Datos de
                                 miembro</Link>
-
-                            <Link to="/reporte-libro" className="hover:text-gray-200">RepLib</Link>
                         </>
                     )}
                     {isLoggedIn && user.rol === 1 && !user.isSubscribed && (

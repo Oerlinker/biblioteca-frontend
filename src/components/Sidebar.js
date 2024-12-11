@@ -27,7 +27,8 @@ const Sidebar = () => {
         { name: "CU:9 Administrar Miembros", path: "/admin/administrar-usuarios/administrar-roles", roles: [4] },
         { name: "CU:10 Generar Reporte De Uso", path: "/admin/administrar-usuarios/activity-log", roles: [4] },
         { name: "Reporte de Miembros", path: "/admin/administrar-usuarios/administrar-miembros", roles: [4] },
-        { name: "Reseñas Reportadas", path: "/admin/reseñas-reportadas", roles: [3, 4] },
+        { name: "Reporte Valid Registros", path: "/reporte-valid-registros", roles: [4] },
+        { name: "Reporte de Libro", path: "/reporte-libro", roles: [4] }
     ];
 
     return (

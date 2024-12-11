@@ -116,7 +116,6 @@ function App() {
                                 <Route path="/admin/gestionar-ediciones" element={<EdicionesForm/>}/>
                                 <Route path="/admin/gestionar-autores" element={<AutorForm/>}/>
                                 <Route path="/reporte-libro" element={<ReporteLibro/>}/>
-                                <Route path="/admin/reseñas-reportadas" element={<ReportedReviews/>}/>
                             </>
                         )}
                     </Routes>

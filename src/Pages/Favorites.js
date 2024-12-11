@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axiosInstance from "../components/axiosInstance";
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 const Favorites = () => {
+    const { user } = useContext(UserContext);
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
@@ -16,7 +18,7 @@ const Favorites = () => {
         };
 
         fetchFavorites();
-    }, []);
+    }, [user.id]);
 
     return (
         <div className="flex flex-col items-center justify-center px-4 py-8 min-h-screen bg-gray-50">

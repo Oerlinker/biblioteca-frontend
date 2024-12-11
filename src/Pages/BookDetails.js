@@ -78,25 +78,7 @@ const BookDetail = () => {
             }
         }
     };
-    const handleReportReview = async (reviewId, editionId, bookId) => {
-        try {
-            const response = await axiosInstance.post(
-                '/reseñas/reportar',
-                { reseñaid: reviewId, edicionid: editionId, libroid: bookId },
-                {
-                    headers: { Authorization: `Bearer ${localStorage.getItem('Token')}` },
-                }
-            );
-            if (response.status === 200) {
-                alert('Reseña reportada con éxito');
-            } else {
-                alert('Hubo un problema al reportar la reseña');
-            }
-        } catch (error) {
-            console.error('Error al reportar la reseña:', error);
-            alert('Hubo un error al reportar la reseña');
-        }
-    };
+
     const handleEdicionChange = (e) => {
         setEdicionSeleccionada(e.target.value);
     };
@@ -182,22 +164,8 @@ const BookDetail = () => {
                                     {renderStars(reviews[currentPage].calificacion)}
                                     <span className="ml-2 text-gray-700">{reviews[currentPage].calificacion}/5</span>
                                 </div>
-                                <p className="text-gray-700">
-                                    <strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}
-                                </p>
+                                <p className="text-gray-700"><strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}</p>
                                 <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
-                                <button
-                                    onClick={() =>
-                                        handleReportReview(
-                                            reviews[currentPage].reseñaid,
-                                            reviews[currentPage].edicionid,
-                                            reviews[currentPage].libroid
-                                        )
-                                    }
-                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                >
-                                    Reportar Reseña
-                                </button>
                             </div>
                             <div className="flex justify-between mt-4">
                                 <button

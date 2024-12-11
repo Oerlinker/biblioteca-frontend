@@ -36,7 +36,6 @@ import EditMembersSemestre from "./Pages/EditMembersSemestre";
 import ResetPassword from './Pages/ResetPassword';
 import ForgotPassword from './Pages/ForgotPassword';
 import ReporteLibro from './Pages/reporteLibro';
-import ReportedReviews from './Pages/ReportedReviews';
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="CU ivan 2">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="CU ivan 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/BookDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/BookDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ReportedReviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ReportedReviews.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/ReportedReviews.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,7 +396,39 @@
       <option name="project" value="LOCAL" />
       <updated>1733941472116</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="CU ivan 3">
+      <option name="closed" value="true" />
+      <created>1733942882957</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1733942882957</updated>
+    </task>
+    <task id="LOCAL-00036" summary="CU ivan 4">
+      <option name="closed" value="true" />
+      <created>1733943286351</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1733943286351</updated>
+    </task>
+    <task id="LOCAL-00037" summary="CU ivan 5">
+      <option name="closed" value="true" />
+      <created>1733943805999</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1733943805999</updated>
+    </task>
+    <task id="LOCAL-00038" summary="CU ivan 6">
+      <option name="closed" value="true" />
+      <created>1733944451482</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1733944451482</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,10 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sidebar fixed" />
-    <MESSAGE value="mejoras al sidebar" />
-    <MESSAGE value="mejoras al side bar solo era desplegable en responsive .-." />
-    <MESSAGE value=".-." />
     <MESSAGE value="sera?" />
     <MESSAGE value="sera? 2" />
     <MESSAGE value="cambio a usercontext" />
@@ -438,6 +467,10 @@
     <MESSAGE value="CU ivan" />
     <MESSAGE value="CU ivan 1" />
     <MESSAGE value="CU ivan 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="CU ivan 2" />
+    <MESSAGE value="CU ivan 3" />
+    <MESSAGE value="CU ivan 4" />
+    <MESSAGE value="CU ivan 5" />
+    <MESSAGE value="CU ivan 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="CU ivan 6" />
   </component>
 </project>

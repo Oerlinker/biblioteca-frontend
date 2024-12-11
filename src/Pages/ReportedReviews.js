@@ -1,0 +1,76 @@
+import React, { useState, useEffect, useContext } from 'react';
+import axiosInstance from "../components/axiosInstance";
+import { UserContext } from '../UserContext';
+
+const ReportedReviews = () => {
+    const [reportedReviews, setReportedReviews] = useState([]);
+    const { user } = useContext(UserContext);
+
+    useEffect(() => {
+        const fetchReportedReviews = async () => {
+            try {
+                const response = await axiosInstance.get('/reseñas/reportadas', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                    }
+                });
+                setReportedReviews(response.data);
+            } catch (error) {
+                console.error('Error fetching reported reviews:', error);
+            }
+        };
+
+        fetchReportedReviews();
+    }, []);
+
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            const response = await axiosInstance.delete(`/reseñas/${reviewId}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                }
+            });
+            if (response.status === 200) {
+                alert('Reseña eliminada con éxito');
+                setReportedReviews(reportedReviews.filter(review => review.reseñaid !== reviewId));
+            } else {
+                alert('Error al eliminar la reseña');
+            }
+        } catch (error) {
+            console.error('Error deleting review:', error);
+            alert('Error al eliminar la reseña');
+        }
+    };
+
+    if (!user || (user.rol !== 3 && user.rol !== 4)) {
+        return <p>No tienes permiso para ver esta página.</p>;
+    }
+
+    return (
+        <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
+            <div className="bg-white border p-6 rounded-lg shadow-lg max-w-3xl w-full">
+                <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">Reseñas Reportadas</h2>
+                {reportedReviews.length > 0 ? (
+                    <div className="space-y-4">
+                        {reportedReviews.map(review => (
+                            <div key={review.reseñaid} className="bg-gray-100 p-4 rounded shadow">
+                                <p className="text-gray-700"><strong>ID:</strong> {review.reseñaid}</p>
+                                <p className="text-gray-700"><strong>Comentario:</strong> {review.comentario}</p>
+                                <button
+                                    onClick={() => handleDeleteReview(review.reseñaid)}
+                                    className="mt-2 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
+                                >
+                                    Eliminar Reseña
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-gray-500">No hay reseñas reportadas.</p>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default ReportedReviews;

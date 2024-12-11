@@ -36,6 +36,7 @@ import EditMembersSemestre from "./Pages/EditMembersSemestre";
 import ResetPassword from './Pages/ResetPassword';
 import ForgotPassword from './Pages/ForgotPassword';
 import ReporteLibro from './Pages/reporteLibro';
+import ReportedReviews from './Pages/ReportedReviews';
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -116,6 +117,7 @@ function App() {
                                 <Route path="/admin/gestionar-ediciones" element={<EdicionesForm/>}/>
                                 <Route path="/admin/gestionar-autores" element={<AutorForm/>}/>
                                 <Route path="/reporte-libro" element={<ReporteLibro/>}/>
+                                <Route path="/admin/reseñas-reportadas" element={<ReportedReviews/>}/>
                             </>
                         )}
                     </Routes>

@@ -33,9 +33,9 @@ const Sidebar = () => {
 
     return (
         <>
-            {/* Botón de menú para dispositivos móviles */}
+            {/* Botón de menú para dispositivos móviles y escritorio */}
             <button
-                className="md:hidden fixed top-4 left-4 z-50 p-2 text-white bg-gray-900 rounded-md"
+                className="fixed top-4 left-4 z-50 p-2 text-white bg-gray-900 rounded-md"
                 onClick={toggleMobileSidebar}
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

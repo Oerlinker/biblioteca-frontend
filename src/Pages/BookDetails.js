@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axiosInstance from "../components/axiosInstance";
 import { useParams, Link } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../UserContext';
 
 const BookDetail = () => {
@@ -81,24 +81,6 @@ const BookDetail = () => {
 
     const handleEdicionChange = (e) => {
         setEdicionSeleccionada(e.target.value);
-    };
-
-    const handleReportReview = async (reviewId) => {
-        try {
-            const response = await axiosInstance.post('/reseñas/reportar', { reseñaid: reviewId }, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
-                }
-            });
-            if (response.status === 200) {
-                alert('Reseña reportada con éxito');
-            } else {
-                alert('Error al reportar la reseña');
-            }
-        } catch (error) {
-            console.error('Error reporting review:', error);
-            alert('Error al reportar la reseña');
-        }
     };
 
     const renderStars = (rating) => {
@@ -184,14 +166,6 @@ const BookDetail = () => {
                                 </div>
                                 <p className="text-gray-700"><strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}</p>
                                 <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
-                                {(user.rol === 2 || user.rol === 3 || user.rol === 4) && (
-                                    <button
-                                        onClick={() => handleReportReview(reviews[currentPage].reseñaid)}
-                                        className="mt-2 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
-                                    >
-                                        Reportar Reseña
-                                    </button>
-                                )}
                             </div>
                             <div className="flex justify-between mt-4">
                                 <button

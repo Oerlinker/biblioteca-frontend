@@ -49,6 +49,15 @@ const Books = () => {
 
     const toggleAdvancedSearch = () => setShowAdvanced(!showAdvanced);
 
+    const addFavorito = async (libroid) => {
+        try {
+            await axiosInstance.post('/users/favoritos', { usuarioid: user.id, libroid });
+            alert('Libro añadido a favoritos');
+        } catch (error) {
+            console.error('Error añadiendo a favoritos:', error);
+        }
+    };
+
     return (
         <div className="flex flex-col items-center justify-center px-4 py-8 min-h-screen bg-gray-50">
             <h2 className="text-2xl md:text-4xl font-semibold text-center mb-8 text-blue-700">Busca tu próximo libro</h2>
@@ -134,6 +143,12 @@ const Books = () => {
                             <p className="text-gray-500 mt-2">
                                 Calificación: {isNaN(parseFloat(book.calificacion)) || book.calificacion === null ? 'N/A' : `${parseFloat(book.calificacion).toFixed(1)} ⭐`}
                             </p>
+                            <button
+                                onClick={() => addFavorito(book.libroid)}
+                                className="mt-2 bg-yellow-500 text-white py-1 px-3 rounded-full hover:bg-yellow-600 transition-all"
+                            >
+                                Añadir a Favoritos
+                            </button>
                         </li>
                     ))}
                 </ul>

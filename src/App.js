@@ -101,7 +101,6 @@ function App() {
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>
-                                <Route path="/ReportComment" element={<ReportComments/>}/>
                                 <Route path="/admin/agregar-libro" element={<BookCrud/>}/>
                                 <Route path="/admin/modificar-libro/:id" element={<BookCrud/>}/>
                                 <Route path="/admin/obtener-libros" element={<BookCrud/>}/>
@@ -122,6 +121,7 @@ function App() {
                                 <Route path="/admin/gestionar-autores" element={<AutorForm/>}/>
                                 <Route path="/reporte-libro" element={<ReporteLibro/>}/>
                                 <Route path="/reporte-valid-registros" element={<ReporteValidRegistros/>}/>
+                                <Route path="/ReportComments" element={<ReportComments/>}/>
                             </>
                         )}
                     </Routes>

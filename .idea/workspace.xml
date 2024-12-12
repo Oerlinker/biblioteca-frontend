@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="prueba">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="ivan 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +123,7 @@
       <workItem from="1732071095718" duration="6918000" />
       <workItem from="1733961064359" duration="2250000" />
       <workItem from="1733964389731" duration="299000" />
-      <workItem from="1733970007213" duration="2707000" />
+      <workItem from="1733970007213" duration="3346000" />
     </task>
     <task id="LOCAL-00001" summary="que cagada">
       <option name="closed" value="true" />
@@ -500,7 +501,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733975145605</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="ivan 2">
+      <option name="closed" value="true" />
+      <created>1733975446240</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1733975446240</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +527,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sera que fixeamos prestamo4?" />
     <MESSAGE value="sera que fixeamos prestamo5?" />
     <MESSAGE value="sera que fixeamos prestamo6?" />
     <MESSAGE value="sera que fixeamos prestamo8?" />
@@ -543,6 +551,7 @@
     <MESSAGE value="CU Victor4" />
     <MESSAGE value="CU Victor5" />
     <MESSAGE value="prueba" />
-    <option name="LAST_COMMIT_MESSAGE" value="prueba" />
+    <MESSAGE value="ivan 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="ivan 2" />
   </component>
 </project>

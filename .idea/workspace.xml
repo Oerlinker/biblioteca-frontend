@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="CU Victor2">
+    <list default="true" id="c76d266a-27f7-4a1d-a00f-ecb283a85aac" name="Changes" comment="CU Victor4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Books.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Books.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -466,7 +465,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733951799481</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="CU Victor3">
+      <option name="closed" value="true" />
+      <created>1733952185199</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1733952185199</updated>
+    </task>
+    <task id="LOCAL-00045" summary="CU Victor4">
+      <option name="closed" value="true" />
+      <created>1733952220584</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1733952220584</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,8 +499,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sera que fixeamos algo?" />
-    <MESSAGE value="sera que fixeamos prestamo?" />
     <MESSAGE value="sera que fixeamos prestamo2?" />
     <MESSAGE value="sera que fixeamos prestamo3?" />
     <MESSAGE value="sera que fixeamos prestamo4?" />
@@ -509,6 +522,8 @@
     <MESSAGE value="CU Andres" />
     <MESSAGE value="CU Andres 2" />
     <MESSAGE value="CU Victor2" />
-    <option name="LAST_COMMIT_MESSAGE" value="CU Victor2" />
+    <MESSAGE value="CU Victor3" />
+    <MESSAGE value="CU Victor4" />
+    <option name="LAST_COMMIT_MESSAGE" value="CU Victor4" />
   </component>
 </project>

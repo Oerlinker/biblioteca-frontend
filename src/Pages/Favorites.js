@@ -33,9 +33,6 @@ const Favorites = () => {
                             <Link to={`/libro/${book.libroid}`} className="text-lg font-medium text-blue-600 hover:underline">
                                 {book.titulo}
                             </Link>
-                            <p className="text-gray-500 mt-2">
-                                Calificación: {isNaN(parseFloat(book.calificacion)) || book.calificacion === null ? 'N/A' : `${parseFloat(book.calificacion).toFixed(1)} ⭐`}
-                            </p>
                         </li>
                     ))}
                 </ul>

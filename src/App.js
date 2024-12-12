@@ -38,7 +38,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import ReporteLibro from './Pages/reporteLibro';
 import ReporteValidRegistros from "./Pages/ReporteValidRegistros";
 import Favorites from './Pages/Favorites';
-
+import ReportComments from './Pages/ReportComments';
 
 function App() {
     const {user, isLoggedIn, setUser, setIsLoggedIn} = useContext(UserContext);
@@ -101,6 +101,7 @@ function App() {
                         )}
                         {isLoggedIn && user.rol === 4 && (
                             <>
+                                <Route path="/ReportComment" element={<ReportComments/>}/>
                                 <Route path="/admin/agregar-libro" element={<BookCrud/>}/>
                                 <Route path="/admin/modificar-libro/:id" element={<BookCrud/>}/>
                                 <Route path="/admin/obtener-libros" element={<BookCrud/>}/>

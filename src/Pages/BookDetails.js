@@ -17,6 +17,10 @@ const BookDetail = () => {
     const [categoria, setCategoria] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
 
+    //ivan
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // Estado para la ventana de confirmación
+    const [currentReview, setCurrentReview] = useState(null); // Guardar la reseña seleccionada
+
     const fetchBookDetails = useCallback(async () => {
         try {
             const response = await axiosInstance.get(`/libros/${id}`);
@@ -119,6 +123,38 @@ const BookDetail = () => {
         return <p className="text-center text-gray-500 mt-8">Cargando detalles del libro...</p>;
     }
 
+
+    //ivan
+    const handleReportComment = (reseñaid) => {
+        
+        setCurrentReview(reseñaid); // Guardar la reseña que se va a reportar
+        setIsConfirmationOpen(true); // Abrir la ventana de confirmación
+        console.log("ID del comentario reportado:", reseñaid);
+    };
+
+    const handleConfirmReport = async () => {
+        // Aquí iría la lógica para reportar el comentario
+        if (currentReview) {
+            try {
+                await axiosInstance.post(`users/report`, {
+                    reseñaid: currentReview
+                });
+                alert('Comentario reportado con exito.');
+                
+            } catch (error) {
+                console.error('Error al reportar comentario:', error);
+                alert('Hubo un error al reportar comentario');
+            }
+        }
+
+        
+        setIsConfirmationOpen(false); // Cerrar la ventana de confirmación
+    };
+
+    const handleCancelReport = () => {
+        setIsConfirmationOpen(false); // Cerrar la ventana sin hacer nada
+    };
+
     return (
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
             <div className="bg-white border p-6 rounded-lg shadow-lg max-w-3xl w-full">
@@ -149,6 +185,14 @@ const BookDetail = () => {
                                     Solicitar Préstamo
                                 </button>
                             )}
+
+                                <button
+                                    onClick={() => handleReportComment(reviews[currentPage].reseñaid)}
+                                    className="absolute top-4 right-4 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                                >
+                                    🚩
+                                </button>
+
                         </div>
                     ) : (
                         <p className="text-red-500">No hay ediciones disponibles en este momento.</p>
@@ -167,6 +211,9 @@ const BookDetail = () => {
                                 <p className="text-gray-700"><strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}</p>
                                 <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
                             </div>
+
+                            
+
                             <div className="flex justify-between mt-4">
                                 <button
                                     onClick={handlePreviousPage}
@@ -188,6 +235,29 @@ const BookDetail = () => {
                         <p className="text-gray-500">No hay reseñas disponibles para este libro.</p>
                     )}
                 </div>
+
+                {/* Ventana de confirmación */}
+                {isConfirmationOpen && (
+                    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
+                        <div className="bg-white p-6 rounded shadow-md">
+                            <h4 className="text-lg font-bold mb-4">¿Estás seguro de que quieres reportar este comentario?</h4>
+                            <div className="flex justify-between">
+                                <button
+                                    onClick={handleConfirmReport}
+                                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                                >
+                                    Sí
+                                </button>
+                                <button
+                                    onClick={handleCancelReport}
+                                    className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <Link to="/" className="text-blue-500 hover:underline mt-4 block text-center">
                     Volver al catálogo

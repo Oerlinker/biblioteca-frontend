@@ -81,9 +81,12 @@ const Header = ({handleLogout}) => {
                         <nav className="flex flex-col p-4 space-y-4">
                             <Link to="/" onClick={toggleMenu} className="hover:text-gray-300">Home</Link>
                             <Link to="/books" onClick={toggleMenu} className="hover:text-gray-300">Books</Link>
+                            
+                            
                             {isLoggedIn && user.rol === 4 && (
-                                <Link to="/gestionar-prestamo" onClick={toggleMenu} className="hover:text-gray-300">Gestión
-                                    de Préstamos</Link>
+                                <><Link to="/gestionar-prestamo" onClick={toggleMenu} className="hover:text-gray-300">Gestión de Préstamos</Link>
+
+                                <Link to="/ReportComments" className="hover:text-gray-200">Comentarios reportados</Link></>
                             )}
                             {isLoggedIn && user.rol === 2 && (
                                 <Link to="/gestionar-prestamos" onClick={toggleMenu} className="hover:text-gray-300">Gestión

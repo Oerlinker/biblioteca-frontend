@@ -7,7 +7,7 @@ const ReportComments = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axiosInstance.get('users/getreport');
+                const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/users/getreport');
                 console.log('Datos obtenidos:', response.data); // Log para ver los datos obtenidos
 
                 // Accede a los datos en response.data.body

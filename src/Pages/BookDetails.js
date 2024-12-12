@@ -159,7 +159,7 @@ const BookDetail = () => {
         <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
             <div className="bg-white border p-6 rounded-lg shadow-lg max-w-3xl w-full">
                 <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">{book.titulo}</h2>
-
+    
                 <div className="space-y-2 mb-4">
                     <p className="text-gray-700"><strong>Género:</strong> {book.genero}</p>
                     <p className="text-gray-700"><strong>Autor:</strong> {autor || 'Desconocido'}</p>
@@ -176,7 +176,7 @@ const BookDetail = () => {
                                     </option>
                                 ))}
                             </select>
-
+    
                             {edicionSeleccionada && (
                                 <button
                                     onClick={() => handleSolicitarPrestamo(edicionSeleccionada)}
@@ -185,35 +185,33 @@ const BookDetail = () => {
                                     Solicitar Préstamo
                                 </button>
                             )}
-
-                                <button
-                                    onClick={() => handleReportComment(reviews[currentPage].reseñaid)}
-                                    className="absolute top-4 right-4 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
-                                >
-                                    🚩
-                                </button>
-
                         </div>
                     ) : (
                         <p className="text-red-500">No hay ediciones disponibles en este momento.</p>
                     )}
                 </div>
-
+    
                 <div className="mt-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">Reseñas</h3>
                     {reviews.length > 0 ? (
                         <div className="space-y-4">
-                            <div className="bg-gray-100 p-4 rounded shadow">
-                                <div className="flex items-center mb-2">
-                                    {renderStars(reviews[currentPage].calificacion)}
-                                    <span className="ml-2 text-gray-700">{reviews[currentPage].calificacion}/5</span>
+                            <div className="bg-gray-100 p-4 rounded shadow flex items-start justify-between">
+                                <div className="flex-1">
+                                    <div className="flex items-center mb-2">
+                                        {renderStars(reviews[currentPage].calificacion)}
+                                        <span className="ml-2 text-gray-700">{reviews[currentPage].calificacion}/5</span>
+                                    </div>
+                                    <p className="text-gray-700"><strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}</p>
+                                    <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
                                 </div>
-                                <p className="text-gray-700"><strong>{reviews[currentPage].miembro_nombre}:</strong> {reviews[currentPage].comentario}</p>
-                                <p className="text-gray-500 text-sm">Fecha: {new Date(reviews[currentPage].fecha_reseña).toLocaleDateString()}</p>
+                                <button
+                                    onClick={() => handleReportComment(reviews[currentPage].reseñaid)}
+                                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                                >
+                                    🚩
+                                </button>
                             </div>
-
-                            
-
+    
                             <div className="flex justify-between mt-4">
                                 <button
                                     onClick={handlePreviousPage}
@@ -235,7 +233,7 @@ const BookDetail = () => {
                         <p className="text-gray-500">No hay reseñas disponibles para este libro.</p>
                     )}
                 </div>
-
+    
                 {/* Ventana de confirmación */}
                 {isConfirmationOpen && (
                     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
@@ -258,7 +256,7 @@ const BookDetail = () => {
                         </div>
                     </div>
                 )}
-
+    
                 <Link to="/" className="text-blue-500 hover:underline mt-4 block text-center">
                     Volver al catálogo
                 </Link>

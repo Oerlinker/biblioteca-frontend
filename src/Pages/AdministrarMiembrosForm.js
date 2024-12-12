@@ -10,7 +10,7 @@ const AdministrarMiembrosForm = () => {
     useEffect(() => {
         const fetchMiembros = async () => {
             try {
-                const response = await axiosInstance.get('https://backend-proyecto-production-13fc.up.railway.app/api/users/members');
+                const response = await axiosInstance.get('/users/members');
                 setMiembros(response.data);
             } catch (error) {
                 console.error('Error fetching members:', error);

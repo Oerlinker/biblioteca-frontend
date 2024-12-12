@@ -29,7 +29,11 @@ const Header = ({handleLogout}) => {
                 <nav className="hidden md:flex space-x-4 mx-auto">
                     <Link to="/" className="hover:text-gray-200">Home</Link>
                     <Link to="/books" className="hover:text-gray-200">Books</Link>
-
+                    {isLoggedIn && user.rol === 4 && (
+                        <>
+                            <Link to="/ReportComments" className="hover:text-gray-200">Comentarios reportados</Link>
+                        </>
+                    )}
                     {isLoggedIn && user.rol === 2 && (
                         <>
                             <Link to="/gestionar-prestamos" className="hover:text-gray-200">Gestión de Préstamos</Link>
